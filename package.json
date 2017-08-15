@@ -1,0 +1,15 @@
+{
+  "name": "web-project-2017",
+  "version": "1.0.0",
+  "description": "Project for Web Course at CEID",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nomaterials",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "morgan": "^1.8.2"
+  }
+}
