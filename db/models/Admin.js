@@ -15,7 +15,7 @@ AdminSchema.pre('save', function (next) {
     var admin = this;
     bcrypt.hash(admin.password, null, null, function (err, hash) {
         if(err) return next(err);
-        user.password = hash;
+        admin.password = hash;
         next();
     });
 });
