@@ -24,14 +24,15 @@ var db = require('./db/config');
 app.use(morgan('dev'));  // for route logging
 app.use(bodyParser.json());  // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
-app.use(express.static(__dirname + '/public'));  // serve public dir
+app.use(express.static(path.join(__dirname, 'public')));
 // Router Linking
 app.use('/api', appRoutes);  // use backend api routes (distinguish these with angular's routes_
 
 
+// All URLs lead to index.html
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname +'/public/app/views/index.html'));
-})
+    res.sendFile(path.join(__dirname +'/index.html'));
+});
 
 
 // App start & listen
