@@ -1,4 +1,8 @@
-var Admin = require('../../db/models/Admin');
+let jwt     = require('jsonwebtoken');
+
+let Admin   = require('../../db/models/Admin');
+
+let secret  = 'supersupersecret12321';
 
 
 
@@ -51,7 +55,8 @@ module.exports = function (router) {
                 if(!validPassword) {
                     res.json({ success: false, message: 'Could not authenticate password' });
                 } else {
-                    res.json({ success: true, message: 'User authenticated!' });
+                    let token = jwt.sign({ username: admin.username }, secret, { expiresIn: '24h' });  //create jwt for session
+                    res.json({ success: true, message: 'User authenticated!', token: token });
                 }
             }
         })
