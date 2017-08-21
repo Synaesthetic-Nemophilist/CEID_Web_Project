@@ -8,10 +8,6 @@ angular.module('Routes', ['ngRoute'])
             templateUrl: 'app/views/pages/home.html'
         })
 
-        .when('/about', {
-            templateUrl: 'app/views/pages/about.html'
-        })
-
         .when('/admin/register', {
             templateUrl: 'app/views/pages/admin/register.html',
             controller: 'regCtrl',
