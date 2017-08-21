@@ -8,18 +8,18 @@ angular.module('Routes', ['ngRoute'])
             templateUrl: 'app/views/pages/home.html'
         })
 
-        .when('/admin/register', {
+        .when('/register', {
             templateUrl: 'app/views/pages/admin/register.html',
             controller: 'regCtrl',
             controllerAs: 'register'
         })
 
-        .when('/admin/login', {
-            templateUrl: 'app/views/pages/admin/login.html'
+        .when('/login', {
+            templateUrl: 'app/views/pages/access/login.html'
         })
 
-        .when('/localEmployee/login', {
-            templateUrl: 'app/views/pages/admin/login.html'
+        .when('/controlPanel', {
+            templateUrl: 'app/views/pages/admin/controlPanel.html'
         })
 
 
