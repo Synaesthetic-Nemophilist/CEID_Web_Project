@@ -1,5 +1,6 @@
-angular.module('adminApp', ['adminRoutes', 'adminControllers', 'mainController', 'adminServices']);
+angular.module('adminApp', ['adminControllers', 'adminServices']);
+angular.module('localEmpApp', ['EmpControllers','EmpServices']);
 
 
+angular.module('systemApp', ['Routes','adminApp','mainControllers']);
 
-angular.module('systemApp', ['adminApp']);

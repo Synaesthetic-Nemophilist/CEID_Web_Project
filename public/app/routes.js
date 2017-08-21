@@ -1,4 +1,4 @@
-angular.module('adminRoutes', ['ngRoute'])
+angular.module('Routes', ['ngRoute'])
 
 .config(function ($routeProvider, $locationProvider) {
 
