@@ -9,7 +9,7 @@ angular.module('localEmpControllers', ['localEmpServices'])
             vm.loading = true;
             vm.errorMsg = false;
 
-            Local_emp.create(vm.regData)
+            LocalEmp.create(vm.regData)
                 .then(function (data) {
                     if(data.data.success) {
                         vm.loading = false;  // remove spinner
