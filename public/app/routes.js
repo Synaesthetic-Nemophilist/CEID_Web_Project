@@ -20,8 +20,6 @@ angular.module('Routes', ['ngRoute'])
 
         .when('/login', {
             templateUrl: 'app/views/pages/admin/login.html'
-            // controller: 'loginCtrl',
-            // controllerAs: 'login'
         })
 
         .otherwise({ redirectTo: '/'});
