@@ -1,10 +1,10 @@
 angular.module('localEmpServices', [])
 
-    .factory('localEmp', function ($http) {
+    .factory('LocalEmp', function ($http) {
         let adminFactory = {};
 
         adminFactory.create = (regData) => {
-            return $http.post('/api/employee', regData)
+            return $http.post('/api/localEmployee', regData)
         };
 
         return adminFactory;
