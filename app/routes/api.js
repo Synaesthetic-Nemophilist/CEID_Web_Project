@@ -61,7 +61,7 @@ module.exports = function (router) {
 
     //----------LOCAL EMP API----------
 
-    //LocalEmp Register
+    //LocalEmp Register TODO: This happens ONLY VIA THE ADMIN, there is no special employee registration page view!!
     // http://localhost:port/api/localEmployee
     router.post('/localEmployee', function (req, res) {
         if( !req.body.username || !req.body.password ) {

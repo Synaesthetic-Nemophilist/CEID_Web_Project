@@ -18,16 +18,9 @@ angular.module('Routes', ['ngRoute'])
             templateUrl: 'app/views/pages/admin/login.html'
         })
 
-        .when('/localEmployee/register', {
-            templateUrl: 'app/views/pages/admin/register.html',
-            controller: 'regCtrl',
-            controllerAs: 'register'
-        })
-
         .when('/localEmployee/login', {
             templateUrl: 'app/views/pages/admin/login.html'
         })
-
 
 
         .otherwise({ redirectTo: '/'});

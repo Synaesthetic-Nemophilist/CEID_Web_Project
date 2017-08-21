@@ -13,12 +13,18 @@ var LocalEmpSchema = Schema({
 // Password hash
 LocalEmpSchema.pre('save', function (next) {
     var localEmp = this;
+
     bcrypt.hash(localEmp.password, null, null, function (err, hash) {
         if(err) return next(err);
         localEmp.password = hash;
         next();
     });
 });
+
+// Method for authenticating password
+LocalEmpSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 
 //Export model

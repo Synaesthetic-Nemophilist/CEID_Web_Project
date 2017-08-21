@@ -25,13 +25,9 @@ TransitHubEmpSchema.pre('save', function(next) {
 });
 
 
-TransitHubEmpSchema.methods.comparePassword =  function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err)
-            return cb(err);
-        cb(null, isMatch);
-    });
-
+// Method for authenticating password
+TransitHubEmpSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
 };
 
 
