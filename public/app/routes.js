@@ -18,6 +18,12 @@ angular.module('adminRoutes', ['ngRoute'])
             controllerAs: 'register'
         })
 
+        .when('/login', {
+            templateUrl: 'app/views/pages/admin/login.html'
+            // controller: 'loginCtrl',
+            // controllerAs: 'login'
+        })
+
         .otherwise({ redirectTo: '/'});
 
     $locationProvider.html5Mode({

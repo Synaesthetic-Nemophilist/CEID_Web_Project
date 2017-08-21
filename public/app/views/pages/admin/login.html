@@ -1,0 +1,34 @@
+<div class="page-header">
+    <h1>Admin Login</h1>
+</div>
+
+<form ng-submit="register.regAdmin(regData)">
+    <div class="form-group">
+        <label>Username:</label>
+        <input class="form-control" type="text" name="username" placeholder="Username" ng-model="register.regData.username">
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input class="form-control" type="password" name="password" placeholder="Password" ng-model="register.regData.password">
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
+</form>
+
+<br>
+
+<div class="jumbotron text-center" ng-show="register.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading...</p>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="register.successMsg">
+    <div class="alert alert-success">{{register.successMsg}}</div>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="register.errorMsg">
+    <div class="alert alert-danger">{{register.errorMsg}}</div>
+</div>

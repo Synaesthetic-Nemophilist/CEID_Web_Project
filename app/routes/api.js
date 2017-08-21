@@ -4,7 +4,8 @@ var Admin = require('../../db/models/Admin');
 
 module.exports = function (router) {
 
-    //Admin signup
+    //Admin Register
+    // http://localhost:port/api/admin
     router.post('/admin', function (req, res) {
         if( !req.body.username || !req.body.password ) {
             res.json({ success: false, message: 'Invalid Details' });
@@ -29,6 +30,13 @@ module.exports = function (router) {
             });
         }
     });
+
+    //Authenticate
+    // http://localhost:port/api/authenticate
+    router.post('/authenticate', function (req, res) {
+
+    });
+
 
     return router;
 };
