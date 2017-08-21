@@ -12,6 +12,10 @@ angular.module('adminRoutes', ['ngRoute'])
             templateUrl: 'app/views/pages/about.html'
         })
 
+        .when('/register', {
+            templateUrl: 'app/views/pages/admin/register.html'
+        })
+
         .otherwise({ redirectTo: '/'});
 
     $locationProvider.html5Mode({
