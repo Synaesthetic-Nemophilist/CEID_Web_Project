@@ -1,2 +1,2 @@
-angular.module('adminApp', ['adminRoutes']);
+angular.module('adminApp', ['adminRoutes', 'adminControllers']);
 

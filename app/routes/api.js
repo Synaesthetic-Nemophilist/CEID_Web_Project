@@ -6,23 +6,22 @@ module.exports = function (router) {
     //Admin signup
     router.post('/admin', function (req, res) {
         if( !req.body.username || !req.body.password ) {
-            res.status("400");
-            res.send("Invalid details");
+            res.json({ success: false, message: 'Invalid Details' });
         } else {
             //Create an instance of an admin model
-            var newAdmin = new Admin({
+            let newAdmin = new Admin({
                 username: req.body.username,
                 password: req.body.password
             });
             //Save to db - handle errors, or set session variable and redirect to adminPanel
             newAdmin.save(function(err, adminData){
                 if(err) {
-                    res.send(err.errmsg);
+                    res.json({ success: false, message: err.errmsg });
                     // console.log(err);
                     // req.flash('info', 'Username already taken!');
                     // res.redirect('signup');
                 } else {
-                    res.send('Admin created')
+                    res.json({ success: true, message: 'Admin created!' });
                     // req.session.admin = adminData;
                     // res.redirect('panel');
                 }

@@ -13,7 +13,9 @@ angular.module('adminRoutes', ['ngRoute'])
         })
 
         .when('/register', {
-            templateUrl: 'app/views/pages/admin/register.html'
+            templateUrl: 'app/views/pages/admin/register.html',
+            controller: 'regCtrl',
+            controllerAs: 'register'
         })
 
         .otherwise({ redirectTo: '/'});
