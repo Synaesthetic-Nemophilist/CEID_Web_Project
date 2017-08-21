@@ -34,11 +34,26 @@ module.exports = function (router) {
     });
 
 
-    //Authenticate
+    //Authenticate TODO: This function should be generalized for admins, localEmps and transitHubEmps!!!
     // http://localhost:port/api/authenticate
     router.post('/authenticate', function (req, res) {
         Admin.findOne({ username: req.body.username }).select('username password').exec(function (err, admin) {
+            if(err) throw err;
 
+            if(!admin) {
+                res.json({ success: false, message: 'Could not authenticate user' });
+            } else if(admin) {
+                if(req.body.password) {
+                    var validPassword = admin.comparePassword(req.body.password);
+                } else {
+                    res.json({ success: false, message: 'No password provided' });
+                }
+                if(!validPassword) {
+                    res.json({ success: false, message: 'Could not authenticate password' });
+                } else {
+                    res.json({ success: true, message: 'User authenticated!' });
+                }
+            }
         })
 
     });

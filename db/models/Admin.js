@@ -20,6 +20,11 @@ AdminSchema.pre('save', function (next) {
     });
 });
 
+// Method for authenticating password
+AdminSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
 
 //Export model
 module.exports = mongoose.model('Admin', AdminSchema);

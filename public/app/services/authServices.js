@@ -3,8 +3,8 @@ angular.module('authServices', [])
     .factory('Auth', function ($http) {
         let authFactory = {};
 
-        authFactory.create = (regData) => {
-            return $http.post('/api/admin', regData)
+        authFactory.login = (loginData) => {
+            return $http.post('/api/authenticate', loginData);
         };
 
         return authFactory;

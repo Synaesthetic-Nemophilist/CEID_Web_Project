@@ -1,11 +1,11 @@
 <div class="container">
 
-    <form class="form-signin" ng-submit="register.regAdmin(regData)">
+    <form class="form-signin" ng-submit="main.doLogin(loginData)">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputUsername" class="sr-only">Username</label>
-        <input id="inputUsername" class="form-control" placeholder="Username" required autofocus ng-model="register.regData.username">
+        <input id="inputUsername" class="form-control" placeholder="Username" required autofocus ng-model="main.loginData.username">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="register.regData.password">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="main.loginData.password">
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
@@ -16,21 +16,21 @@
 
     <br>
 
-    <div class="jumbotron text-center" ng-show="register.loading">
+    <div class="jumbotron text-center" ng-show="main.loading">
         <span class="glyphicon glyphicon-repeat spinner"></span>
         <p>Loading...</p>
     </div>
 
     <br>
 
-    <div class="row show-hide-message" ng-show="register.successMsg">
-        <div class="alert alert-success">{{register.successMsg}}</div>
+    <div class="row show-hide-message" ng-show="main.successMsg">
+        <div class="alert alert-success">{{main.successMsg}}</div>
     </div>
 
     <br>
 
-    <div class="row show-hide-message" ng-show="register.errorMsg">
-        <div class="alert alert-danger">{{register.errorMsg}}</div>
+    <div class="row show-hide-message" ng-show="main.errorMsg">
+        <div class="alert alert-danger">{{main.errorMsg}}</div>
     </div>
 
 </div> <!-- /container -->
