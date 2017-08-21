@@ -1,2 +1,2 @@
-angular.module('adminApp', ['adminRoutes', 'adminControllers']);
+angular.module('adminApp', ['adminRoutes', 'adminControllers', 'adminServices', 'ngAnimate']);
 
