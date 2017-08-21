@@ -1,6 +1,6 @@
-angular.module('EmpServices', [])
+angular.module('Local_EmpServices', [])
 
-    .factory('Employee', function ($http) {
+    .factory('Local_emp', function ($http) {
         let adminFactory = {};
 
         adminFactory.create = (regData) => {

@@ -1,6 +1,6 @@
-angular.module('EmpControllers', ['EmpServices'])
+angular.module('Local_EmpControllers', ['Local_EmpServices'])
 
-    .controller('regCtrl', function ($http, $location, $timeout, Admin) {
+    .controller('regCtrl', function ($http, $location, $timeout, Local_emp) {
 
         //for making ctrl vars public to scope
         let vm = this;
@@ -9,7 +9,7 @@ angular.module('EmpControllers', ['EmpServices'])
             vm.loading = true;
             vm.errorMsg = false;
 
-            Admin.create(vm.regData)
+            Local_emp.create(vm.regData)
                 .then(function (data) {
                     if(data.data.success) {
                         vm.loading = false;  // remove spinner
