@@ -1,4 +1,4 @@
-angular.module('Local_EmpControllers', ['Local_EmpServices'])
+angular.module('localEmpControllers', ['localEmpServices'])
 
     .controller('regCtrl', function ($http, $location, $timeout, Local_emp) {
 
