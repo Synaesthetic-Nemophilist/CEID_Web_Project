@@ -19,8 +19,7 @@ angular.module('Routes', ['ngRoute'])
         })
 
         .when('/controlPanel', {
-            templateUrl: 'app/views/pages/admin/controlPanel.html',
-            controller: 'newCtrl'
+            templateUrl: 'app/views/pages/admin/controlPanel.html'
         })
 
 
