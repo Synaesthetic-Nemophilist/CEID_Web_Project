@@ -24,4 +24,12 @@ angular.module('mainController', ['authServices'])
                 })
         };
 
+        vm.logout = () => {
+            Auth.logout();
+            $location.path('/logout');
+            $timeout(function () {
+                $location.path('/');
+            }, 2000);
+        };
+
     });

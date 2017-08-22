@@ -18,6 +18,10 @@ angular.module('Routes', ['ngRoute'])
             templateUrl: 'app/views/pages/access/login.html'
         })
 
+        .when('/logout', {
+            templateUrl: 'app/views/pages/access/logout.html'
+        })
+
         .when('/controlPanel', {
             templateUrl: 'app/views/pages/admin/controlPanel.html'
         })
