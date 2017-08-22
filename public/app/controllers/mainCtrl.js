@@ -15,6 +15,7 @@ angular.module('mainController', ['authServices'])
                         vm.successMsg = data.data.message + '...Redirecting';  // show success msg
                         // Redirect to home page
                         $timeout(function () {
+                            vm.successMsg = false;
                             $location.path('/controlPanel');  //TODO: cases for each: admin, localEmp, transitHubEmp
                         }, 2000);
                     } else {
