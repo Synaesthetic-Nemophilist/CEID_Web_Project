@@ -1,8 +1,24 @@
 angular.module('mainController', ['authServices'])
 
-    .controller('mainCtrl', function (Auth, $timeout, $location) {
+    .controller('mainCtrl', function (Auth, $timeout, $location, $rootScope) {
 
         let vm = this;
+
+        //Initial vm property values can or may not go here..
+        //----
+
+        // this is executed upon every route change
+        $rootScope.$on('$routeChangeStart', function () {
+            if(Auth.isLoggedIn()) {
+                console.log('User is logged in'); //TODO: temp, remove this log when not nec anymore
+                Auth.getUser().then(function (data) {
+                    vm.username = data.data.username;  // username is accessible on front-end now
+                });
+            } else {
+                console.log('Failure: User is NOT logged in');
+                vm.username = '';
+            }
+        });
 
         vm.doLogin = (loginData) => {
             vm.loading = true;
@@ -15,6 +31,7 @@ angular.module('mainController', ['authServices'])
                         vm.successMsg = data.data.message + '...Redirecting';  // show success msg
                         // Redirect to home page
                         $timeout(function () {
+                            vm.loginData = {};  // clear form data
                             vm.successMsg = false;
                             $location.path('/controlPanel');  //TODO: cases for each: admin, localEmp, transitHubEmp
                         }, 2000);
