@@ -17,6 +17,15 @@ angular.module('authServices', [])
             return !!AuthToken.getToken();
         };
 
+        // method for retrieving user info via token
+        authFactory.getUser = () => {
+            if(AuthToken.getToken()) {
+                return $http.post('/api/current');
+            } else {
+                $q.reject({ message: 'User has no token' });
+            }
+        };
+
         // method for logging out (deleting token from browser cookies)
         authFactory.logout = () => {
             AuthToken.setToken();  // we pass no arg, in order for the method to del the token and logout
@@ -42,4 +51,19 @@ angular.module('authServices', [])
         };
 
         return authTokenFactory;
+    })
+
+    // service for attaching tokens to every request
+    .factory('AuthInterceptors', function (AuthToken) {
+        let authInterceptorsFactory = {};
+
+        authInterceptorsFactory.request = function (config) {
+            let token = AuthToken.getToken();
+
+            if(token) config.headers['x-access-token'] = token;
+
+            return config;
+        };
+
+        return authInterceptorsFactory;
     });

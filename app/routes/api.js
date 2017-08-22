@@ -38,6 +38,8 @@ module.exports = function (router) {
     });
 
 
+    //-----------AUTHENTICATION-----------
+
     //Authenticate TODO: This function should be generalized for admins, localEmps and transitHubEmps!!!
     // http://localhost:port/api/authenticate
     router.post('/authenticate', function (req, res) {
@@ -61,6 +63,30 @@ module.exports = function (router) {
             }
         })
 
+    });
+
+
+    // Middleware for verifying token (check existence, equality and expiration)
+    router.use(function(req, res, next) {
+        let token = req.body.token || req.body.query || req.headers['x-access-token'];
+
+        if(token) {
+            jwt.verify(token, secret, function (err, decoded) {
+                if(err) {
+                    res.json({ success: false, message: 'Token invalid' });
+                } else {
+                    req.decoded = decoded;  // if all ok, store decoded user info and pass onto next route
+                    next();
+                }
+            });
+        } else {
+            res.json({ success: false, message: 'No token provided' });
+        }
+    });
+
+
+    router.post('/current', function (req, res) {
+        res.json(req.decoded);
     });
 
 
