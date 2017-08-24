@@ -4,19 +4,19 @@ angular.module('localStoreServices', [])
         let localStoreFactory = {};
 
         localStoreFactory.getAll = () => {
-            return $http.get('/api/localStore');
+            return $http.get('/api/localstore');
         };
 
         localStoreFactory.create = (lsData) => {
-            return $http.post('/api/localStore', lsData)
+            return $http.post('/api/localstore', lsData)
         };
 
         localStoreFactory.update =  (lsData) => {
-            return $http.put('/api/localStore' + lsData.id, lsData);
+            return $http.put('/api/localstore' + lsData.id, lsData);
         };
 
         localStoreFactory.delete = (lsId) => {
-            return $http.delete('/api/localStore' + lsId);
+            return $http.delete('/api/localstore' + lsId);
         };
 
         return localStoreFactory;

@@ -42,14 +42,16 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             LocalStore.getAll()
                 .then(function (res) {
                     console.log(res);
-                    vm.localStores = res;
+                    vm.localStores = res.data;
                 })
                 .catch(function (err) {
                     console.log(err);
                 });
         };
 
-        //vm.getAllLocalStores();
+        vm.getAllLocalStores();
+
+        console.log(vm.localStores);
 
         // Choose a localStore and save state, also reset messages
         vm.selectLocalStore = function (ls) {
@@ -74,7 +76,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
         };
 
         vm.resetForm = function () {
-            vm.selectedLocalStore = {"id":'',"title":'',"pages":'',"author":{"first_name":'',"last_name":'',"age":''}};
+            vm.selectedLocalStore = {};
         };
 
         // Reset form for info insertion
@@ -100,7 +102,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
                         vm.errorMsg = 'There was an error. Please try again.'
                     });
             }else{
-                LocalStore.update(LocalStoreData)
+                LocalStore.update(localStoreData)
                     .then(function () {
                         vm.successMsg = 'Data successfully updated.';
                     })
@@ -110,7 +112,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             }
         };
 
-        // For deleting the selected book
+        // For deleting the selected book TODO: implement delete path in back end
         vm.delLocalStore = function () {
             let localStoreId = vm.selectedLocalStore.id;
             console.log(localStoreId);

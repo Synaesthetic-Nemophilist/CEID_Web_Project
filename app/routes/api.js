@@ -31,7 +31,7 @@ module.exports = function (router) {
     router.post('/localstore', function(req, res){
 
         // Creates a new Local store based on the Mongoose schema and the post bo.dy
-        var newstore = new Lstore(req.body);
+        let newstore = new Lstore(req.body);
 
         // New Local store is saved in the db.
         newstore.save(function(err){

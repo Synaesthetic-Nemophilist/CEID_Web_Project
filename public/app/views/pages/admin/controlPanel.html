@@ -42,22 +42,115 @@
                     <div class="page-header">
                         <h3>Local Stores</h3>
                         <div class="list-group pre-scrollable">
-                            <a href="#" class="list-group-item" ng-repeat="book in bookctrl.books | orderBy:bookctrl.orderFilter | limitTo:bookctrl.countFilter "
-                               ng-click="bookctrl.selectBook(book)"
-                               ng-class="{active: bookctrl.isSelected(book)}">
-                                <span>{{book.title}}</span>
-                            </a>
+                            <button type="button" class="list-group-item list-group-item-action" ng-repeat="ls in aCrud.localStores"
+                               ng-click="aCrud.selectLocalStore(ls)"
+                               ng-class="{active: aCrud.isSelected(ls)}">
+                                <span>{{ls.Address.City}}</span>
+                            </button>
                         </div>
 
-                        <button class="btn btn-default btn-group-justified" ng-click="bookctrl.addContact()">
+                        <button class="btn btn-default btn-group-justified" ng-click="aCrud.addLocalStore()">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </div>
                 </div>
+
                 <div class="col-md-8">
                     <div class="page-header">
                         <h3>Local Store Details</h3>
-                        <p>blablablab</p>
+                        <div class="col-md-6">
+                            <div class="alert alert-success" ng-if="aCrud.successMsg">{{aCrud.successMsg}}</div>
+                            <div class="alert alert-danger" ng-if="aCrud.errorMsg">{{aCrud.errorMsg}}</div>
+                            <form>
+                                <div>
+                                    <div id="addressWell" class="well">
+                                        <h5><strong>Address:</strong> </h5>
+
+                                        <p ng-show="!aCrud.editMode">
+                                            <span><strong>City:</strong> </span>
+                                            <span >{{aCrud.selectedLocalStore.Address.City}}</span>
+                                        </p>
+                                        <div ng-show="aCrud.editMode" class="form-group">
+                                            <label for="city" >City:</label>
+                                            <input id="city" class="form-control" ng-model="aCrud.selectedLocalStore.Address.City" required>
+                                        </div>
+
+                                        <p ng-show="!aCrud.editMode">
+                                            <span><strong>Street:</strong> </span>
+                                            <span >{{aCrud.selectedLocalStore.Address.Street}}</span>
+                                        </p>
+                                        <div ng-show="aCrud.editMode" class="form-group">
+                                            <label for="street" >Street:</label>
+                                            <input id="street" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Street" required>
+                                        </div>
+
+                                        <p ng-show="!aCrud.editMode">
+                                            <span><strong>Number:</strong> </span>
+                                            <span >{{aCrud.selectedLocalStore.Address.Number}}</span>
+                                        </p>
+                                        <div ng-show="aCrud.editMode" class="form-group">
+                                            <label for="number" >Number:</label>
+                                            <input id="number" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Number" required>
+                                        </div>
+
+                                        <p ng-show="!aCrud.editMode">
+                                            <span><strong>Post Code:</strong> </span>
+                                            <span >{{aCrud.selectedLocalStore.Address.Post_code}}</span>
+                                        </p>
+                                        <div ng-show="aCrud.editMode" class="form-group">
+                                            <label for="postCode" >Post Code:</label>
+                                            <input id="postCode" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Post_code" required>
+                                        </div>
+                                    </div>
+
+                                    <div id="locationWell" class="well">
+                                        <h5><strong>Location:</strong> </h5>
+
+                                        <p ng-show="!aCrud.editMode">
+                                            <span><strong>Longitude:</strong> </span>
+                                            <span >{{aCrud.selectedLocalStore.Location.Longitude}}</span>
+                                        </p>
+                                        <div ng-show="aCrud.editMode" class="form-group">
+                                            <label for="longit" >Longitude:</label>
+                                            <input id="longit" class="form-control" ng-model="aCrud.selectedLocalStore.Location.Longitude" required>
+                                        </div>
+
+                                        <p ng-show="!aCrud.editMode">
+                                            <span><strong>Latitude:</strong> </span>
+                                            <span >{{aCrud.selectedLocalStore.Location.Latitude}}</span>
+                                        </p>
+                                        <div ng-show="aCrud.editMode" class="form-group">
+                                            <label for="latit" >Latitude:</label>
+                                            <input id="latit" class="form-control" ng-model="aCrud.selectedLocalStore.Location.Latitude" required>
+                                        </div>
+                                    </div>
+
+                                    <p ng-show="!aCrud.editMode">
+                                        <p><strong>Phone number:</strong> </p>
+                                        <span >{{aCrud.selectedLocalStore.phone_number}}</span>
+                                    </p>
+                                    <div ng-show="aCrud.editMode" class="form-group">
+                                        <label for="phone" >Phone number:</label>
+                                        <input id="phone" class="form-control" ng-model="aCrud.selectedLocalStore.phone_number" required>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="btn-group btn-group-justified">
+                                    <a href="#" class="btn bg-primary" ng-if="!aCrud.editMode" ng-click="aCrud.toggleEditMode()">Edit</a>
+                                    <a href="#" class="btn bg-primary" ng-if="aCrud.editMode" ng-click="aCrud.saveLocalStore()">Save</a>
+                                    <a href="#" class="btn btn-danger" ng-class="{disabled: aCrud.disabledDel()}" ng-click="aCrud.delLocalStore()">Delete</a>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <!--<img id="pic" class="img-responsive" style='min-width: 350px; min-height: 400px' ng-src="./rsc/{{bookctrl.selectedBook.title}}.jpg" err-src="./rsc/noCover.jpg"/>-->
+                        </div>
                     </div>
                 </div>
 
