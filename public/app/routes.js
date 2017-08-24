@@ -5,7 +5,9 @@ angular.module('Routes', ['ngRoute'])
     $routeProvider
 
         .when('/', {
-            templateUrl: 'app/views/pages/home.html'
+            templateUrl: 'app/views/pages/home.html',
+            controller: 'mapCtrl',
+            controllerAs: 'map'
         })
 
         .when('/register', {
