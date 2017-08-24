@@ -21,7 +21,7 @@ var LocalStoreSchema = Schema({
     }],
 
 
-    Location: [{
+    Location: [{   // TODO: Should this be an array?
         Longitude: {type: String},
         Latitude: {type: String}
     }],
