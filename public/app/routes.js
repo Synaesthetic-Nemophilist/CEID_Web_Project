@@ -4,11 +4,11 @@ let app = angular.module('Routes', ['ngRoute'])
 
         $routeProvider
 
-        .when('/', {
-            templateUrl: 'app/views/pages/home.html',
-            controller: 'mapCtrl',
-            controllerAs: 'map'
-        })
+            .when('/', {
+                templateUrl: 'app/views/pages/home.html',
+                controller: 'homeCtrl',
+                controllerAs: 'home'
+            })
 
             .when('/register', {
                 templateUrl: 'app/views/pages/admin/register.html',

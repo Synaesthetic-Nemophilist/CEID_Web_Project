@@ -1,8 +1,6 @@
+angular.module('homeControllers', [])
 
-
-angular.module('homeCtrl', [])
-
-    .controller('mapCtrl', function () {
+    .controller('homeCtrl', function () {
 
         //for making ctrl vars public to scope
         let vm = this;
