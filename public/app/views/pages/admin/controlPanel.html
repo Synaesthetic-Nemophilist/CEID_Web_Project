@@ -49,8 +49,8 @@
                             </button>
                         </div>
 
-                        <button class="btn btn-default btn-group-justified" ng-click="aCrud.addLocalStore()">
-                            <span class="glyphicon glyphicon-plus"></span>
+                        <button class="btn btn-secondary btn-group-justified" ng-click="aCrud.addLocalStore()">
+                            <span class="fa fa-plus"></span>
                         </button>
                     </div>
                 </div>
@@ -126,11 +126,11 @@
                                     </div>
 
                                     <p ng-show="!aCrud.editMode">
-                                        <p><strong>Phone number:</strong> </p>
+                                        <span><strong>Phone Number:</strong> </span>
                                         <span >{{aCrud.selectedLocalStore.phone_number}}</span>
                                     </p>
                                     <div ng-show="aCrud.editMode" class="form-group">
-                                        <label for="phone" >Phone number:</label>
+                                        <label for="phone" >Phone Number:</label>
                                         <input id="phone" class="form-control" ng-model="aCrud.selectedLocalStore.phone_number" required>
                                     </div>
 

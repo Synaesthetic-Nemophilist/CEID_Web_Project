@@ -17,11 +17,12 @@ module.exports = function (router) {
         // Uses Mongoose schema to run the search (empty conditions)
         var query = Lstore.find({});
         query.exec(function(err, Lstores){
-            if(err)
+            if(err) {
                 res.send(err);
-
-            // If no errors are found, it responds with a JSON of all users
-            res.json(Lstores);
+            } else {
+                console.log(Lstores);
+                res.json(Lstores);
+            }
         });
     });
 
@@ -30,16 +31,16 @@ module.exports = function (router) {
     // Provides method for saving new users in the db
     router.post('/localstore', function(req, res){
 
-        // Creates a new Local store based on the Mongoose schema and the post bo.dy
+        // Creates a new Local store based on the Mongoose schema and the post body
         let newstore = new Lstore(req.body);
 
         // New Local store is saved in the db.
-        newstore.save(function(err){
-            if(err)
-                res.send(err);
-
-            // If no errors are found, it responds with a JSON of the new user
-            res.json(req.body);
+        newstore.save(function(err, lsData){
+            if(err) {
+                res.json({success: false, message: err.errmsg});
+            } else {
+                res.json({success: true, message: 'Local Store saved to DB'});
+            }
         });
     });
 
@@ -60,13 +61,8 @@ module.exports = function (router) {
             newAdmin.save(function(err, adminData){
                 if(err) {
                     res.json({ success: false, message: err.errmsg });
-                    // console.log(err);
-                    // req.flash('info', 'Username already taken!');
-                    // res.redirect('signup');
                 } else {
                     res.json({ success: true, message: 'Admin created!' });
-                    // req.session.admin = adminData;
-                    // res.redirect('panel');
                 }
             });
         }

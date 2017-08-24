@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
+
+
 var LocalStoreSchema = Schema({
 
     //transit_hub_id: {type: Schema.ObjectId, ref: 'TransitHub', required: true}, TODO: implement in admin crud form

@@ -41,7 +41,6 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
         vm.getAllLocalStores = function () {
             LocalStore.getAll()
                 .then(function (res) {
-                    console.log(res);
                     vm.localStores = res.data;
                 })
                 .catch(function (err) {
@@ -49,9 +48,8 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
                 });
         };
 
+        // render all cities in list
         vm.getAllLocalStores();
-
-        console.log(vm.localStores);
 
         // Choose a localStore and save state, also reset messages
         vm.selectLocalStore = function (ls) {
@@ -93,7 +91,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             if(vm.addMode) {
                 LocalStore.create(localStoreData)
                     .then(function () {
-                        vm.successMsg = 'Data successfully updated.';
+                        vm.successMsg = 'Data successfully added.';
                         vm.addMode = false;
                         // Render updated list
                         vm.getAllLocalStores();
@@ -112,7 +110,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             }
         };
 
-        // For deleting the selected book TODO: implement delete path in back end
+        // For deleting the selected book TODO: DOES NOT WORK YET!: implement delete path in back end
         vm.delLocalStore = function () {
             let localStoreId = vm.selectedLocalStore.id;
             console.log(localStoreId);
