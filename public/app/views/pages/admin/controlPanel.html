@@ -63,89 +63,80 @@
                         <div class="col-md-6">
                             <div class="alert alert-success" ng-if="aCrud.successMsg">{{aCrud.successMsg}}</div>
                             <div class="alert alert-danger" ng-if="aCrud.errorMsg">{{aCrud.errorMsg}}</div>
+
+                            <table class="table table-striped table-bordered" ng-show="!aCrud.editMode">
+                                <tbody>
+                                    <tr>
+                                        <th>City:</th>
+                                        <td>{{aCrud.selectedLocalStore.Address.City}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Street:</th>
+                                        <td>{{aCrud.selectedLocalStore.Address.Street}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Number:</th>
+                                        <td>{{aCrud.selectedLocalStore.Address.Number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Post Code:</th>
+                                        <td>{{aCrud.selectedLocalStore.Address.Post_code}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Longitude:</th>
+                                        <td>{{aCrud.selectedLocalStore.Location.Longitude}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Latitude:</th>
+                                        <td>{{aCrud.selectedLocalStore.Location.Latitude}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number:</th>
+                                        <td>{{aCrud.selectedLocalStore.phone_number}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                             <form>
-                                <div>
-                                    <div id="addressWell">
-
-
-                                        <table class="table table-striped table-bordered" ng-show="!aCrud.editMode">
-                                            <tbody>
-                                                <tr>
-                                                    <th>City:</th>
-                                                    <td>{{aCrud.selectedLocalStore.Address.City}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Street:</th>
-                                                    <td>{{aCrud.selectedLocalStore.Address.Street}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Number:</th>
-                                                    <td>{{aCrud.selectedLocalStore.Address.Number}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Post Code:</th>
-                                                    <td>{{aCrud.selectedLocalStore.Address.Post_code}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Longitude:</th>
-                                                    <td>{{aCrud.selectedLocalStore.Location.Longitude}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Latitude:</th>
-                                                    <td>{{aCrud.selectedLocalStore.Location.Latitude}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Phone Number:</th>
-                                                    <td>{{aCrud.selectedLocalStore.phone_number}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-
-                                        <div ng-show="aCrud.editMode" class="form-group">
-                                            <label for="city" >City:</label>
-                                            <input id="city" class="form-control" ng-model="aCrud.selectedLocalStore.Address.City" required>
-                                        </div>
-
-
-                                        <div ng-show="aCrud.editMode" class="form-group">
-                                            <label for="street" >Street:</label>
-                                            <input id="street" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Street" required>
-                                        </div>
-
-
-                                        <div ng-show="aCrud.editMode" class="form-group">
-                                            <label for="number" >Number:</label>
-                                            <input id="number" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Number" required>
-                                        </div>
-
-
-                                        <div ng-show="aCrud.editMode" class="form-group">
-                                            <label for="postCode" >Post Code:</label>
-                                            <input id="postCode" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Post_code" required>
-                                        </div>
-
-                                        <div ng-show="aCrud.editMode" class="form-group">
-                                            <label for="longit" >Longitude:</label>
-                                            <input id="longit" class="form-control" ng-model="aCrud.selectedLocalStore.Location.Longitude" required>
-                                        </div>
-
-
-                                        <div ng-show="aCrud.editMode" class="form-group">
-                                            <label for="latit" >Latitude:</label>
-                                            <input id="latit" class="form-control" ng-model="aCrud.selectedLocalStore.Location.Latitude" required>
-                                        </div>
-
-
-
-                                    <div ng-show="aCrud.editMode" class="form-group">
-                                        <label for="phone" >Phone Number:</label>
-                                        <input id="phone" class="form-control" ng-model="aCrud.selectedLocalStore.phone_number" required>
-                                    </div>
-
-
-
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="city" >City:</label>
+                                    <input id="city" class="form-control" ng-model="aCrud.selectedLocalStore.Address.City" required>
                                 </div>
+
+
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="street" >Street:</label>
+                                    <input id="street" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Street" required>
+                                </div>
+
+
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="number" >Number:</label>
+                                    <input id="number" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Number" required>
+                                </div>
+
+
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="postCode" >Post Code:</label>
+                                    <input id="postCode" class="form-control" ng-model="aCrud.selectedLocalStore.Address.Post_code" required>
+                                </div>
+
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="longit" >Longitude:</label>
+                                    <input id="longit" class="form-control" ng-model="aCrud.selectedLocalStore.Location.Longitude" required>
+                                </div>
+
+
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="latit" >Latitude:</label>
+                                    <input id="latit" class="form-control" ng-model="aCrud.selectedLocalStore.Location.Latitude" required>
+                                </div>
+
+                                <div ng-show="aCrud.editMode" class="form-group">
+                                    <label for="phone" >Phone Number:</label>
+                                    <input id="phone" class="form-control" ng-model="aCrud.selectedLocalStore.phone_number" required>
+                                </div>
+
 
                                 <div class="btn-group btn-group-justified">
                                     <a href="#" class="btn bg-primary" ng-if="!aCrud.editMode" ng-click="aCrud.toggleEditMode()">Edit</a>
