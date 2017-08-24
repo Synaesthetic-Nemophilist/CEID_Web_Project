@@ -21,10 +21,10 @@ var LocalStoreSchema = Schema({
     }],
 
 
-    Location: [{   // TODO: Should this be an array?
+    Location: {
         Longitude: {type: String},
         Latitude: {type: String}
-    }],
+    },
 
     // All stored packages in the current Store
     Stored_packages: [{
