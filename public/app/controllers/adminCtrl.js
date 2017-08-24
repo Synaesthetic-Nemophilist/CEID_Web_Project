@@ -27,7 +27,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
     })
 
 
-    .controller('adminCrudCtrl', function (LocalStore) {
+    .controller('adminCrudLsCtrl', function (LocalStore) {
 
         let vm = this;
 
