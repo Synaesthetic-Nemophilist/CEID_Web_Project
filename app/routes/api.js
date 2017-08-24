@@ -20,7 +20,6 @@ module.exports = function (router) {
             if(err) {
                 res.send(err);
             } else {
-                console.log(Lstores);
                 res.json(Lstores);
             }
         });
@@ -42,6 +41,19 @@ module.exports = function (router) {
                 res.json({success: true, message: 'Local Store saved to DB'});
             }
         });
+    });
+
+
+    router.put('/localstore/:id', function(req, res){
+
+        let newStore = new Lstore(req.body);
+        var query = {_id:req.params.id};
+
+        Lstore.findOneAndUpdate(query, newStore, {upsert:true}, function(err, doc){
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully saved");
+        });
+
     });
 
 

@@ -105,6 +105,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
                         vm.successMsg = 'Data successfully updated.';
                     })
                     .catch(function (err) {
+                        console.log(err);
                         vm.errorMsg = 'There was an error. Please try again.'
                     });
             }

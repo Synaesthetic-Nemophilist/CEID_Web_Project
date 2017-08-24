@@ -12,11 +12,12 @@ angular.module('localStoreServices', [])
         };
 
         localStoreFactory.update =  (lsData) => {
-            return $http.put('/api/localstore' + lsData.id, lsData);
+            console.log(lsData._id);
+            return $http.put('/api/localstore/' + lsData._id, lsData);
         };
 
         localStoreFactory.delete = (lsId) => {
-            return $http.delete('/api/localstore' + lsId);
+            return $http.delete('/api/localstore/' + lsId);
         };
 
         return localStoreFactory;
