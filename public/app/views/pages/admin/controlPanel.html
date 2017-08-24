@@ -41,7 +41,17 @@
                 <div class="col-md-4">
                     <div class="page-header">
                         <h3>Local Stores</h3>
-                        <p>blablablab</p>
+                        <div class="list-group pre-scrollable">
+                            <a href="#" class="list-group-item" ng-repeat="book in bookctrl.books | orderBy:bookctrl.orderFilter | limitTo:bookctrl.countFilter "
+                               ng-click="bookctrl.selectBook(book)"
+                               ng-class="{active: bookctrl.isSelected(book)}">
+                                <span>{{book.title}}</span>
+                            </a>
+                        </div>
+
+                        <button class="btn btn-default btn-group-justified" ng-click="bookctrl.addContact()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-8">

@@ -30,6 +30,8 @@ let app = angular.module('Routes', ['ngRoute'])
 
             .when('/controlPanel', {
                 templateUrl: 'app/views/pages/admin/controlPanel.html',
+                controller: 'adminCrudCtrl',
+                controllerAs: 'aCrud',
                 authenticated: true
             })
 

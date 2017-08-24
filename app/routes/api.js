@@ -12,7 +12,7 @@ module.exports = function (router) {
     //----------Local Store API----------
     // --------------------------------------------------------
     // Retrieve records for all localstores in the db
-    app.get('/localstore', function(req, res){
+    router.get('/localstore', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
         var query = Lstore.find({});
@@ -28,7 +28,7 @@ module.exports = function (router) {
     // POST Routes
     // --------------------------------------------------------
     // Provides method for saving new users in the db
-    app.post('/localstore', function(req, res){
+    router.post('/localstore', function(req, res){
 
         // Creates a new Local store based on the Mongoose schema and the post bo.dy
         var newstore = new Lstore(req.body);

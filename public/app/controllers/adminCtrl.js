@@ -1,4 +1,4 @@
-angular.module('adminControllers', ['adminServices'])
+angular.module('adminControllers', ['adminServices', 'localStoreServices'])
 
     .controller('regCtrl', function ($http, $location, $timeout, Admin) {
 
@@ -24,6 +24,111 @@ angular.module('adminControllers', ['adminServices'])
                     }
                 })
         };
+    })
+
+
+    .controller('adminCrudCtrl', function (LocalStore) {
+
+        let vm = this;
+
+        //public vars
+        vm.localStores = []; // init List with empty array until GET
+        vm.selectedLocalStore = undefined;
+        vm.editMode = false;
+        vm.addMode = false;
+
+        // Get all localStores from db
+        vm.getAllLocalStores = function () {
+            LocalStore.getAll()
+                .then(function (res) {
+                    console.log(res);
+                    vm.localStores = res;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        };
+
+        //vm.getAllLocalStores();
+
+        // Choose a localStore and save state, also reset messages
+        vm.selectLocalStore = function (ls) {
+            vm.selectedLocalStore = ls;
+            vm.successMsg = undefined;
+            vm.errorMsg = undefined;
+        };
+
+        // For activating selected local store in list
+        vm.isSelected = function (ls) {
+            return vm.selectedLocalStore === ls;
+        };
+
+        // Cases for disabling delete button
+        vm.disabledDel = function () {
+            return vm.selectedLocalStore === undefined || vm.addMode;
+        };
+
+        // For when clicking on Edit/Save btn
+        vm.toggleEditMode = function () {
+            vm.editMode = !vm.editMode;
+        };
+
+        vm.resetForm = function () {
+            vm.selectedLocalStore = {"id":'',"title":'',"pages":'',"author":{"first_name":'',"last_name":'',"age":''}};
+        };
+
+        // Reset form for info insertion
+        vm.addLocalStore = function () {
+            vm.resetForm();
+            vm.addMode = true;
+            vm.editMode = true;
+        };
+
+        // Depending on mode, POST or PUT data
+        vm.saveLocalStore = function () {
+            vm.toggleEditMode();
+            let localStoreData = vm.selectedLocalStore;
+            if(vm.addMode) {
+                LocalStore.create(localStoreData)
+                    .then(function () {
+                        vm.successMsg = 'Data successfully updated.';
+                        vm.addMode = false;
+                        // Render updated list
+                        vm.getAllLocalStores();
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.'
+                    });
+            }else{
+                LocalStore.update(LocalStoreData)
+                    .then(function () {
+                        vm.successMsg = 'Data successfully updated.';
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.'
+                    });
+            }
+        };
+
+        // For deleting the selected book
+        vm.delLocalStore = function () {
+            let localStoreId = vm.selectedLocalStore.id;
+            console.log(localStoreId);
+            if(confirm('Are you sure you want to delete this book?')) {
+                LocalStore.delete(localStoreId)
+                    .then(function () {
+                        vm.successMsg = 'Local Store successfully deleted.';
+                        // Render updated list
+                        vm.getAllLocalStores();
+                        vm.resetForm();
+                        vm.selectedLocalStore = undefined;
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.';
+                    })
+            }
+        };
+
     });
 
 
