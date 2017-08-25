@@ -6,10 +6,10 @@
             <h3>Transit Hub Employees</h3>
             <hr>
             <div class="list-group pre-scrollable">
-                <button type="button" class="list-group-item list-group-item-action" ng-repeat="ls in crudThEmp.transitHubEmps"
-                        ng-click="crudThEmp.selecttransitHubEmp(ls)"
-                        ng-class="{active: crudThEmp.isSelected(ls)}">
-                    <span>{{ls.Name}}</span>
+                <button type="button" class="list-group-item list-group-item-action" ng-repeat="th in crudThEmp.transitHubEmps"
+                        ng-click="crudThEmp.selecttransitHubEmp(th)"
+                        ng-class="{active: crudThEmp.isSelected(th)}">
+                    <span>{{th.firstname}} {{th.lastname}}</span>
                 </button>
             </div>
 

@@ -122,7 +122,7 @@ module.exports = function (router) {
     //----------Transit Hub Employee API----------
     // --------------------------------------------------------
     // Retrieve records for all transit hub Employees in the db
-    router.get('/themployee', function(req, res){
+    router.get('/transitHubEmp', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
         var query = ThEmp.find({});
@@ -136,7 +136,7 @@ module.exports = function (router) {
     });
 
     // Provides method for saving new users in the db
-    router.post('/themployee', function(req, res){
+    router.post('/transitHubEmp', function(req, res){
 
         // Creates a new Local store Employee based on the Mongoose schema and the post body
         let newemp = new ThEmp(req.body);
@@ -152,9 +152,9 @@ module.exports = function (router) {
     });
 
 
-    router.put('/themployee/:id', function(req, res){
+    router.put('/transitHubEmp/:id', function(req, res){
 
-        let newemp = new LocalEmp(req.body);
+        let newemp = new ThEmp(req.body);
         let query = {_id:req.params.id};
 
         ThEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
@@ -163,7 +163,7 @@ module.exports = function (router) {
         });
     });
 
-    router.delete('/themployee/:id', function (req, res){
+    router.delete('/transitHubEmp/:id', function (req, res){
 
         Themp.findByIdAndRemove(req.params.id, function (err,offer){
             if (err) return res.send(500, { error: err });

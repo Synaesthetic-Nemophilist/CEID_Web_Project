@@ -1,4 +1,4 @@
-angular.module('adminControllers', ['adminServices', 'localStoreServices', 'localEmpServices'])
+angular.module('adminControllers', ['adminServices', 'localStoreServices', 'localEmpServices', 'transitHubEmpServices'])
 
     .controller('regCtrl', function ($http, $location, $timeout, Admin) {
 
