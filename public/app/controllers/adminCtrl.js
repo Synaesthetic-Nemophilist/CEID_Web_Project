@@ -142,7 +142,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
         vm.addMode = false;
 
         // Get all localStoreEmps from db
-        vm.getAlllocalStoreEmps = function () {
+        vm.getAllLocalStoreEmps = function () {
             LocalStoreEmp.getAll()
                 .then(function (res) {
                     vm.localStoreEmps = res.data;
@@ -153,7 +153,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
         };
 
         // render all cities in list
-        vm.getAlllocalStoreEmps();
+        vm.getAllLocalStoreEmps();
 
         // Choose a localStoreEmp and save state, also reset messages
         vm.selectlocalStoreEmp = function (ls) {
@@ -198,7 +198,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                         vm.successMsg = 'Data successfully added.';
                         vm.addMode = false;
                         // Render updated list
-                        vm.getAlllocalStoreEmps();
+                        vm.getAllLocalStoreEmps();
                     })
                     .catch(function (err) {
                         vm.errorMsg = 'There was an error. Please try again.'
@@ -224,7 +224,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                     .then(function () {
                         vm.successMsg = 'Local Store successfully deleted.';
                         // Render updated list
-                        vm.getAlllocalStoreEmps();
+                        vm.getAllLocalStoreEmps();
                         vm.resetForm();
                         vm.selectedlocalStoreEmp = undefined;
                     })
