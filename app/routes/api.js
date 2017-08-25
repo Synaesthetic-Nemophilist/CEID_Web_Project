@@ -43,8 +43,6 @@ module.exports = function (router) {
         });
     });
 
-
-
     router.put('/localstore/:id', function(req, res){
 
         let newStore = new Lstore(req.body);
@@ -53,6 +51,15 @@ module.exports = function (router) {
         Lstore.findOneAndUpdate(query, newStore, {upsert:true}, function(err, doc){
             if (err) return res.send(500, { error: err });
             return res.send("succesfully saved");
+        });
+
+    });
+
+    router.delete('/localstore/:id', function (req, res){
+
+        Lstore.findByIdAndRemove(req.params.id, function (err,offer){
+            if(err) { throw err; }
+
         });
 
     });

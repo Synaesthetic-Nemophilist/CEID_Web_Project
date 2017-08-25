@@ -113,7 +113,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
 
         // For deleting the selected book TODO: DOES NOT WORK YET!: implement delete path in back end
         vm.delLocalStore = function () {
-            let localStoreId = vm.selectedLocalStore.id;
+            let localStoreId = vm.selectedLocalStore._id;
             console.log(localStoreId);
             if(confirm('Are you sure you want to delete this book?')) {
                 LocalStore.delete(localStoreId)
