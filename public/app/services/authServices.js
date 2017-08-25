@@ -5,7 +5,8 @@ angular.module('authServices', [])
         let authFactory = {};
 
         // method for logging in using authentication and token setting
-        authFactory.login = (loginData) => {
+        authFactory.login = (loginData, asAn) => {
+            loginData.is = asAn;
             return $http.post('/api/authenticate', loginData).then(function (data) {
                 AuthToken.setToken(data.data.token);
                 return data;

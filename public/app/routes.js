@@ -63,7 +63,15 @@ app.run(['$rootScope', 'Auth', '$location', function ($rootScope, Auth, $locatio
         } else if(next.$$route.authenticated === false) {
             if(Auth.isLoggedIn()) {
                 event.preventDefault();
-                $location.path('controlPanel');  // TODO: When auth generalization happes redirect to respective user case
+                Auth.getUser().then(function (data) {
+                    if(data.data.is === "admin") {
+                        $location.path('/controlPanel');
+                    } else if(data.data.is === "lsEmp") {
+                        $location.path('/localStoreApp');
+                    } else if(data.data.is === "thEmp") {
+                        $location.path('/transitHubApp');
+                    }
+                });
             }
         }
     });

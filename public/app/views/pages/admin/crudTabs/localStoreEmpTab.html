@@ -89,8 +89,8 @@
 
                     <div class="btn-group btn-group-justified">
                         <a href="#" class="btn bg-primary" style="color: white" ng-if="!crudLsEmp.editMode" ng-class="{disabled: crudLsEmp.disabledDel()}" ng-click="crudLsEmp.toggleEditMode()">Edit</a>
-                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudLsEmp.editMode"  ng-class="{disabled: !crudLsEmp.allfieldsOk(lsempform)}" ng-click="crudLsEmp.saveLocalStore()">Save</a>
-                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudLsEmp.editMode" ng-class="{disabled: crudLsEmp.disabledDel()}" ng-click="crudLsEmp.delLocalStore()">Delete</a>
+                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudLsEmp.editMode"  ng-class="{disabled: !crudLsEmp.allfieldsOk(lsempform)}" ng-click="crudLsEmp.savelocalStoreEmp()">Save</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudLsEmp.editMode" ng-class="{disabled: crudLsEmp.disabledDel()}" ng-click="crudLsEmp.dellocalStoreEmp()">Delete</a>
                         <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="crudLsEmp.editMode"  ng-click="crudLsEmp.cancelEdit()">Cancel</a>
                     </div>
 

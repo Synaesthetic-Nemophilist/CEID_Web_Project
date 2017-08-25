@@ -89,8 +89,8 @@
 
                     <div class="btn-group btn-group-justified">
                         <a href="#" class="btn bg-primary" style="color: white" ng-if="!crudThEmp.editMode" ng-class="{disabled: crudThEmp.disabledDel()}" ng-click="crudThEmp.toggleEditMode()">Edit</a>
-                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudThEmp.editMode"  ng-class="{disabled: !crudThEmp.allfieldsOk(thempform)}" ng-click="crudThEmp.saveLocalStore()">Save</a>
-                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudThEmp.editMode" ng-class="{disabled: crudThEmp.disabledDel()}" ng-click="crudThEmp.delLocalStore()">Delete</a>
+                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudThEmp.editMode"  ng-class="{disabled: !crudThEmp.allfieldsOk(thempform)}" ng-click="crudThEmp.savetransitHubEmp()">Save</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudThEmp.editMode" ng-class="{disabled: crudThEmp.disabledDel()}" ng-click="crudThEmp.deltransitHubEmp()">Delete</a>
                         <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="crudThEmp.editMode"  ng-click="crudThEmp.cancelEdit()">Cancel</a>
                     </div>
 

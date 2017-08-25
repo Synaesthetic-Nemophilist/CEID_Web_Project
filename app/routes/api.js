@@ -263,6 +263,8 @@ module.exports = function (router) {
                     }
                 }
             });
+        } else {
+            res.json({success: false, message: 'Not a valid user'});
         }
 
     });

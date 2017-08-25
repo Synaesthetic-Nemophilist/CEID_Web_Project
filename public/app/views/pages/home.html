@@ -10,7 +10,19 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <a class="btn btn-success" href="/login">>Login</a>
+
+        <div class="dropdown show">
+            <a class="btn btn-success dropdown-toggle dropdown-toggle-split" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                Login
+            </a>
+
+            <div class="dropdown-menu" style="right: 0; left: auto;">
+                <a class="dropdown-item" href="/login" ng-click="main.asAnAdmin()">As Admin</a>
+                <a class="dropdown-item" href="/login" ng-click="main.asAnEmpLs()">As Local Store Employee</a>
+                <a class="dropdown-item" href="/login" ng-click="main.asAnAEmpTh()">As Transit Hub Employee</a>
+            </div>
+        </div>
+
     </div>
 </nav>
 

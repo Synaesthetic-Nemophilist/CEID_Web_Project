@@ -6,6 +6,7 @@ angular.module('mainController', ['authServices'])
 
         //Initial vm property values can or may not go here..
         //----
+        vm.asAn = undefined;
 
         // this is executed upon every route change
         $rootScope.$on('$routeChangeStart', function () {
@@ -24,15 +25,18 @@ angular.module('mainController', ['authServices'])
             vm.loading = true;
             vm.errorMsg = false;
 
-            Auth.login(vm.loginData)
+            Auth.login(vm.loginData, vm.asAn)
                 .then(function (data) {
                     if(data.data.success) {
                         vm.loading = false;  // remove spinner
                         vm.successMsg = data.data.message + '...Redirecting';  // show success msg
-                        // Redirect to home page
+                        console.log(data.data.token.is);  //TODO: vgazei undefined i mlkia!!!
+
+
                         $timeout(function () {
                             vm.loginData = {};  // clear form data
                             vm.successMsg = false;
+
 
                             // Redirect to corresponding app based on user type
                             if(data.data.token.is === "admin") {
@@ -54,8 +58,21 @@ angular.module('mainController', ['authServices'])
             Auth.logout();
             $location.path('/logout');
             $timeout(function () {
+                vm.asAn = undefined;
                 $location.path('/');
             }, 2000);
+        };
+
+
+        // methods to distinguish what kind of user it is
+        vm.asAnAdmin = () => {
+            vm.asAn = "admin";
+        };
+        vm.asAnEmpLs = () => {
+            vm.asAn = "lsEmp";
+        };
+        vm.asAnAEmpTh = () => {
+            vm.asAn = "thEmp";
         };
 
     });
