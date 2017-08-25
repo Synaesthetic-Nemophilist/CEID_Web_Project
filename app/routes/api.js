@@ -89,8 +89,10 @@ module.exports = function (router) {
         // New Local store Employee is saved in the db.
         newemp.save(function(err, lsEmpData){
             if(err) {
+                console.log(err);
                 res.json({success: false, message: err.errmsg});
             } else {
+                console.log(lsEmpData);
                 res.json({success: true, message: 'Local Store Employee saved to DB'});
             }
         });
