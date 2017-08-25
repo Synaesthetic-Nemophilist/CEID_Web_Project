@@ -77,6 +77,11 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
             vm.selectedLocalStore = {};
         };
 
+        vm.cancelEdit = function () {
+            vm.resetForm();
+            vm.toggleEditMode();
+        };
+
         // Reset form for info insertion
         vm.addLocalStore = function () {
             vm.resetForm();
@@ -179,6 +184,11 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
 
         vm.resetForm = function () {
             vm.selectedlocalStoreEmp = {};
+        };
+
+        vm.cancelEdit = function () {
+            vm.resetForm();
+            vm.toggleEditMode();
         };
 
         // Reset form for info insertion
@@ -285,6 +295,11 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
 
         vm.resetForm = function () {
             vm.selectedtransitHubEmp = {};
+        };
+
+        vm.cancelEdit = function () {
+            vm.resetForm();
+            vm.toggleEditMode();
         };
 
         // Reset form for info insertion
