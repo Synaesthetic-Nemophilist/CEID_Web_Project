@@ -52,7 +52,7 @@
                     </tbody>
                 </table>
 
-                <form>
+                <form name="lsempform">
                     <div ng-show="crudLsEmp.editMode" class="form-group">
                         <label for="firstname" >First name:</label>
                         <input id="firstname" class="form-control" ng-model="crudLsEmp.selectedlocalStoreEmp.firstname" required>
@@ -89,9 +89,9 @@
 
                     <div class="btn-group btn-group-justified">
                         <a href="#" class="btn bg-primary" style="color: white" ng-if="!crudLsEmp.editMode" ng-class="{disabled: crudLsEmp.disabledDel()}" ng-click="crudLsEmp.toggleEditMode()">Edit</a>
-                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudLsEmp.editMode"  ng-click="crudLsEmp.saveLocalStore()">Save</a>
+                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudLsEmp.editMode"  ng-class="{disabled: !crudLsEmp.allfieldsOk(lsempform)}" ng-click="crudLsEmp.saveLocalStore()">Save</a>
                         <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudLsEmp.editMode" ng-class="{disabled: crudLsEmp.disabledDel()}" ng-click="crudLsEmp.delLocalStore()">Delete</a>
-                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="crudLsEmp.editMode"  ng-click="crudLsEmp.delLocalStore()">Cancel</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="crudLsEmp.editMode"  ng-click="crudLsEmp.cancelEdit()">Cancel</a>
                     </div>
 
                 </form>
