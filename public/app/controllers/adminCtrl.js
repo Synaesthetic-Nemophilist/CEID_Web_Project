@@ -130,7 +130,112 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             }
         };
 
-    });
+    })
 
+    .controller('adminCrudLsEmpCtrl', function (LocalStoreEmp) {
+        let vm = this;
+
+        //public vars
+        vm.localStoreEmps = []; // init List with empty array until GET
+        vm.selectedlocalStoreEmp = undefined;
+        vm.editMode = false;
+        vm.addMode = false;
+
+        // Get all localStoreEmps from db
+        vm.getAlllocalStoreEmps = function () {
+            localStoreEmp.getAll()
+                .then(function (res) {
+                    vm.localStoreEmps = res.data;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        };
+
+        // render all cities in list
+        vm.getAlllocalStoreEmps();
+
+        // Choose a localStoreEmp and save state, also reset messages
+        vm.selectlocalStoreEmp = function (ls) {
+            vm.selectedlocalStoreEmp = ls;
+            vm.successMsg = undefined;
+            vm.errorMsg = undefined;
+        };
+
+        // For activating selected local store in list
+        vm.isSelected = function (ls) {
+            return vm.selectedlocalStoreEmp === ls;
+        };
+
+        // Cases for disabling delete button
+        vm.disabledDel = function () {
+            return vm.selectedlocalStoreEmp === undefined || vm.addMode;
+        };
+
+        // For when clicking on Edit/Save btn
+        vm.toggleEditMode = function () {
+            vm.editMode = !vm.editMode;
+        };
+
+        vm.resetForm = function () {
+            vm.selectedlocalStoreEmp = {};
+        };
+
+        // Reset form for info insertion
+        vm.addlocalStoreEmp = function () {
+            vm.resetForm();
+            vm.addMode = true;
+            vm.editMode = true;
+        };
+
+        // Depending on mode, POST or PUT data
+        vm.savelocalStoreEmp = function () {
+            vm.toggleEditMode();
+            let localStoreEmpData = vm.selectedlocalStoreEmp;
+            if(vm.addMode) {
+                localStoreEmp.create(localStoreEmpData)
+                    .then(function () {
+                        vm.successMsg = 'Data successfully added.';
+                        vm.addMode = false;
+                        // Render updated list
+                        vm.getAlllocalStoreEmps();
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.'
+                    });
+            }else{
+                localStoreEmp.update(localStoreEmpData)
+                    .then(function () {
+                        vm.successMsg = 'Data successfully updated.';
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        vm.errorMsg = 'There was an error. Please try again.'
+                    });
+            }
+        };
+
+        // For deleting the selected book TODO: DOES NOT WORK YET!: implement delete path in back end
+        vm.dellocalStoreEmp = function () {
+            let localStoreEmpId = vm.selectedlocalStoreEmp._id;
+            console.log(localStoreEmpId);
+            if(confirm('Are you sure you want to delete this book?')) {
+                localStoreEmp.delete(localStoreEmpId)
+                    .then(function () {
+                        vm.successMsg = 'Local Store successfully deleted.';
+                        // Render updated list
+                        vm.getAlllocalStoreEmps();
+                        vm.resetForm();
+                        vm.selectedlocalStoreEmp = undefined;
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.';
+                    })
+            }
+        };
+
+
+
+    });
 
 

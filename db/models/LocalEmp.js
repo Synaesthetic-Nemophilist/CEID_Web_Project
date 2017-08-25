@@ -6,7 +6,12 @@ var Schema = mongoose.Schema;
 //Define Schema
 var LocalEmpSchema = Schema({
     username: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    firstname: {type: String, required: false, default: 'Anon'},
+    lastname: {type: String, required: false},
+    birthday: { type: Date, required: false, default: Date.now },
+    role: {type: String, required: false, default: 'basic'},
+    phonenumber: {type: Number, required: true}
 });
 
 

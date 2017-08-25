@@ -58,8 +58,8 @@ module.exports = function (router) {
     router.delete('/localstore/:id', function (req, res){
 
         Lstore.findByIdAndRemove(req.params.id, function (err,offer){
-            if(err) { throw err; }
-
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully deleted");
         });
 
     });
@@ -109,6 +109,15 @@ module.exports = function (router) {
         });
     });
 
+    router.delete('/localstoreEmp/:id', function (req, res){
+
+        LstoreEmp.findByIdAndRemove(req.params.id, function (err,offer){
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully deleted");
+        });
+
+    });
+
     //----------Transit Hub Employee API----------
     // --------------------------------------------------------
     // Retrieve records for all transit hub Employees in the db
@@ -147,13 +156,20 @@ module.exports = function (router) {
         let newemp = new LocalEmp(req.body);
         var query = {_id:req.params.id};
 
-        LstoreEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
+        ThEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
             if (err) return res.send(500, { error: err });
             return res.send("succesfully saved");
         });
     });
 
+    router.delete('/themployee/:id', function (req, res){
 
+        Themp.findByIdAndRemove(req.params.id, function (err,offer){
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully deleted");
+        });
+
+    });
 
 
     //----------ADMIN API----------
