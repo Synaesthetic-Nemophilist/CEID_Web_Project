@@ -1,0 +1,120 @@
+<div id="lsTab" class="tab-pane fade show active" ng-controller="adminCrudLsCtrl as crudLs">
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <h3>Local Stores</h3>
+                <hr>
+                <div class="list-group pre-scrollable">
+                    <button type="button" class="list-group-item list-group-item-action" ng-repeat="ls in crudLs.localStores"
+                            ng-click="crudLs.selectLocalStore(ls)"
+                            ng-class="{active: crudLs.isSelected(ls)}">
+                        <span>{{ls.Address.City}}</span>
+                    </button>
+                </div>
+
+                <button class="btn btn-secondary btn-group-justified" ng-click="crudLs.addLocalStore()">
+                    <span class="fa fa-plus"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div>
+                <h3>Local Store Details</h3>
+                <hr>
+                <div class="col-md-6">
+                    <div class="alert alert-success" ng-if="crudLs.successMsg">{{crudLs.successMsg}}</div>
+                    <div class="alert alert-danger" ng-if="crudLs.errorMsg">{{crudLs.errorMsg}}</div>
+
+                    <table class="table table-striped table-bordered" ng-show="!crudLs.editMode">
+                        <tbody>
+                        <tr>
+                            <th>City:</th>
+                            <td>{{crudLs.selectedLocalStore.Address.City}}</td>
+                        </tr>
+                        <tr>
+                            <th>Street:</th>
+                            <td>{{crudLs.selectedLocalStore.Address.Street}}</td>
+                        </tr>
+                        <tr>
+                            <th>Number:</th>
+                            <td>{{crudLs.selectedLocalStore.Address.Number}}</td>
+                        </tr>
+                        <tr>
+                            <th>Post Code:</th>
+                            <td>{{crudLs.selectedLocalStore.Address.Post_code}}</td>
+                        </tr>
+                        <tr>
+                            <th>Longitude:</th>
+                            <td>{{crudLs.selectedLocalStore.Location.Longitude}}</td>
+                        </tr>
+                        <tr>
+                            <th>Latitude:</th>
+                            <td>{{crudLs.selectedLocalStore.Location.Latitude}}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number:</th>
+                            <td>{{crudLs.selectedLocalStore.phone_number}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <form>
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="city" >City:</label>
+                            <input id="city" class="form-control" ng-model="crudLs.selectedLocalStore.Address.City" required>
+                        </div>
+
+
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="street" >Street:</label>
+                            <input id="street" class="form-control" ng-model="crudLs.selectedLocalStore.Address.Street" required>
+                        </div>
+
+
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="number" >Number:</label>
+                            <input id="number" class="form-control" ng-model="crudLs.selectedLocalStore.Address.Number" required>
+                        </div>
+
+
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="postCode" >Post Code:</label>
+                            <input id="postCode" class="form-control" ng-model="crudLs.selectedLocalStore.Address.Post_code" required>
+                        </div>
+
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="longit" >Longitude:</label>
+                            <input id="longit" class="form-control" ng-model="crudLs.selectedLocalStore.Location.Longitude" required>
+                        </div>
+
+
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="latit" >Latitude:</label>
+                            <input id="latit" class="form-control" ng-model="crudLs.selectedLocalStore.Location.Latitude" required>
+                        </div>
+
+                        <div ng-show="crudLs.editMode" class="form-group">
+                            <label for="phone" >Phone Number:</label>
+                            <input id="phone" class="form-control" ng-model="crudLs.selectedLocalStore.phone_number" required>
+                        </div>
+
+
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn bg-primary" ng-if="!crudLs.editMode" ng-click="crudLs.toggleEditMode()">Edit</a>
+                            <a href="#" class="btn bg-primary" ng-if="crudLs.editMode" ng-click="crudLs.saveLocalStore()">Save</a>
+                            <a href="#" class="btn btn-danger" ng-class="{disabled: crudLs.disabledDel()}" ng-click="crudLs.delLocalStore()">Delete</a>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="col-md-2">
+                    <!--<img id="pic" class="img-responsive" style='min-width: 350px; min-height: 400px' ng-src="./rsc/{{bookctrl.selectedBook.title}}.jpg" err-src="./rsc/noCover.jpg"/>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
