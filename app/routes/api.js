@@ -1,13 +1,12 @@
 let jwt     = require('jsonwebtoken');
 
 let Admin   = require('../../db/models/Admin');
+let Lstore  = require('../../db/models/LocalStore');
+let LstoreEmp  = require('../../db/models/LocalEmp');
+let ThEmp = require('../../db/models/TH_Employee');
+
 
 let secret  = 'supersupersecret12321';
-let Lstore  = require('../../db/models/LocalStore');
-
-let LstoreEmp  = require('../../db/models/LocalEmp');
-
-let ThEmp = require('../../db/models/TH_Employee');
 
 module.exports = function (router) {
 
@@ -17,7 +16,7 @@ module.exports = function (router) {
     router.get('/localstore', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        var query = Lstore.find({});
+        let query = Lstore.find({});
         query.exec(function(err, Lstores){
             if(err) {
                 res.send(err);
@@ -46,7 +45,7 @@ module.exports = function (router) {
     router.put('/localstore/:id', function(req, res){
 
         let newStore = new Lstore(req.body);
-        var query = {_id:req.params.id};
+        let query = {_id:req.params.id};
 
         Lstore.findOneAndUpdate(query, newStore, {upsert:true}, function(err, doc){
             if (err) return res.send(500, { error: err });
@@ -71,7 +70,7 @@ module.exports = function (router) {
     router.get('/localstoreEmp', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        var query = LstoreEmp.find({});
+        let query = LstoreEmp.find({});
         query.exec(function(err, Lstoreemps){
             if(err) {
                 res.send(err);
@@ -85,7 +84,7 @@ module.exports = function (router) {
     router.post('/localstoreEmp', function(req, res){
 
         // Creates a new Local store Employee based on the Mongoose schema and the post body
-        let newemp = new LocalEmp(req.body);
+        let newemp = new LstoreEmp(req.body);
 
         // New Local store Employee is saved in the db.
         newemp.save(function(err, lsEmpData){
@@ -100,8 +99,8 @@ module.exports = function (router) {
 
     router.put('/localstoreEmp/:id', function(req, res){
 
-        let newemp = new LocalEmp(req.body);
-        var query = {_id:req.params.id};
+        let newemp = new LstoreEmp(req.body);
+        let query = {_id:req.params.id};
 
         LstoreEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
             if (err) return res.send(500, { error: err });
@@ -154,7 +153,7 @@ module.exports = function (router) {
     router.put('/themployee/:id', function(req, res){
 
         let newemp = new LocalEmp(req.body);
-        var query = {_id:req.params.id};
+        let query = {_id:req.params.id};
 
         ThEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
             if (err) return res.send(500, { error: err });
@@ -173,6 +172,7 @@ module.exports = function (router) {
 
 
     //----------ADMIN API----------
+    // --------------------------------------------------------
     //Admin Register
     // http://localhost:port/api/admin
     router.post('/admin', function (req, res) {

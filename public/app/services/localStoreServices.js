@@ -12,7 +12,6 @@ angular.module('localStoreServices', [])
         };
 
         localStoreFactory.update =  (lsData) => {
-            console.log(lsData._id);
             return $http.put('/api/localstore/' + lsData._id, lsData);
         };
 

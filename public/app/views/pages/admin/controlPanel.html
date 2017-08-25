@@ -36,8 +36,14 @@
 
     <div class="tab-content">
 
-        <ng-include src="'app/views/pages/admin/crudTabs/localStoreTab.html'"></ng-include>
-        <!--<ng-include src="'app/views/pages/admin/crudTabs/localStorEmp.html'"></ng-include>-->
+        <div id="lsTab" class="tab-pane fade show active" ng-controller="adminCrudLsCtrl as crudLs" ng-include="'app/views/pages/admin/crudTabs/localStoreTab.html'">
+        </div>
+        <div id="lsEmpTab" class="tab-pane fade" ng-controller="adminCrudLsEmpCtrl as crudLsEmp" ng-include="'app/views/pages/admin/crudTabs/localStoreEmpTab.html'">
+        </div>
+
+        <div id="thEmpTab" class="tab-pane fade">
+            <p>top kek</p>
+        </div>
 
     </div>
 

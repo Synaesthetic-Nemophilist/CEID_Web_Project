@@ -1,11 +1,23 @@
 angular.module('localEmpServices', [])
 
-    .factory('LocalEmp', function ($http) {
-        let adminFactory = {};
+    .factory('LocalStoreEmp', function ($http) {
+        let localStoreEmpFactory = {};
 
-        adminFactory.create = (regData) => {
-            return $http.post('/api/localEmployee', regData)
+        localStoreEmpFactory.getAll = () => {
+            return $http.get('/api/localstoreEmp');
         };
 
-        return adminFactory;
+        localStoreEmpFactory.create = (lsEmpData) => {
+            return $http.post('/api/localstoreEmp', lsEmpData)
+        };
+
+        localStoreEmpFactory.update =  (lsEmpData) => {
+            return $http.put('/api/localstoreEmp/' + lsEmpData._id, lsEmpData);
+        };
+
+        localStoreEmpFactory.delete = (lsEmpId) => {
+            return $http.delete('/api/localstoreEmp/' + lsEmpId);
+        };
+
+        return localStoreEmpFactory;
     });

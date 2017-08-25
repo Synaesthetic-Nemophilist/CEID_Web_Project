@@ -1,4 +1,4 @@
-angular.module('adminControllers', ['adminServices', 'localStoreServices'])
+angular.module('adminControllers', ['adminServices', 'localStoreServices', 'localEmpServices'])
 
     .controller('regCtrl', function ($http, $location, $timeout, Admin) {
 
@@ -111,7 +111,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             }
         };
 
-        // For deleting the selected book TODO: DOES NOT WORK YET!: implement delete path in back end
+        // For deleting the selected book
         vm.delLocalStore = function () {
             let localStoreId = vm.selectedLocalStore._id;
             console.log(localStoreId);
@@ -143,7 +143,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
 
         // Get all localStoreEmps from db
         vm.getAlllocalStoreEmps = function () {
-            localStoreEmp.getAll()
+            LocalStoreEmp.getAll()
                 .then(function (res) {
                     vm.localStoreEmps = res.data;
                 })
@@ -193,7 +193,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             vm.toggleEditMode();
             let localStoreEmpData = vm.selectedlocalStoreEmp;
             if(vm.addMode) {
-                localStoreEmp.create(localStoreEmpData)
+                LocalStoreEmp.create(localStoreEmpData)
                     .then(function () {
                         vm.successMsg = 'Data successfully added.';
                         vm.addMode = false;
@@ -204,7 +204,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
                         vm.errorMsg = 'There was an error. Please try again.'
                     });
             }else{
-                localStoreEmp.update(localStoreEmpData)
+                LocalStoreEmp.update(localStoreEmpData)
                     .then(function () {
                         vm.successMsg = 'Data successfully updated.';
                     })
@@ -215,12 +215,12 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
             }
         };
 
-        // For deleting the selected book TODO: DOES NOT WORK YET!: implement delete path in back end
+        // For deleting the selected book
         vm.dellocalStoreEmp = function () {
             let localStoreEmpId = vm.selectedlocalStoreEmp._id;
             console.log(localStoreEmpId);
             if(confirm('Are you sure you want to delete this book?')) {
-                localStoreEmp.delete(localStoreEmpId)
+                LocalStoreEmp.delete(localStoreEmpId)
                     .then(function () {
                         vm.successMsg = 'Local Store successfully deleted.';
                         // Render updated list
@@ -237,5 +237,8 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices'])
 
 
     });
+
+
+
 
 
