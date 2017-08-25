@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 //Define Schema
 var AdminSchema = Schema({
     username: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    is: {type: String, default: "admin"}
 });
 
 

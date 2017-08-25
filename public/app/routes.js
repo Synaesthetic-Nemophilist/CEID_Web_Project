@@ -33,6 +33,15 @@ let app = angular.module('Routes', ['ngRoute'])
                 authenticated: true
             })
 
+            .when('/localStoreApp', {
+                templateUrl: 'app/views/pages/localStore/home.html',
+                authenticated: true
+            })
+
+            .when('/transitHubApp', {
+                templateUrl: 'app/views/pages/transitHub/home.html',
+                authenticated: true
+            })
 
             .otherwise({ redirectTo: '/'});
 

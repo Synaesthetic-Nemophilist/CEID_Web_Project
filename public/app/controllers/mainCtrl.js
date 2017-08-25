@@ -33,7 +33,15 @@ angular.module('mainController', ['authServices'])
                         $timeout(function () {
                             vm.loginData = {};  // clear form data
                             vm.successMsg = false;
-                            $location.path('/controlPanel');  //TODO: cases for each: admin, localEmp, transitHubEmp
+
+                            // Redirect to corresponding app based on user type
+                            if(data.data.token.is === "admin") {
+                                $location.path('/controlPanel');
+                            } else if(data.data.token.is === "lsEmp") {
+                                $location.path('/localStoreApp');
+                            } else if(data.data.token.is === "thEmp") {
+                                $location.path('/transitHubApp');
+                            }
                         }, 2000);
                     } else {
                         vm.loading = false;  // remove spinner

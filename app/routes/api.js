@@ -203,25 +203,67 @@ module.exports = function (router) {
     //Authenticate TODO: This function should be generalized for admins, localEmps and transitHubEmps!!!
     // http://localhost:port/api/authenticate
     router.post('/authenticate', function (req, res) {
-        Admin.findOne({ username: req.body.username }).select('username password').exec(function (err, admin) {
-            if(err) throw err;
+        if(req.body.is === "admin") {
+            Admin.findOne({username: req.body.username}).select('username password').exec(function (err, admin) {
+                if (err) throw err;
 
-            if(!admin) {
-                res.json({ success: false, message: 'Could not authenticate user' });
-            } else if(admin) {
-                if(req.body.password) {
-                    var validPassword = admin.comparePassword(req.body.password);
-                } else {
-                    res.json({ success: false, message: 'No password provided' });
+                if (!admin) {
+                    res.json({success: false, message: 'Could not authenticate user'});
+                } else if (admin) {
+                    if (req.body.password) {
+                        var validPassword = admin.comparePassword(req.body.password);
+                    } else {
+                        res.json({success: false, message: 'No password provided'});
+                    }
+                    if (!validPassword) {
+                        res.json({success: false, message: 'Could not authenticate password'});
+                    } else {
+                        let token = jwt.sign({username: admin.username, is: admin.is}, secret, {expiresIn: '24h'});  //create jwt for session
+                        res.json({success: true, message: 'User authenticated!', token: token});
+                    }
                 }
-                if(!validPassword) {
-                    res.json({ success: false, message: 'Could not authenticate password' });
-                } else {
-                    let token = jwt.sign({ username: admin.username }, secret, { expiresIn: '24h' });  //create jwt for session
-                    res.json({ success: true, message: 'User authenticated!', token: token });
+            });
+        } else if(req.body.is === "lsEmp") {
+            LstoreEmp.findOne({username: req.body.username}).select('username password').exec(function (err, lsemp) {
+                if (err) throw err;
+
+                if (!lsemp) {
+                    res.json({success: false, message: 'Could not authenticate user'});
+                } else if (lsemp) {
+                    if (req.body.password) {
+                        var validPassword = lsemp.comparePassword(req.body.password);
+                    } else {
+                        res.json({success: false, message: 'No password provided'});
+                    }
+                    if (!validPassword) {
+                        res.json({success: false, message: 'Could not authenticate password'});
+                    } else {
+                        let token = jwt.sign({username: lsemp.username, is: lsemp.is}, secret, {expiresIn: '24h'});  //create jwt for session
+                        res.json({success: true, message: 'User authenticated!', token: token});
+                    }
                 }
-            }
-        })
+            });
+        } else if(req.body.is === "thEmp") {
+            ThEmp.findOne({username: req.body.username}).select('username password').exec(function (err, themp) {
+                if (err) throw err;
+
+                if (!themp) {
+                    res.json({success: false, message: 'Could not authenticate user'});
+                } else if (themp) {
+                    if (req.body.password) {
+                        var validPassword = themp.comparePassword(req.body.password);
+                    } else {
+                        res.json({success: false, message: 'No password provided'});
+                    }
+                    if (!validPassword) {
+                        res.json({success: false, message: 'Could not authenticate password'});
+                    } else {
+                        let token = jwt.sign({username: themp.username, is: themp.is}, secret, {expiresIn: '24h'});  //create jwt for session
+                        res.json({success: true, message: 'User authenticated!', token: token});
+                    }
+                }
+            });
+        }
 
     });
 
@@ -248,37 +290,6 @@ module.exports = function (router) {
     router.post('/current', function (req, res) {
         res.json(req.decoded);
     });
-
-
-    //----------LOCAL EMP API----------
-
-    //LocalEmp Register TODO: This happens ONLY VIA THE ADMIN, there is no special employee registration page view!!
-    // http://localhost:port/api/localEmployee
-    router.post('/localEmployee', function (req, res) {
-        if( !req.body.username || !req.body.password ) {
-            res.json({ success: false, message: 'Invalid Details' });
-        } else {
-            //Create an instance of an admin model
-            let newLocalEmp = new LocalEmp({
-                username: req.body.username,
-                password: req.body.password
-            });
-            //Save to db - handle errors, or set session variable and redirect to adminPanel
-            newLocalEmp.save(function(err, localEmpData){
-                if(err) {
-                    res.json({ success: false, message: err.errmsg });
-                    // console.log(err);
-                    // req.flash('info', 'Username already taken!');
-                    // res.redirect('signup');
-                } else {
-                    res.json({ success: true, message: 'Local Employee created!' });
-                    // req.session.admin = adminData;
-                    // res.redirect('panel');
-                }
-            });
-        }
-    });
-
 
 
     return router;
