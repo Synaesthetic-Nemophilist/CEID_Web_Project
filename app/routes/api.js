@@ -5,7 +5,9 @@ let Admin   = require('../../db/models/Admin');
 let secret  = 'supersupersecret12321';
 let Lstore  = require('../../db/models/LocalStore');
 
+let LstoreEmp  = require('../../db/models/LocalEmp');
 
+let ThEmp = require('../../db/models/TH_Employee');
 
 module.exports = function (router) {
 
@@ -25,8 +27,6 @@ module.exports = function (router) {
         });
     });
 
-    // POST Routes
-    // --------------------------------------------------------
     // Provides method for saving new users in the db
     router.post('/localstore', function(req, res){
 
@@ -44,6 +44,7 @@ module.exports = function (router) {
     });
 
 
+
     router.put('/localstore/:id', function(req, res){
 
         let newStore = new Lstore(req.body);
@@ -55,6 +56,97 @@ module.exports = function (router) {
         });
 
     });
+
+    //----------Local Store Employee API----------
+    // --------------------------------------------------------
+    // Retrieve records for all localstoreEployees in the db
+
+    router.get('/localstoreEmp', function(req, res){
+
+        // Uses Mongoose schema to run the search (empty conditions)
+        var query = LstoreEmp.find({});
+        query.exec(function(err, Lstoreemps){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(Lstoreemps);
+            }
+        });
+    });
+
+    // Provides method for saving new users in the db
+    router.post('/localstoreEmp', function(req, res){
+
+        // Creates a new Local store Employee based on the Mongoose schema and the post body
+        let newemp = new LocalEmp(req.body);
+
+        // New Local store Employee is saved in the db.
+        newemp.save(function(err, lsEmpData){
+            if(err) {
+                res.json({success: false, message: err.errmsg});
+            } else {
+                res.json({success: true, message: 'Local Store Employee saved to DB'});
+            }
+        });
+    });
+
+
+    router.put('/localstoreEmp/:id', function(req, res){
+
+        let newemp = new LocalEmp(req.body);
+        var query = {_id:req.params.id};
+
+        LstoreEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully saved");
+        });
+    });
+
+    //----------Transit Hub Employee API----------
+    // --------------------------------------------------------
+    // Retrieve records for all transit hub Employees in the db
+    router.get('/themployee', function(req, res){
+
+        // Uses Mongoose schema to run the search (empty conditions)
+        var query = ThEmp.find({});
+        query.exec(function(err, themps){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(themps);
+            }
+        });
+    });
+
+    // Provides method for saving new users in the db
+    router.post('/themployee', function(req, res){
+
+        // Creates a new Local store Employee based on the Mongoose schema and the post body
+        let newemp = new ThEmp(req.body);
+
+        // New Transit Hub Employee is saved in the db.
+        newemp.save(function(err, thEmpData){
+            if(err) {
+                res.json({success: false, message: err.errmsg});
+            } else {
+                res.json({success: true, message: 'Transit Hub Employee saved to DB'});
+            }
+        });
+    });
+
+
+    router.put('/themployee/:id', function(req, res){
+
+        let newemp = new LocalEmp(req.body);
+        var query = {_id:req.params.id};
+
+        LstoreEmp.findOneAndUpdate(query, newemp, {upsert:true}, function(err, doc){
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully saved");
+        });
+    });
+
+
 
 
     //----------ADMIN API----------
