@@ -236,6 +236,110 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
 
 
 
+    })
+
+    .controller('adminCrudThEmpCtrl', function (transitHubEmp) {
+        let vm = this;
+
+        //public vars
+        vm.transitHubEmps = []; // init List with empty array until GET
+        vm.selectedtransitHubEmp = undefined;
+        vm.editMode = false;
+        vm.addMode = false;
+
+        // Get all transitHubEmps from db
+        vm.getAlltransitHubEmps = function () {
+            transitHubEmp.getAll()
+                .then(function (res) {
+                    vm.transitHubEmps = res.data;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        };
+
+        // render all cities in list
+        vm.getAlltransitHubEmps();
+
+        // Choose a transitHubEmp and save state, also reset messages
+        vm.selecttransitHubEmp = function (ls) {
+            vm.selectedtransitHubEmp = ls;
+            vm.successMsg = undefined;
+            vm.errorMsg = undefined;
+        };
+
+        // For activating selected Transit Hub in list
+        vm.isSelected = function (ls) {
+            return vm.selectedtransitHubEmp === ls;
+        };
+
+        // Cases for disabling delete button
+        vm.disabledDel = function () {
+            return vm.selectedtransitHubEmp === undefined || vm.addMode;
+        };
+
+        // For when clicking on Edit/Save btn
+        vm.toggleEditMode = function () {
+            vm.editMode = !vm.editMode;
+        };
+
+        vm.resetForm = function () {
+            vm.selectedtransitHubEmp = {};
+        };
+
+        // Reset form for info insertion
+        vm.addtransitHubEmp = function () {
+            vm.resetForm();
+            vm.addMode = true;
+            vm.editMode = true;
+        };
+
+        // Depending on mode, POST or PUT data
+        vm.savetransitHubEmp = function () {
+            vm.toggleEditMode();
+            let transitHubEmpData = vm.selectedtransitHubEmp;
+            if (vm.addMode) {
+                transitHubEmp.create(transitHubEmpData)
+                    .then(function () {
+                        vm.successMsg = 'Data successfully added.';
+                        vm.addMode = false;
+                        // Render updated list
+                        vm.getAlltransitHubEmps();
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.'
+                    });
+            } else {
+                transitHubEmp.update(transitHubEmpData)
+                    .then(function () {
+                        vm.successMsg = 'Data successfully updated.';
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        vm.errorMsg = 'There was an error. Please try again.'
+                    });
+            }
+        };
+
+        // For deleting the selected book
+        vm.deltransitHubEmp = function () {
+            let transitHubEmpId = vm.selectedtransitHubEmp._id;
+            console.log(transitHubEmpId);
+            if (confirm('Are you sure you want to delete this book?')) {
+                transitHubEmp.delete(transitHubEmpId)
+                    .then(function () {
+                        vm.successMsg = 'Transit Hub successfully deleted.';
+                        // Render updated list
+                        vm.getAlltransitHubEmps();
+                        vm.resetForm();
+                        vm.selectedtransitHubEmp = undefined;
+                    })
+                    .catch(function (err) {
+                        vm.errorMsg = 'There was an error. Please try again.';
+                    })
+            }
+        };
+
     });
 
 
