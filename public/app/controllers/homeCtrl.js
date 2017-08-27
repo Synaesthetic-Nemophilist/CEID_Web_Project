@@ -14,7 +14,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                 },
                 zoom: 11,
                 markers: [{
-                    id: 1,
+                    id: "Alexandroupoli",
                     latitude: 40.8562833,
                     longitude: 25.8642735
 
