@@ -11,10 +11,9 @@ angular.module('mainController', ['authServices'])
         // this is executed upon every route change
         $rootScope.$on('$routeChangeStart', function () {
             if(Auth.isLoggedIn()) {
-                console.log('User is logged in'); //TODO: temp, remove this log when not nec anymore
                 Auth.getUser().then(function (data) {
                     vm.username = data.data.username;  // username is accessible on front-end now
-                    console.log(data.data);
+                    console.log('User '+ vm.username +' is logged in, he is a '+ data.data.is); //TODO: temp, remove this log when not nec anymore
 
                 });
             } else {
