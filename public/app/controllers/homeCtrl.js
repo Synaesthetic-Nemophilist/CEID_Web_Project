@@ -111,7 +111,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
             strokeWeight: 2
         });
 
-        flightPath.setMap(map);
+        flightPath.setMap(vm.map);
 
 
 

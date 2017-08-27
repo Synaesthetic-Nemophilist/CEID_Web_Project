@@ -14,6 +14,8 @@ angular.module('mainController', ['authServices'])
                 console.log('User is logged in'); //TODO: temp, remove this log when not nec anymore
                 Auth.getUser().then(function (data) {
                     vm.username = data.data.username;  // username is accessible on front-end now
+                    console.log(data.data);
+
                 });
             } else {
                 console.log('Failure: User is NOT logged in');
@@ -30,22 +32,21 @@ angular.module('mainController', ['authServices'])
                     if(data.data.success) {
                         vm.loading = false;  // remove spinner
                         vm.successMsg = data.data.message + '...Redirecting';  // show success msg
-                        console.log(data.data.token.is);  //TODO: vgazei undefined i mlkia!!!
-
 
                         $timeout(function () {
                             vm.loginData = {};  // clear form data
                             vm.successMsg = false;
 
-
-                            // Redirect to corresponding app based on user type
-                            if(data.data.token.is === "admin") {
-                                $location.path('/controlPanel');
-                            } else if(data.data.token.is === "lsEmp") {
-                                $location.path('/localStoreApp');
-                            } else if(data.data.token.is === "thEmp") {
-                                $location.path('/transitHubApp');
-                            }
+                            Auth.getUser().then(function (data) {
+                                // Redirect to corresponding app based on user type
+                                if(data.data.is === "admin") {
+                                    $location.path('/controlPanel');
+                                } else if(data.data.is === "lsEmp") {
+                                    $location.path('/localStoreApp');
+                                } else if(data.data.is === "thEmp") {
+                                    $location.path('/transitHubApp');
+                                }
+                            });
                         }, 2000);
                     } else {
                         vm.loading = false;  // remove spinner

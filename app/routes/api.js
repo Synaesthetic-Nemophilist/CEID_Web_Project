@@ -6,7 +6,7 @@ let LstoreEmp  = require('../../db/models/LocalEmp');
 let ThEmp = require('../../db/models/TH_Employee');
 
 
-let secret  = 'supersupersecret12321';
+let secret  = 'supersuperseret12321';
 
 module.exports = function (router) {
 
@@ -204,7 +204,7 @@ module.exports = function (router) {
     // http://localhost:port/api/authenticate
     router.post('/authenticate', function (req, res) {
         if(req.body.is === "admin") {
-            Admin.findOne({username: req.body.username}).select('username password').exec(function (err, admin) {
+            Admin.findOne({username: req.body.username}).select('username password is').exec(function (err, admin) {
                 if (err) throw err;
 
                 if (!admin) {
@@ -218,13 +218,13 @@ module.exports = function (router) {
                     if (!validPassword) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
-                        let token = jwt.sign({username: admin.username, is: admin.is}, secret, {expiresIn: '24h'});  //create jwt for session
+                        let token = jwt.sign({username: admin.username, is: admin.is}, secret);  //create jwt for session
                         res.json({success: true, message: 'User authenticated!', token: token});
                     }
                 }
             });
         } else if(req.body.is === "lsEmp") {
-            LstoreEmp.findOne({username: req.body.username}).select('username password').exec(function (err, lsemp) {
+            LstoreEmp.findOne({username: req.body.username}).select('username password is').exec(function (err, lsemp) {
                 if (err) throw err;
 
                 if (!lsemp) {
@@ -238,13 +238,13 @@ module.exports = function (router) {
                     if (!validPassword) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
-                        let token = jwt.sign({username: lsemp.username, is: lsemp.is}, secret, {expiresIn: '24h'});  //create jwt for session
+                        let token = jwt.sign({username: lsemp.username, is: lsemp.is}, secret);  //create jwt for session
                         res.json({success: true, message: 'User authenticated!', token: token});
                     }
                 }
             });
         } else if(req.body.is === "thEmp") {
-            ThEmp.findOne({username: req.body.username}).select('username password').exec(function (err, themp) {
+            ThEmp.findOne({username: req.body.username}).select('username password is').exec(function (err, themp) {
                 if (err) throw err;
 
                 if (!themp) {
@@ -258,7 +258,7 @@ module.exports = function (router) {
                     if (!validPassword) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
-                        let token = jwt.sign({username: themp.username, is: themp.is}, secret, {expiresIn: '24h'});  //create jwt for session
+                        let token = jwt.sign({username: themp.username, is: themp.is}, secret);  //create jwt for session
                         res.json({success: true, message: 'User authenticated!', token: token});
                     }
                 }
