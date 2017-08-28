@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
 var TransitHubEmpSchema = Schema({
+
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     firstname: {type: String, required: false, default: 'Anon'},
@@ -15,8 +16,8 @@ var TransitHubEmpSchema = Schema({
     birthday: { type: Date, required: false, default: Date.now },
     role: {type: String, required: false, default: 'basic'},
     phonenumber: {type: Number, required: true},
-    is: {type: String, default: "thEmp"}
-    //transit_hub_id: {type: Schema.ObjectId,ref: 'TransitHub', required: true}
+    is: {type: String, default: "thEmp"},
+    transit_hub_id: {type: Schema.ObjectId,ref: 'TransitHub', required: true}
 });
 
 // Password hashing BEFORE save to DB

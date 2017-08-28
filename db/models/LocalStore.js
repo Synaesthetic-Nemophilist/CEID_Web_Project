@@ -28,11 +28,10 @@ var LocalStoreSchema = Schema({
         Latitude: {type: String}
     },
 
-    // All stored packages in the current Store
-    // Stored_packages: [{
-    //     package_id: { type: Schema.ObjectId, ref:'Package', unique: true} TODO: implement in admin crud form
-    //
-    // }]
+    //All stored packages in the current Store
+    Stored_Packages: [{
+        Package_Id: { type: Schema.ObjectId, ref:'Package', unique: true}
+    }]
 
 });
 

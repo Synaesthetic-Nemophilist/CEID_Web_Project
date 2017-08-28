@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 //Define Schema
 var LocalEmpSchema = Schema({
+
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     firstname: {type: String, required: false, default: 'Anon'},
@@ -12,7 +13,9 @@ var LocalEmpSchema = Schema({
     birthday: { type: Date, required: false, default: Date.now },
     role: {type: String, required: false, default: 'basic'},
     phonenumber: {type: Number, required: true},
-    is: {type: String, default: "lsEmp"}
+    is: {type: String, default: "lsEmp"},
+    local_store_id: {type: Schema.ObjectId, ref: 'LocalStore', required: true}
+
 });
 
 
