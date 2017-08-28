@@ -3,6 +3,7 @@ let jwt     = require('jsonwebtoken');
 let Admin   = require('../../db/models/Admin');
 let Lstore  = require('../../db/models/LocalStore');
 let LstoreEmp  = require('../../db/models/LocalEmp');
+let Thub = require('../../db/models/TransitHub');
 let ThEmp = require('../../db/models/TH_Employee');
 
 
@@ -26,7 +27,7 @@ module.exports = function (router) {
         });
     });
 
-    // Provides method for saving new users in the db
+    // Provides method for saving new local stores in the db
     router.post('/localstore', function(req, res){
 
         // Creates a new Local store based on the Mongoose schema and the post body
@@ -61,6 +62,38 @@ module.exports = function (router) {
             return res.send("succesfully deleted");
         });
 
+    });
+
+    //----------Transit Hub API----------
+    // --------------------------------------------------------
+    // Retrieve records for all transit hubs in the db
+    router.get('/transithub', function(req, res){
+
+        // Uses Mongoose schema to run the search (empty conditions)
+        let query = Thub.find({});
+        query.exec(function(err, Thubs){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(Thubs);
+            }
+        });
+    });
+
+    // Provides method for saving new transit hubs in the db
+    router.post('/transithub', function(req, res){
+
+        // Creates a new Local store based on the Mongoose schema and the post body
+        let newhub = new Thub(req.body);
+
+        // New Local store is saved in the db.
+        newhub.save(function(err, thData){
+            if(err) {
+                res.json({success: false, message: err});
+            } else {
+                res.json({success: true, message: 'Transit Hub saved to DB'});
+            }
+        });
     });
 
     //----------Local Store Employee API----------
@@ -125,11 +158,12 @@ module.exports = function (router) {
     router.get('/transitHubEmp', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        var query = ThEmp.find({});
+        let query = ThEmp.find({}).populate('transit_hub_id');
         query.exec(function(err, themps){
             if(err) {
                 res.send(err);
             } else {
+                console.log(themps);
                 res.json(themps);
             }
         });
