@@ -12,7 +12,7 @@ let PackageSchema = Schema({
 
     Tracking_Number: {type: String, required: true},
     Express: {type: Boolean, required: true},
-    Qr_code: {type: String, required: true},  //TODO: Fix qr code type later on
+    Qr_code: {type: String},  //TODO: Fix qr code type later on
     Delivery_Address: {type: String, required: true},
     Cost: {type: Number, required: true},
 

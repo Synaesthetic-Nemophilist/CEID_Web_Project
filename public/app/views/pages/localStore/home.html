@@ -14,5 +14,92 @@
     <div class="page-header jumbtron text-center">
         <h1>Local Store App</h1>
         <h5>Order creation with time and cost estimation, tracking num and QR code. Order track. Package received update</h5>
+
+        <br>
+
+        <div class="col-md-8">
+
+            <div class="list-group pre-scrollable">
+                <button type="button" class="list-group-item list-group-item-action" ng-repeat="p in pack.packages"
+                        ng-click="pack.selectPackage(p)"
+                        ng-class="{active: pack.isSelected(p)}">
+                    <span>{{p.Tracking_Number}}</span>
+                </button>
+            </div>
+
+            <table class="table table-striped table-bordered" ng-show="pack.selectedpackage">
+                <tbody>
+                <tr>
+                    <th>Locations Passed:</th>
+                    <td>{{pack.selectedlocalStoreEmp.firstname}}</td>
+                </tr>
+                <tr>
+                    <th>Last Name:</th>
+                    <td>{{crudLsEmp.selectedlocalStoreEmp.lastname}}</td>
+                </tr>
+                <tr>
+                    <th>Username:</th>
+                    <td>{{crudLsEmp.selectedlocalStoreEmp.username}}</td>
+                </tr>
+                <tr>
+                    <th>Role:</th>
+                    <td>{{crudLsEmp.selectedlocalStoreEmp.role}}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td>{{crudLsEmp.selectedlocalStoreEmp.phonenumber}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <ul class="list-group" ng-show="pack.selectedpackage">
+                <li class="list-group-item" ng-repeat="loc in pack.selectedpackage.Hubs_Passed">
+                    {{loc.Date}}:
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="h in loc.Hub">
+                            {{h.Address.City}}
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <form name="packageForm">
+                <div class="form-group">
+                    <label for="delivAdd" >Delivery Address:</label>
+                    <input id="delivAdd" class="form-control" ng-model="pack.packageToSave.Delivery_Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="exp" >Express:</label>
+                    <input id="exp" type="checkbox" class="form-control" ng-model="pack.packageToSave.Express" required>
+                </div>
+
+
+
+
+
+
+
+                <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn bg-primary" style="color: white" ng-class="{disabled: !pack.allfieldsOk(packageForm)}" ng-click="pack.calcPackageDetails()">Save</a>
+                    <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-click="pack.cancelEdit()">Cancel</a>
+                </div>
+
+            </form>
+
+            <div class="alert alert-success" ng-if="pack.successMsg">{{pack.successMsg}}</div>
+            <div class="alert alert-danger" ng-if="pack.errorMsg">{{pack.errorMsg}}</div>
+
+        </div>
+
+
+
     </div>
 </div>

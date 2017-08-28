@@ -35,6 +35,8 @@ let app = angular.module('Routes', ['ngRoute'])
 
             .when('/localStoreApp', {
                 templateUrl: 'app/views/pages/localStore/home.html',
+                controller: 'packageCtrl',
+                controllerAs: 'pack',
                 authenticated: true
             })
 
