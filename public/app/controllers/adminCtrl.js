@@ -141,7 +141,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
 
     })
 
-    .controller('adminCrudLsEmpCtrl', function (LocalStoreEmp) {
+    .controller('adminCrudLsEmpCtrl', function (LocalStoreEmp, LocalStore) {
         let vm = this;
 
         //public vars
@@ -161,8 +161,22 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                 });
         };
 
-        // render all cities in list
+        // render all emps in list
         vm.getAllLocalStoreEmps();
+
+
+        // get all stores for the select box
+        let getStores = function () {
+            LocalStore.getAll()
+                .then(function (res) {
+                    vm.localStores = res.data;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+
+        };
+        getStores();
 
         // Choose a localStoreEmp and save state, also reset messages
         vm.selectlocalStoreEmp = function (ls) {
@@ -251,6 +265,8 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                     })
             }
         };
+
+
 
 
 

@@ -42,6 +42,10 @@
                         <td>{{crudLsEmp.selectedlocalStoreEmp.username}}</td>
                     </tr>
                     <tr>
+                        <th>Local Store:</th>
+                        <td>{{crudLsEmp.selectedlocalStoreEmp.local_store_id.Address.City}}</td>
+                    </tr>
+                    <tr>
                         <th>Role:</th>
                         <td>{{crudLsEmp.selectedlocalStoreEmp.role}}</td>
                     </tr>
@@ -74,6 +78,12 @@
                         <input id="password" class="form-control" ng-model="crudLsEmp.selectedlocalStoreEmp.password" required>
                     </div>
 
+                    <div ng-show="crudLsEmp.editMode" class="form-group">
+                        <label for="storeForm" >Local Store:</label>
+                        <select id="storeForm" class="form-control" ng-model="crudLsEmp.selectedlocalStoreEmp.local_store_id" required>
+                            <option ng-repeat="city in crudLsEmp.localStores" value="{{city._id}}">{{city.Address.City}}</option>
+                        </select>
+                    </div>
 
                     <div ng-show="crudLsEmp.editMode" class="form-group">
                         <label for="role" >Role:</label>

@@ -1,5 +1,5 @@
 angular.module('adminApp', ['adminControllers', 'adminServices', 'localStoreServices']);
-angular.module('localEmpApp', ['localEmpControllers', 'localEmpServices', ]);
+angular.module('localEmpApp', ['localEmpControllers', 'localEmpServices', 'packageServices' ]);
 angular.module('siteApp', ['homeControllers']);
 
 

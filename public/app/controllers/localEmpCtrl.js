@@ -1,6 +1,6 @@
 angular.module('localEmpControllers', ['localEmpServices', 'packageServices'])
 
-    .controller('packageCtrl', function ($http, $location, $timeout, Local_emp, Package) {
+    .controller('packageCtrl', function ($http, $location, $timeout, Package) {
 
         //for making ctrl vars public to scope
         let vm = this;

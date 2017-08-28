@@ -30,7 +30,7 @@ var LocalStoreSchema = Schema({
 
     //All stored packages in the current Store
     Stored_Packages: [{
-        Package_Id: { type: Schema.ObjectId, ref:'Package', unique: true}
+        Package_Id: { type: Schema.ObjectId, ref:'Package'}
     }]
 
 });

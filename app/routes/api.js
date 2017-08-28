@@ -36,8 +36,10 @@ module.exports = function (router) {
         // New Local store is saved in the db.
         newstore.save(function(err, lsData){
             if(err) {
+                console.log(err);
                 res.json({success: false, message: err.errmsg});
             } else {
+                console.log(lsData);
                 res.json({success: true, message: 'Local Store saved to DB'});
             }
         });
