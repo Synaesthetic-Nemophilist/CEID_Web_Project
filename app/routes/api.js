@@ -17,7 +17,7 @@ module.exports = function (router) {
     router.get('/localstore', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        let query = Lstore.find({});
+        let query = Lstore.find({}).populate('Stored_Packages');
         query.exec(function(err, Lstores){
             if(err) {
                 res.send(err);
@@ -70,7 +70,7 @@ module.exports = function (router) {
     router.get('/transithub', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        let query = Thub.find({});
+        let query = Thub.find({}).populate('Local_Store_Id');
         query.exec(function(err, Thubs){
             if(err) {
                 res.send(err);
@@ -103,7 +103,7 @@ module.exports = function (router) {
     router.get('/localstoreEmp', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        let query = LstoreEmp.find({});
+        let query = LstoreEmp.find({}).populate('local_store_id');
         query.exec(function(err, Lstoreemps){
             if(err) {
                 res.send(err);
