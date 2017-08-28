@@ -1,4 +1,4 @@
-angular.module('adminControllers', ['adminServices', 'localStoreServices', 'localEmpServices', 'transitHubEmpServices'])
+angular.module('adminControllers', ['adminServices', 'localStoreServices', 'transitHubServices', 'localEmpServices', 'transitHubEmpServices'])
 
     .controller('regCtrl', function ($http, $location, $timeout, Admin) {
 
@@ -112,6 +112,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                 LocalStore.update(localStoreData)
                     .then(function () {
                         vm.successMsg = 'Data successfully updated.';
+                        vm.getAllLocalStores();
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -239,6 +240,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                 LocalStoreEmp.update(localStoreEmpData)
                     .then(function () {
                         vm.successMsg = 'Data successfully updated.';
+                        vm.getAllLocalStoreEmps();
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -272,7 +274,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
 
     })
 
-    .controller('adminCrudThEmpCtrl', function (transitHubEmp) {
+    .controller('adminCrudThEmpCtrl', function (transitHubEmp, TransitHub) {
         let vm = this;
 
         //public vars
@@ -294,6 +296,19 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
 
         // render all cities in list
         vm.getAlltransitHubEmps();
+
+        // get all hubs for the select box
+        let getHubs = function () {
+            TransitHub.getAll()
+                .then(function (res) {
+                    vm.transitHubs = res.data;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+
+        };
+        getHubs();
 
         // Choose a transitHubEmp and save state, also reset messages
         vm.selecttransitHubEmp = function (ls) {
@@ -356,6 +371,7 @@ angular.module('adminControllers', ['adminServices', 'localStoreServices', 'loca
                 transitHubEmp.update(transitHubEmpData)
                     .then(function () {
                         vm.successMsg = 'Data successfully updated.';
+                        vm.getAlltransitHubEmps();
                     })
                     .catch(function (err) {
                         console.log(err);

@@ -42,6 +42,10 @@
                         <td>{{crudThEmp.selectedtransitHubEmp.username}}</td>
                     </tr>
                     <tr>
+                        <th>Transit Hub:</th>
+                        <td>{{crudThEmp.selectedtransitHubEmp.transit_hub_id.Address.City}}</td>
+                    </tr>
+                    <tr>
                         <th>Role:</th>
                         <td>{{crudThEmp.selectedtransitHubEmp.role}}</td>
                     </tr>
@@ -72,6 +76,13 @@
                     <div ng-show="crudThEmp.editMode" class="form-group">
                         <label for="password" >Password:</label>
                         <input id="password" class="form-control" ng-model="crudThEmp.selectedtransitHubEmp.password" required>
+                    </div>
+
+                    <div ng-show="crudThEmp.editMode" class="form-group">
+                        <label for="storeForm" >Transit Hub:</label>
+                        <select id="storeForm" class="form-control" ng-model="crudThEmp.selectedtransitHubEmp.transit_hub_id" required>
+                            <option ng-repeat="city in crudThEmp.transitHubs" value="{{city._id}}">{{city.Address.City}}</option>
+                        </select>
                     </div>
 
 
