@@ -3,18 +3,29 @@
  */
 
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 
-var TransitHubSchema = Schema({
-    //longtitude: {type: String, required: true},
-    //latitude: {type: String, required: true},
-    location: {type: Array, required: true},
-    name: {type: String, required: true},
-    //local_store_id: {type: Schema.ObjectId, required: true, unique: true}
+let TransitHubSchema = Schema({
+
+    Address: {
+        City: {type: String, required: true},
+        Street: {type: String, required: true},
+        Number: {type: Number, required: true},
+        Post_code: {type: Number, required: true}
+    },
+
+    Location: {
+        Longitude: {type: String, required: true},
+        Latitude: {type: String, required: true}
+    },
+
+    Phone_Number: {type: Number, required: true},
+
+    Local_Store_Id: {type: Schema.ObjectId, ref: 'LocalStore', required: true, unique: true}
 
 });
 

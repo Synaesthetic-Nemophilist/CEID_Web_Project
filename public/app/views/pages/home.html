@@ -39,13 +39,14 @@
                                 coords="home.map.window.model"
                                 options="home.map.window.options"
                                 closeClick="home.map.window.closeClick()">
-                    <div>This freakn city is called: {{home.map.window.model.id}}</div>
+                    <div>{{home.map.window.model.id}}</div>
                 </ui-gmap-window>
 
                 <ui-gmap-markers models="home.map.markers"
                                  coords="'self'"
                                  events="home.map.markersEvents">
                 </ui-gmap-markers>
+
                 <shape name="polyline" path="{{path}}" geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="2"></shape>
 
             </ui-gmap-google-map>

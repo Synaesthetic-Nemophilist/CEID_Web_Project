@@ -15,7 +15,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                 },
                 zoom: 6,
                 markers: [{
-                    id: "Alexandroupoli",
+                    id: "Αλεξανδρούπολη",
                     latitude: 40.8562833,
                     longitude: 25.8642735
 
@@ -35,7 +35,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                     longitude: 21.739027
 
                 },{
-                    id: "Ιοάννινα",
+                    id: "Ιωάννινα",
                     latitude: 39.6818260,
                     longitude: 20.8630371
 
@@ -62,7 +62,6 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                 }],
                 markersEvents: {
                     click: function(marker, eventName, model) {
-                        console.log('Click marker');
                         vm.map.window.model = model;
                         vm.map.window.show = true;
                     }
