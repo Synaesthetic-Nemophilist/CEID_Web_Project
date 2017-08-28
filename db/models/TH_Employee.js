@@ -17,7 +17,7 @@ var TransitHubEmpSchema = Schema({
     role: {type: String, required: false, default: 'basic'},
     phonenumber: {type: Number, required: true},
     is: {type: String, default: "thEmp"},
-    transit_hub_id: {type: Schema.ObjectId,ref: 'TransitHub', required: true}
+    transit_hub_id: {type: Schema.ObjectId,ref: 'TransitHub'}
 });
 
 // Password hashing BEFORE save to DB

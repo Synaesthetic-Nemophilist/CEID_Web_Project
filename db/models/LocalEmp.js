@@ -14,7 +14,7 @@ var LocalEmpSchema = Schema({
     role: {type: String, required: false, default: 'basic'},
     phonenumber: {type: Number, required: true},
     is: {type: String, default: "lsEmp"},
-    local_store_id: {type: Schema.ObjectId, ref: 'LocalStore', required: true}
+    local_store_id: {type: Schema.ObjectId, ref: 'LocalStore'}
 
 });
 
