@@ -27,6 +27,17 @@ module.exports = function (router) {
         });
     });
 
+    router.get('/localstore/:id', function (req, res) {
+        let query = Lstore.findById(req.params.id).populate('Stored_Packages');
+        query.exec(function(err, Lstore){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(Lstore);
+            }
+        });
+    });
+
     // Provides method for saving new local stores in the db
     router.post('/localstore', function(req, res){
 
@@ -260,7 +271,7 @@ module.exports = function (router) {
                 }
             });
         } else if(req.body.is === "lsEmp") {
-            LstoreEmp.findOne({username: req.body.username}).select('username password is').exec(function (err, lsemp) {
+            LstoreEmp.findOne({username: req.body.username}).select('username password is local_store_id').exec(function (err, lsemp) {
                 if (err) throw err;
 
                 if (!lsemp) {
@@ -274,13 +285,13 @@ module.exports = function (router) {
                     if (!validPassword) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
-                        let token = jwt.sign({username: lsemp.username, is: lsemp.is}, secret);  //create jwt for session
+                        let token = jwt.sign({username: lsemp.username, is: lsemp.is, storeId: lsemp.local_store_id}, secret);  //create jwt for session
                         res.json({success: true, message: 'User authenticated!', token: token});
                     }
                 }
             });
         } else if(req.body.is === "thEmp") {
-            ThEmp.findOne({username: req.body.username}).select('username password is').exec(function (err, themp) {
+            ThEmp.findOne({username: req.body.username}).select('username password is transit_hub_id').exec(function (err, themp) {
                 if (err) throw err;
 
                 if (!themp) {
@@ -294,7 +305,7 @@ module.exports = function (router) {
                     if (!validPassword) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
-                        let token = jwt.sign({username: themp.username, is: themp.is}, secret);  //create jwt for session
+                        let token = jwt.sign({username: themp.username, is: themp.is, hubId: themp.transit_hub_id}, secret);  //create jwt for session
                         res.json({success: true, message: 'User authenticated!', token: token});
                     }
                 }
