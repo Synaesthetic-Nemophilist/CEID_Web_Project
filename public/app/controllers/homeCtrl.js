@@ -1,13 +1,13 @@
-angular.module('homeControllers', ['uiGmapgoogle-maps'])
+angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices'])
 
-    .controller('homeCtrl', function () {
+    .controller('homeCtrl', function (LocalStore) {
 
         //for making ctrl vars public to scope
         let vm = this;
 
 
-        angular.extend(vm, {
-            map: {
+
+        vm.map = {
 
                 center: {
                     latitude:  38.223970,
@@ -19,46 +19,6 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                     latitude: 40.8562833,
                     longitude: 25.8642735
 
-                },{
-                    id: "Ηράκλειο",
-                    latitude: 35.3397899,
-                    longitude: 25.1477693
-
-                },{
-                    id: "Ασπρόπυργος",
-                    latitude: 38.0565795,
-                    longitude: 23.587001
-
-                },{
-                    id: "Πάτρα",
-                    latitude: 38.2252024,
-                    longitude: 21.739027
-
-                },{
-                    id: "Ιωάννινα",
-                    latitude: 39.6818260,
-                    longitude: 20.8630371
-
-                },{
-                    id: "Θεσσαλονίκη",
-                    latitude: 40.6723026,
-                    longitude: 22.9397766
-
-                },{
-                    id: "Λάρισα",
-                    latitude: 39.6439608,
-                    longitude: 22.4102031
-
-                },{
-                    id: "Καλαμάτα",
-                    latitude: 37.0421268,
-                    longitude: 22.1205741
-
-                },{
-                    id: "Μυτιλήνη",
-                    latitude: 39.1001524,
-                    longitude: 26.5513702
-
                 }],
                 markersEvents: {
                     click: function(marker, eventName, model) {
@@ -66,23 +26,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                         vm.map.window.show = true;
                     }
                 },
-                events: {
-                    click: function (map, eventName, originalEventArgs) {
-                        console.log("Geiaa");
-                        var e = originalEventArgs[0];
-                        var lat = e.latLng.lat(),lon = e.latLng.lng();
-                        var marker = {
-                            id: Date.now(),
-                            coords: {
-                                latitude: lat,
-                                longitude: lon
-                            }
-                        };
-                        vm.map.markers.push(marker);
-                        console.log(vm.map.markers);
-                        vm.$apply();
-                    }
-                },
+
                 window: {
                     marker: {},
                     show: false,
@@ -92,27 +36,42 @@ angular.module('homeControllers', ['uiGmapgoogle-maps'])
                     options: {}
                 },
 
-            }
-        });
-
-        var flightPlanCoordinates = [
-            new google.maps.LatLng(37.772323, -122.214897),
-            new google.maps.LatLng(21.291982, -157.821856),
-            new google.maps.LatLng(-18.142599, 178.431),
-            new google.maps.LatLng(-27.46758, 153.027892)
-        ];
-
-        var flightPath = new google.maps.Polyline({
-            path: flightPlanCoordinates,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
-
-        flightPath.setMap(vm.map);
+            };
 
 
+        vm.loadMarkers = function (){
+          LocalStore.getAll()
+              .then(function (res) {
+                  for (i = 0; i < res.data.length ; i++ ){
+                      createMarker(res.data[i]);
+
+                  }
+
+              })
+              .catch(function (err) {
+                  console.log(err);
+              });
+        };
+
+        let createMarker = function(data){
+
+            let marker = {
+                id: Date.now(),
+                coodrs: {
+                    latitude: data.Location.Latitude,
+                    longitude: data.Location.Longitude
+                }
+
+
+            };
+
+            console.log("Geia",data.Location);
+            vm.map.markers.push(marker);
+        };
+
+
+
+        vm.loadMarkers();
 
 
     });
