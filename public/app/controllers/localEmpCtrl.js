@@ -7,7 +7,8 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
 
         vm.packages = [];
         vm.selectedpackage = undefined;
-        vm.packageToSave = undefined;
+        vm.packageToSave = {};
+        vm.packageToSave.Express=false;
 
 
         vm.calcPackageDetails = function () {
@@ -18,7 +19,9 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
             vm.packageToSave.Date_Sent = Date.now();
             vm.packageToSave.Tracking_Number = initial1 + vm.packageToSave.Date_Sent + initial2;
 
-            // TODO: this func calculates cost and time based on whether express or not
+            // TODO: Replace this part underneath with the cost calc algorithm
+            vm.packageToSave.Cost = 45;
+
 
             savePackage();
         };
@@ -28,7 +31,7 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
 
             Package.create(packageData)
                 .then(function () {
-                    vm.successMsg = 'Data successfully added.';
+                    vm.successMsg = 'Package successfully stored.';
 
                     // Render updated list
                     vm.getAllPackages();

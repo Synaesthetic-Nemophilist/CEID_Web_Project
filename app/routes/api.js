@@ -5,6 +5,8 @@ let Lstore  = require('../../db/models/LocalStore');
 let LstoreEmp  = require('../../db/models/LocalEmp');
 let Thub = require('../../db/models/TransitHub');
 let ThEmp = require('../../db/models/TH_Employee');
+let Package = require('../../db/models/Package');
+
 
 
 let secret  = 'supersuperseret12321';
@@ -218,6 +220,47 @@ module.exports = function (router) {
         });
 
     });
+
+
+    //----------PACKAGE API----------
+    // --------------------------------------------------------
+
+    // For fetching all packages
+    router.get('/package', function(req, res){
+
+        // Uses Mongoose schema to run the search (empty conditions)
+        let query = Package.find({}).populate('Hubs_Passed.Hub');
+        query.exec(function(err, packages){
+            if(err) {
+                console.log(err);
+                res.send(err);
+            } else {
+                console.log(packages);
+                res.json(packages);
+            }
+        });
+    });
+
+    // For creating a new package
+    router.post('/package', function(req, res){
+
+        // Creates a new Package obj based on the Mongoose schema and the post body
+        let newPackage = new Package(req.body);
+
+        // New package is saved in the db
+        newPackage.save(function(err, packageData){
+            if(err) {
+                console.log(err);
+                res.json({success: false, message: err.errmsg});
+            } else {
+                console.log(packageData);
+                res.json({success: true, message: 'Package saved to DB'});
+            }
+        });
+    });
+
+
+
 
 
     //----------ADMIN API----------
