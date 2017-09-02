@@ -9,6 +9,7 @@
   "author": "nomaterials",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",

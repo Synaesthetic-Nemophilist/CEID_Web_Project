@@ -1,3 +1,4 @@
+let pol = require('babel-polyfill');
 let jwt     = require('jsonwebtoken');
 let Graph = require('node-dijkstra');
 
@@ -281,20 +282,37 @@ module.exports = function (router) {
         //console.log(Object.keys(Network.schema.obj));
 
         // Uses Mongoose schema to run the search (empty conditions)
-        let query = Network.find({});
+        let query = Network.findOne({}).select('-_id -__v');
         query.exec(function(err, data){
             if(err) {
                 res.send(err);
             } else {
 
+                // Create graph with costs and calc shortest path and cost
+                const route = new Graph();
 
-                // const route = new Graph({
-                //     data.
-                // })
+                let entries = Object.entries(data._doc);
 
-                res.json(data);
+                entries.forEach(function (city) {
+                    let inEntry = Object.entries(city[1]);
+                    let neighbors = {};
+
+                    inEntry.forEach(function (n) {
+                        neighbors[n[0]] = n[1].cost
+                    });
+
+                    route.addNode(city[0], neighbors);
+                });
+
+                let ok = route.path('Patra', 'Alexandroupoli');
+                console.log(ok);
             }
+            res.json(data);
         });
+
+
+
+
     });
 
     // Network Schema has default values, so no data during post pls
