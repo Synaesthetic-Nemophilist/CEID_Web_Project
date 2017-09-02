@@ -22,6 +22,7 @@ module.exports = function (router) {
         let query = Lstore.find({}).populate('Stored_Packages');
         query.exec(function(err, Lstores){
             if(err) {
+                console.log(err);
                 res.send(err);
             } else {
                 res.json(Lstores);
@@ -235,7 +236,6 @@ module.exports = function (router) {
                 console.log(err);
                 res.send(err);
             } else {
-                console.log(packages);
                 res.json(packages);
             }
         });
@@ -253,7 +253,6 @@ module.exports = function (router) {
                 console.log(err);
                 res.json({success: false, message: err.errmsg});
             } else {
-                console.log(packageData);
                 res.json({success: true, message: 'Package saved to DB'});
             }
         });
