@@ -1,8 +1,6 @@
-angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'localStoreServices', 'authServices'])
+angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'localStoreServices', 'transitHubServices', 'authServices'])
 
-    .controller('packageCtrl', function ($http, $location, $timeout, Package, LocalStore, Auth) {
-
-        const Graph = require('node-dijkstra');
+    .controller('packageCtrl', function ($http, $location, $timeout, Package, LocalStore, TransitHub, Auth) {
 
         //for making ctrl vars public to scope
         let vm = this;
@@ -116,6 +114,12 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
 
 
         let calcCost = function () {
-
+            TransitHub.getCostGraph()
+                .then(function (res) {
+                    console.log(res.data);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         }
     });
