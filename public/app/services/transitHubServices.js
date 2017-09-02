@@ -3,7 +3,7 @@ angular.module('transitHubServices', [])
     .factory('TransitHub', function ($http) {
         let transitHubFactory = {};
 
-        transitHubFactory. = () => {
+        transitHubFactory.getCostGraph = () => {
             return $http.get('app/services/graphs/costs.json');
         };
 

@@ -1,4 +1,5 @@
 let jwt     = require('jsonwebtoken');
+let Graph = require('node-dijkstra');
 
 let Admin   = require('../../db/models/Admin');
 let Lstore  = require('../../db/models/LocalStore');
@@ -6,6 +7,7 @@ let LstoreEmp  = require('../../db/models/LocalEmp');
 let Thub = require('../../db/models/TransitHub');
 let ThEmp = require('../../db/models/TH_Employee');
 let Package = require('../../db/models/Package');
+let Network = require('../../db/models/Network');
 
 
 
@@ -254,6 +256,47 @@ module.exports = function (router) {
                 res.json({success: false, message: err.errmsg});
             } else {
                 res.json({success: true, message: 'Package saved to DB'});
+            }
+        });
+    });
+
+
+    //----------NETWORK API----------
+    // --------------------------------------------------------
+    // Fetch
+    router.get('/network/noExpress/:from/:to', function(req, res){
+
+        //console.log(Object.keys(Network.schema.obj));
+
+        // Uses Mongoose schema to run the search (empty conditions)
+        let query = Network.find({});
+        query.exec(function(err, data){
+            if(err) {
+                res.send(err);
+            } else {
+
+
+                // const route = new Graph({
+                //     data.
+                // })
+
+                res.json(data);
+            }
+        });
+    });
+
+    // Network Schema has default values, so no data during post pls
+    router.post('/network', function(req, res){
+
+        // Creates a new Local store Employee based on the Mongoose schema and the post body
+        let network = new Network(req.body);
+
+        // New Transit Hub Employee is saved in the db.
+        network.save(function(err, net){
+            if(err) {
+                res.json({success: false, message: err.errmsg});
+            } else {
+                res.json({success: true, message: 'Network saved to DB:\n' + net});
             }
         });
     });
