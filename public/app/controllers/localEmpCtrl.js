@@ -22,6 +22,8 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
             // TODO: Replace this part underneath with the cost calc algorithm
             vm.packageToSave.Cost = 45;
 
+            calcCost();
+
 
             savePackage();
         };
@@ -111,4 +113,7 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
         };
 
 
+        let calcCost = function () {
+
+        }
     });
