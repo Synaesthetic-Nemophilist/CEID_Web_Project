@@ -2,6 +2,8 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
 
     .controller('packageCtrl', function ($http, $location, $timeout, Package, LocalStore, Auth) {
 
+        const Graph = require('node-dijkstra');
+
         //for making ctrl vars public to scope
         let vm = this;
 

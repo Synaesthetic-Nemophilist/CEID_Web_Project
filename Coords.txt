@@ -9,10 +9,6 @@ Irakleio
 	Lat: 35.3397899
 	Long 25.1477693
 
-Aspropirgos
-	Lat: 38.0565795
-	Long: 23.587001
-
 Patra
 	Lat: 38.2252024
 	Long 21.739027
@@ -37,3 +33,6 @@ Mitilini
 	Lat: 39.1001524
 	Lon: 26.5513702
 
+Athina
+    Lat: 37.983810
+    Lon: 23.727539
