@@ -27,19 +27,21 @@
 </nav>
 
 <div class="container jumbotron text-center">
-    <div class="page-header"  >
         <h1>Customer Update</h1>
         <h3>Google API, package tracking, store search and info goes here!!!</h3>
 
         <br>
-        <div id="map_canvas">
+        <div  id="map_canvas">
             <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom">
 
                 <ui-gmap-window show="home.map.window.show"
                                 coords="home.map.window.model"
                                 options="home.map.window.options"
                                 closeClick="home.map.window.closeClick()">
-                    <div>{{home.map.window.model.id}}</div>
+                    <div><b>City: </b> {{home.map.window.model.name}}
+                        <br><b>Address: </b>{{home.map.window.model.street}}
+                        {{home.map.window.model.number}}
+                    </div>
                 </ui-gmap-window>
 
                 <ui-gmap-markers models="home.map.markers"
@@ -47,9 +49,22 @@
                                  events="home.map.markersEvents">
                 </ui-gmap-markers>
 
-                <shape name="polyline" path="{{path}}" geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="2"></shape>
+                <ui-gmap-polyline ng-repeat="p in home.map.polylines" path="p.path" stroke="p.stroke" visible='p.visible'
+                                  geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'></ui-gmap-polyline>
 
             </ui-gmap-google-map>
         </div>
+    <br><br><br>
+
+
+        <form align="left" id="TnForm">
+            Tracking number:<br>
+            <input ng-model="home.tnumber" type="text" name="Tracking_number" value="" maxlength= "17" minlength= "17" size="20">
+            <br><br>
+            <button  ng-click="home.submit_click(home.tnumber)">Submit</button>
+            <div class="alert alert-danger" ng-if="home.errorMsg">{{home.tnumber}} not found.</div>
+
+        </form>
+
     </div>
 </div><!-- /.container -->

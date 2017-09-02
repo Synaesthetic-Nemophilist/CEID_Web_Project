@@ -19,5 +19,9 @@ angular.module('packageServices', [])
             return $http.delete('/api/package/' + packageDataId);
         };
 
+        packageFactory.getByTn = (tn) => {
+            return $http.get('/api/package/' + tn);
+        };
+
         return packageFactory;
     });

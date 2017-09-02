@@ -260,6 +260,18 @@ module.exports = function (router) {
         });
     });
 
+    router.get('/package/:tn', function (req, res) {
+        let query = Package.findOne({Tracking_Number: req.params.tn}).populate('Hubs_Passed.Hub');
+        query.exec(function(err, packages){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(packages);
+            }
+        });
+    });
+
+
 
     //----------NETWORK API----------
     // --------------------------------------------------------

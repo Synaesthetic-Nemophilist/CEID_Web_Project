@@ -1,4 +1,4 @@
-angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices'])
+angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','packageServices'])
 
     .config(function(uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
@@ -8,11 +8,11 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices'])
         });
     })
 
-    .controller('homeCtrl', function (LocalStore, uiGmapGoogleMapApi) {
+    .controller('homeCtrl', function (LocalStore, uiGmapGoogleMapApi, Package) {
 
         //for making ctrl vars public to scope
         let vm = this;
-
+        vm.errorMsg = false;
 
 
 
@@ -42,8 +42,6 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices'])
 
         };
 
-
-
         let loadMarkers = function (){
             LocalStore.getAll()
                 .then(function(response) {
@@ -56,20 +54,164 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices'])
                     console.log(err);
                 });
 
-        };
 
+
+        };
         let createMarker = function(data){
             let marker = {
                 id: data._id,
                 latitude: data.Location.Latitude,
-                longitude: data.Location.Longitude
+                longitude: data.Location.Longitude,
+                name: data.Address.City,
+                street: data.Address.Street,
+                number: data.Address.Number,
+
             };
             vm.map.markers.push(marker);
+
+
+        };
+        let createPolylines = function () {
+            vm.map.polylines = [
+                {
+                    id: 1,
+                    path: [
+                        {
+                          latitude: 40.8562833,
+                          longitude:  25.8642735
+                        },{
+                          latitude: 35.3397899,
+                          longitude:  25.1477693
+                        },{
+                          latitude: 37.0421268,
+                          longitude:  22.1205741
+                        },{
+                          latitude: 38.2252024,
+                          longitude:  21.739027
+                        },{
+                          latitude: 39.6818260,
+                          longitude:  20.8630371
+                        },{
+                          latitude: 40.6723026,
+                          longitude:  22.9397766
+                        },{
+                          latitude: 40.8562833,
+                          longitude:  25.8642735
+                        },{
+                          latitude: 37.983810,
+                          longitude: 23.727539
+                        },{
+                          latitude: 40.6723026,
+                          longitude:  22.9397766
+                        },{
+                          latitude: 39.6439608,
+                          longitude:  22.4102031
+                        },{
+                          latitude: 40.6723026,
+                          longitude: 22.9397766
+                        }],
+                    stroke: {
+                        color: '#6060FB',
+                        weight: 3
+                    }},
+                {
+                        id: 2,
+                        path: [
+                        {
+                            latitude: 39.6439608,
+                            longitude: 22.4102031
+                        },{
+                            latitude: 37.983810,
+                            longitude: 23.727539
+                        },{
+                            latitude: 38.2252024,
+                            longitude: 21.739027
+                        }],
+                        stroke: {
+                        color: '#6060FB',
+                        weight: 3
+                        }
+                },
+                {
+                    id: 3,
+                    path: [
+                        {
+                            latitude: 37.983810,
+                            longitude: 23.727539
+                        },{
+                            latitude: 37.0421268,
+                            longitude: 22.1205741
+                        }],
+                    stroke: {
+                        color: '#6060FB',
+                        weight: 3
+                    }
+                },
+                {
+                    id: 4,
+                    path: [
+                        {
+                            latitude: 37.983810,
+                            longitude: 23.727539
+                        },{
+                            latitude: 35.3397899,
+                            longitude: 25.1477693
+                        }],
+                    stroke: {
+                        color: '#6060FB',
+                        weight: 3
+                    }
+                },
+                {
+                    id: 5,
+                    path: [
+                        {
+                            latitude: 37.983810,
+                            longitude: 23.727539
+                        },{
+                            latitude: 39.1001524,
+                            longitude: 26.5513702
+                        }],
+                    stroke: {
+                        color: '#6060FB',
+                        weight: 3
+                    }
+                },
+            ];
+
         };
 
+
+        vm.submit_click = function(tn){
+            Package.getByTn(tn)
+                .then(function(response) {
+                    console.log(response);
+                    if (response.data === null){
+
+                        vm.errorMsg = true;
+                        vm.tnumber = '';
+                    }
+                    else{
+                        console.log("Geiaaaaa")
+                        let marker = {
+                            id: response.data._id,
+                            longitude: 35.740682,
+                            latitude: 27.173313
+                            //longitude: response.data.Current_Location.Longitude,
+                            //latitude: response.data.Current_Location.Latitude
+                        };
+
+                        vm.map.markers.push(marker);
+                    }
+                })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+
+        };
+
+
+
         loadMarkers();
-
-
-
-
+        createPolylines();
     });
