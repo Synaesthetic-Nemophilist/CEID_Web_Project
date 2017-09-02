@@ -1,0 +1,49 @@
+//TODO: This should ideally be persisted in db and injected via service to controllers not hardcoded, what are you 7?
+{
+  "Alexandroupoli": {
+    "Thessaloniki": 1,
+    "Athina": 1,
+    "Irakleio": 1
+  },
+  "Thessaloniki": {
+    "Alexandroupoli": 1,
+    "Athina": 1,
+    "Larisa": 1,
+    "Ioannina": 1
+  },
+  "Ioannina": {
+    "Thessaloniki": 1,
+    "Patra": 1
+  },
+  "Larisa": {
+    "Thessaloniki": 1,
+    "Athina": 1
+  },
+  "Patra": {
+    "Ioannina": 1,
+    "Athina": 1,
+    "Kalamata": 1
+  },
+  "Kalamata": {
+    "Patra":  1,
+    "Athina": 1,
+    "Irakleio": 2
+  },
+  "Athina": {
+    "Patra": 1,
+    "Kalamata": 1,
+    "Larisa": 1,
+    "Irakleio": 1,
+    "Mitilini": 1,
+    "Thessaloniki": 1,
+    "Alexandroupoli": 1
+  },
+  "Mitilini": {
+    "Athina": 1
+  },
+  "Irakleio": {
+    "Athina": 1,
+    "Kalamata": 2,
+    "Alexandroupoli": 1
+  }
+}
