@@ -277,9 +277,7 @@ module.exports = function (router) {
     //----------NETWORK API----------
     // --------------------------------------------------------
     // Fetch
-    router.get('/network/noExpress/:from/:to', function(req, res){
-
-        //console.log(Object.keys(Network.schema.obj));
+    router.get('/network/:from/:to/:express', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
         let query = Network.findOne({}).select('-_id -__v');
@@ -288,26 +286,92 @@ module.exports = function (router) {
                 res.send(err);
             } else {
 
-                // Create graph with costs and calc shortest path and cost
-                const route = new Graph();
+                // Create graphs with costs and time and calc shortest path for both, return based on express flag
+                const costGraph = new Graph();
+                const timeGraph = new Graph();
 
                 let entries = Object.entries(data._doc);
 
                 entries.forEach(function (city) {
                     let inEntry = Object.entries(city[1]);
-                    let neighbors = {};
+                    let neighborsCostMap = {};
+                    let neighborsTimeMap = {};
 
                     inEntry.forEach(function (n) {
-                        neighbors[n[0]] = n[1].cost
+                        neighborsCostMap[n[0]] = n[1].cost;
+                        neighborsTimeMap[n[0]] = n[1].time;
                     });
 
-                    route.addNode(city[0], neighbors);
+                    costGraph.addNode(city[0], neighborsCostMap);
+                    timeGraph.addNode(city[0], neighborsTimeMap);
                 });
+                if(req.params.express === 'true') {
+                    let timeInfo = timeGraph.path(req.params.from, req.params.to, {cost: true});
 
-                let ok = route.path('Patra', 'Alexandroupoli');
-                console.log(ok);
+                    //calculate cost of this path via db query
+                    let cost = 0;
+                    let iter = 0;  // counter for triggering response to client
+                    timeInfo.path.forEach(function (city, index, array) {
+                        if(index < array.length-1) {
+                            let next = array[index+1];
+                            let query = {};
+                            query[[city]+'.'+[next]+".cost"] = 1;
+                            Network.findOne({}, query , function (err, data) {
+                                if(err) {
+                                    console.log(err);
+                                } else {
+                                    iter++;
+                                    let n = data[city];
+                                    cost += n[next].cost;
+
+                                    // Return complete data
+                                    if(iter === array.length-1) {
+                                        let info = {
+                                            path: timeInfo.path,
+                                            cost: cost,
+                                            time: timeInfo.cost
+                                        };
+                                        return res.json(info);
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                } else if(req.params.express === 'false') {
+                    let costInfo = costGraph.path(req.params.from, req.params.to, { cost: true });
+
+                    //calculate time of this path via db query
+                    let time = 0;
+                    let iter = 0;  // counter for triggering response to client
+                    costInfo.path.forEach(function (city, index, array) {
+                        if(index < array.length-1) {
+                            let next = array[index+1];
+                            let query = {};
+                            query[[city]+'.'+[next]+".time"] = 1;
+                            Network.findOne({}, query , function (err, data) {
+                                if(err) {
+                                    console.log(err);
+                                } else {
+                                    iter++;
+                                    let n = data[city];
+                                    time += n[next].time;
+
+                                    // Return complete data
+                                    if(iter === array.length-1) {
+                                        let info = {
+                                            path: costInfo.path,
+                                            cost: costInfo.cost,
+                                            time: time
+                                        };
+                                        return res.json(info);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             }
-            res.json(data);
         });
 
 

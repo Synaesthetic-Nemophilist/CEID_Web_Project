@@ -19,18 +19,14 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
             vm.packageToSave.Date_Sent = Date.now();
             vm.packageToSave.Tracking_Number = initial1 + vm.packageToSave.Date_Sent + initial2;
 
-            // TODO: Replace this part underneath with the cost calc algorithm
-            vm.packageToSave.Cost = 45;
-
-            calcCost();
-
-
-            savePackage();
+            // Calculate path based on express flag and cost + time
+            calcDijkstra();
         };
 
         let savePackage = function () {
             let packageData = vm.packageToSave;
 
+            console.log(packageData);
             Package.create(packageData)
                 .then(function () {
                     vm.successMsg = 'Package successfully stored.';
@@ -113,10 +109,14 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
         };
 
 
-        let calcCost = function () {
-            TransitHub.getCostGraph()
+        // Calculates cost, time and path of package based on express flag
+        let calcDijkstra = function () {
+            TransitHub.getDijkstra(vm.thisStore.Address.City, vm.packageToSave.Delivery_Address, vm.packageToSave.Express)
                 .then(function (res) {
                     console.log(res.data);
+                    vm.packageToSave.Cost = res.data.cost + 2;  // plus 2 for hub-store and vise versa path
+                    vm.packageToSave.Estimated_Days = res.data.time;
+                    savePackage();
                 })
                 .catch(function (err) {
                     console.log(err);

@@ -3,12 +3,8 @@ angular.module('transitHubServices', [])
     .factory('TransitHub', function ($http) {
         let transitHubFactory = {};
 
-        transitHubFactory.getCostGraph = () => {
-            return $http.get('app/services/graphs/costs.json');
-        };
-
-        transitHubFactory.getTimeGraph = () => {
-            return $http.get('app/services/graphs/time.json');
+        transitHubFactory.getDijkstra = (from, to, express) => {
+            return $http.get('/api/network/' + from + '/' + to + '/' + express);
         };
 
         transitHubFactory.getAll = () => {
@@ -16,7 +12,7 @@ angular.module('transitHubServices', [])
         };
 
         transitHubFactory.create = (thData) => {
-            return $http.post('/api/transithub', lsData)
+            return $http.post('/api/transithub', thData)
         };
 
         transitHubFactory.update =  (thData) => {

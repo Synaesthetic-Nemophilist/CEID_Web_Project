@@ -17,6 +17,7 @@ let PackageSchema = Schema({
     Sent_From: {type: String},
     Delivery_Address: {type: String, required: true},
     Cost: {type: Number, required: true},
+    Estimated_Days: {type: Number, required: true},
 
     // Current location of the package
     Current_Location: {
