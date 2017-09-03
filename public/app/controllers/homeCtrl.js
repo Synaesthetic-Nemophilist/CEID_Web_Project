@@ -14,6 +14,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         let vm = this;
         vm.errorMsg = false;
 
+        let pkg = 'public/assets/pgk.png';
 
 
         vm.map = {
@@ -192,13 +193,14 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                         vm.tnumber = '';
                     }
                     else{
-                        console.log("Geiaaaaa")
                         let marker = {
                             id: response.data._id,
                             longitude: 35.740682,
-                            latitude: 27.173313
-                            //longitude: response.data.Current_Location.Longitude,
-                            //latitude: response.data.Current_Location.Latitude
+                            latitude: 27.173313,
+                            options: {
+                                icon: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Chartreuse.png"
+                            },
+                            icon: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Chartreuse.png"
                         };
 
                         vm.map.markers.push(marker);
@@ -211,7 +213,10 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         };
 
 
+        let image = {
+            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
 
+        };
         loadMarkers();
         createPolylines();
     });

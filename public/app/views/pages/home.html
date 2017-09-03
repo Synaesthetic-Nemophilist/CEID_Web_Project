@@ -46,11 +46,14 @@
 
                 <ui-gmap-markers models="home.map.markers"
                                  coords="'self'"
-                                 events="home.map.markersEvents">
+                                 events="home.map.markersEvents"
+                                 icon="'home.map.icon'"
+                                 options="home.map.marker.options">
                 </ui-gmap-markers>
 
                 <ui-gmap-polyline ng-repeat="p in home.map.polylines" path="p.path" stroke="p.stroke" visible='p.visible'
                                   geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'></ui-gmap-polyline>
+
 
             </ui-gmap-google-map>
         </div>
