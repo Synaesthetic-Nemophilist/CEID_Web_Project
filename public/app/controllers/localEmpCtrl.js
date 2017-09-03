@@ -109,13 +109,13 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
         };
 
 
-        // Calculates cost, time and path of package based on express flag
+        // API call to calculate cost, time and path of package based on express flag
         let calcDijkstra = function () {
             TransitHub.getDijkstra(vm.thisStore.Address.City, vm.packageToSave.Delivery_Address, vm.packageToSave.Express)
                 .then(function (res) {
-                    console.log(res.data);
                     vm.packageToSave.Cost = res.data.cost + 2;  // plus 2 for hub-store and vise versa path
                     vm.packageToSave.Estimated_Days = res.data.time;
+                    vm.packageToSave.Full_Path = res.data.path;
                     savePackage();
                 })
                 .catch(function (err) {

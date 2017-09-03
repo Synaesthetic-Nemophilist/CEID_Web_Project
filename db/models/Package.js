@@ -15,6 +15,7 @@ let PackageSchema = Schema({
     Express: {type: Boolean, required: true},
     Qr_code: {type: String},  //TODO: Fix qr code type later on
     Sent_From: {type: String},
+    Full_Path: [{type: String}],
     Delivery_Address: {type: String, required: true},
     Cost: {type: Number, required: true},
     Estimated_Days: {type: Number, required: true},
