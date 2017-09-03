@@ -9,15 +9,21 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
         vm.selectedpackage = undefined;
         vm.packageToSave = {};
         vm.packageToSave.Express=false;
+        vm.packageToSave.Current_Location = {};
 
 
         vm.calcPackageDetails = function () {
 
-            // calc unique tracking number
+            // Calculate unique tracking number
             let initial1 = vm.thisStore.Address.City.substr(0, 2).toUpperCase();
             let initial2 = vm.packageToSave.Delivery_Address.substr(0, 2).toUpperCase();
             vm.packageToSave.Date_Sent = Date.now();
             vm.packageToSave.Tracking_Number = initial1 + vm.packageToSave.Date_Sent + initial2;
+
+            // Calculate current location (city and coords)
+            vm.packageToSave.Current_Location.City = vm.thisStore.Address.City;
+            vm.packageToSave.Current_Location.Longitude = vm.thisStore.Location.Longitude;
+            vm.packageToSave.Current_Location.Latitude = vm.thisStore.Location.Latitude;
 
             // Calculate path based on express flag and cost + time
             calcDijkstra();

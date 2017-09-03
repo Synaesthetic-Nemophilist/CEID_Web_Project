@@ -22,6 +22,7 @@ let PackageSchema = Schema({
 
     // Current location of the package
     Current_Location: {
+        City: {type: String},
         Longitude: {type: String},
         Latitude: {type: String}
     },
