@@ -14,7 +14,6 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         let vm = this;
         vm.errorMsg = false;
 
-
         vm.map = {
 
             center: {
@@ -221,9 +220,9 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                     else{
                     }
                 })
-                    .catch(function (err) {
-                        console.log(err);
-                     });
+                .catch(function (err) {
+                    console.log(err);
+                 });
         };
 
 

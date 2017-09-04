@@ -44,17 +44,19 @@ module.exports = function (router) {
         });
     });
 
-    router.get('/localstore/:pcode', function (req, res) {
-        let query = Lstore.findOne({'Address.Post_code': "res.params.pcode"}).populate('Stored_Packages');
-        query.exec(function(err, Lstore){
+    router.get('/localstore/pcode/:pcode', function (req, res) {
+        let code = Number(req.params.pcode);
+        let query = Lstore.findOne({'Address.Post_code': code}).populate('Stored_Packages');
+
+        query.exec(function(err, lstore){
             if(err) {
+                console.log(err);
                 res.send(err);
             } else {
-                res.json(Lstore);
+                res.json(lstore);
             }
         });
     });
-
 
 
     // Provides method for saving new local stores in the db

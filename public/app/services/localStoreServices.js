@@ -12,7 +12,7 @@ angular.module('localStoreServices', [])
         };
 
         localStoreFactory.getByPcode = (pcode) => {
-            return $http.get('/api/localstore/' + pcode);
+            return $http.get('/api/localstore/pcode/' + pcode);
         };
 
         localStoreFactory.create = (lsData) => {
