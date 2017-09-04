@@ -1,3 +1,5 @@
+var Victor = require('victor');
+var NodeGeocoder = require('node-geocoder');
 let pol = require('babel-polyfill');
 let jwt     = require('jsonwebtoken');
 let Graph = require('node-dijkstra');
@@ -45,15 +47,41 @@ module.exports = function (router) {
     });
 
     router.get('/localstore/pcode/:pcode', function (req, res) {
-        let code = Number(req.params.pcode);
-        let query = Lstore.findOne({'Address.Post_code': code}).populate('Stored_Packages');
+        let userCode = req.params.pcode;
 
-        query.exec(function(err, lstore){
+        // Init and config geocode with options
+        let options = {
+            provider: 'google'
+        };
+        let geocoder = NodeGeocoder(options);
+
+        // Find user coords based on input post_code
+        geocoder.geocode({address: userCode, country: 'Greece'}, function(err, geo) {
             if(err) {
-                console.log(err);
-                res.send(err);
+                console.log(err)
             } else {
-                res.json(lstore);
+                let userCoords = Victor(geo[0].longitude, geo[0].latitude);
+
+                // Fetch all store location
+                let query = Lstore.find({}).select('Location');
+                query.exec(function(err, lStores){
+                    if(err) {
+                        console.log(err);
+                    } else {
+
+                        // Calculate coord distances and respond with closest store
+                        let diffs = [];
+                        lStores.forEach(function (store) {
+                            let storeCoords = Victor(store.Location.Longitude, store.Location.Latitude);
+
+                            diffs.push(userCoords.distance(storeCoords));
+                        });
+
+                        let minIndex = diffs.indexOf(Math.min.apply(Math, diffs));
+
+                        res.json(lStores[minIndex]);
+                    }
+                });
             }
         });
     });

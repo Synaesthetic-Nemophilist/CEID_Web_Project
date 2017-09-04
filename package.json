@@ -16,6 +16,8 @@
     "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.10.8",
     "morgan": "^1.8.2",
-    "node-dijkstra": "^2.5.0"
+    "node-dijkstra": "^2.5.0",
+    "node-geocoder": "^3.20.0",
+    "victor": "^1.1.0"
   }
 }

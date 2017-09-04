@@ -33,6 +33,6 @@ Mitilini
 	Lat: 39.1001524
 	Lon: 26.5513702
 
-Athina
-    Lat: 37.983810
-    Lon: 23.727539
+Aspropurgos
+    Lat: 38.0599661
+    Lon: 23.588151100
