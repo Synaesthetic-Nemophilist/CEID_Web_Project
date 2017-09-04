@@ -11,6 +11,10 @@ angular.module('localStoreServices', [])
             return $http.get('/api/localstore/' + id);
         };
 
+        localStoreFactory.getByPcode = (pcode) => {
+            return $http.get('/api/localstore/' + pcode);
+        };
+
         localStoreFactory.create = (lsData) => {
             return $http.post('/api/localstore', lsData)
         };

@@ -44,6 +44,19 @@ module.exports = function (router) {
         });
     });
 
+    router.get('/localstore/:pcode', function (req, res) {
+        let query = Lstore.findOne({'Address.Post_code': "res.params.pcode"}).populate('Stored_Packages');
+        query.exec(function(err, Lstore){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(Lstore);
+            }
+        });
+    });
+
+
+
     // Provides method for saving new local stores in the db
     router.post('/localstore', function(req, res){
 
@@ -82,6 +95,7 @@ module.exports = function (router) {
         });
 
     });
+
 
     //----------Transit Hub API----------
     // --------------------------------------------------------

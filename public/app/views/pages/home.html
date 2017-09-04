@@ -68,6 +68,23 @@
             <div class="alert alert-danger" ng-if="home.errorMsg">{{home.tnumber}} not found.</div>
 
         </form>
+    <br><br>
+        <form align="left" id="LsForm">
+            Local Store near me<br>
+
+            Post Code:<input ng-model="home.pcode" type="text" name="Post_code" value="" maxlength= "17" minlength= "17" size="20">
+            <br><br>
+            <button  ng-click="home.submit_pcode(home.pcode)">Submit</button>
+
+            <div class="alert alert-danger" ng-if="home.errorMsg">{{home.pcode}} not found.</div>
+            <br><br><br>
+            City Name:<input ng-model="home.cityname" type="text" name="City_name" value="" maxlength= "17" minlength= "17" size="20">
+            <br><br>
+            <button  ng-click="home.submit_cityname(home.cityname)">Submit</button>
+            <br>
+            <div class="alert alert-danger" ng-if="home.errorMsg">{{home.cityname}} not found.</div>
+
+        </form>
 
     </div>
 </div><!-- /.container -->

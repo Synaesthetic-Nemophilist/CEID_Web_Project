@@ -192,11 +192,11 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                     else{
                         let marker = {
                             id: response.data._id,
-                            longitude: 35.740682,
-                            latitude: 27.173313,
+                            longitude: response.data.Current_Location.Longitude,
+                            latitude: response.data.Current_Location.Latitude,
                             icon: {
                                 url: 'assets/pgk.png',
-                                scaledSize: { width: 36, height: 48 }
+                                scaledSize: { width: 36, height: 36 }
                             }
                         };
 
@@ -206,7 +206,24 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                     .catch(function (err) {
                         console.log(err);
                     });
+        };
 
+
+        vm.submit_pcode = function(pcode){
+            LocalStore.getByPcode(pcode)
+                .then(function(response) {
+                    console.log(response);
+
+                    if (response.data === null){
+                        vm.errorMsg = true;
+                        vm.tnumber = '';
+                    }
+                    else{
+                    }
+                })
+                    .catch(function (err) {
+                        console.log(err);
+                     });
         };
 
 
