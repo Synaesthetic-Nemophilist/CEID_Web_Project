@@ -42,6 +42,8 @@ let app = angular.module('Routes', ['ngRoute'])
 
             .when('/transitHubApp', {
                 templateUrl: 'app/views/pages/transitHub/home.html',
+                controller: 'qrCtrl',
+                controllerAs: 'qr',
                 authenticated: true
             })
 

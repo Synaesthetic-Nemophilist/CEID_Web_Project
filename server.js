@@ -25,7 +25,9 @@ app.use(morgan('dev'));  // for route logging
 app.use(bodyParser.json());  // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/scripts', express.static(__dirname + '/node_modules/'));
+app.use('/npm_scripts', express.static(__dirname + '/node_modules/'));
+app.use('/bower_scripts', express.static(__dirname + '/bower_components/'));
+
 // Router Linking
 app.use('/api', appRoutes);  // use backend api routes (distinguish these with angular's routes_
 
