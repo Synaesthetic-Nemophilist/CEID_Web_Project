@@ -11,9 +11,9 @@ let PackageSchema = Schema({
     //transit_hub_id: {type: Schema.ObjectId, ref: 'TransitHub', required: true},
 
     Date_Sent: {type: Date},
-    Tracking_Number: {type: String, required: true},
+    Tracking_Number: {type: String, required: true, unique: true},
     Express: {type: Boolean, required: true},
-    Qr_code: {type: String},  //TODO: Fix qr code type later on
+    Qr_code: {type: String},
     Sent_From: {type: String},
     Full_Path: [{type: String}],
     Delivery_Address: {type: String, required: true},

@@ -1,5 +1,6 @@
 var Victor = require('victor');
 var NodeGeocoder = require('node-geocoder');
+var QRCode = require('qrcode');
 let pol = require('babel-polyfill');
 let jwt     = require('jsonwebtoken');
 let Graph = require('node-dijkstra');
@@ -314,6 +315,18 @@ module.exports = function (router) {
                 res.json(packages);
             }
         });
+    });
+
+    // Generate QR code based on tracking number and respond with it's info
+    router.get('/package/qr/:tn', function (req, res) {
+        QRCode.toDataURL(req.params.tn, function (err, url) {
+            if (err) {
+                res.send(err);
+            } else {
+                console.log(url);
+                res.json(url);
+            }
+        })
     });
 
 

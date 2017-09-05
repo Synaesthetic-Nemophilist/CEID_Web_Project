@@ -23,5 +23,9 @@ angular.module('packageServices', [])
             return $http.get('/api/package/' + tn);
         };
 
+        packageFactory.genQR = (tn) => {
+            return $http.get('/api/package/qr/' + tn);
+        };
+
         return packageFactory;
     });

@@ -25,6 +25,9 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
             vm.packageToSave.Current_Location.Longitude = vm.thisStore.Location.Longitude;
             vm.packageToSave.Current_Location.Latitude = vm.thisStore.Location.Latitude;
 
+            // Generate QR code based on package's Tracking Number
+            generateQR();
+
             // Calculate path based on express flag and cost + time
             calcDijkstra();
         };
@@ -127,5 +130,17 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
                 .catch(function (err) {
                     console.log(err);
                 });
+        };
+
+        // API call to generate QR based on package's tracking number
+        let generateQR = function () {
+            Package.genQR(vm.packageToSave.Tracking_Number)
+                .then(function (res) {
+                    vm.packageToSave.Qr_code = res.data;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
         }
+
     });
