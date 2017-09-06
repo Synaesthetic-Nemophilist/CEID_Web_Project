@@ -246,13 +246,21 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         };
 
 
+        // API call to find closest store by post code and show info window on map
         vm.submit_pcode = function(pcode){
             LocalStore.getByPcode(pcode)
                 .then(function(response) {
-                    console.log(response);
 
-                    // TODO: Do cool stuff with data --> Show coords on map, animate marker something like that...
-
+                    // TODO: Do cool stuff with response.data --> Show coords on map, animate marker something like that...
+                    vm.map.window.model = {
+                        id: response.data._id,
+                        longitude: response.data.Location.Longitude,
+                        latitude: response.data.Location.Latitude,
+                        name: response.data.Address.City,
+                        street: response.data.Address.Street,
+                        number: response.data.Address.Number,
+                    };
+                    vm.map.window.show = true;
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -267,7 +275,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
             LocalStore.getById(cityId)
                 .then(function (res) {
                     console.log(res.data);
-                    // TODO: Do cool stuff with data --> Show coords on map, animate marker something like that...
+                    // TODO: Do cool stuff with response.data --> Show coords on map, animate marker something like that...
                 })
                 .catch(function (err) {
                     console.log(err);

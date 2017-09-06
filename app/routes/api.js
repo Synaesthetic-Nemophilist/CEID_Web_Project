@@ -65,7 +65,7 @@ module.exports = function (router) {
                 let userCoords = Victor(geo[0].longitude, geo[0].latitude);
 
                 // Fetch all store location
-                let query = Lstore.find({}).select('Location');
+                let query = Lstore.find({});
                 query.exec(function(err, lStores){
                     if(err) {
                         console.log(err);
