@@ -9,73 +9,94 @@
 </nav>
 
 <div class="container">
-    <div class="page-header jumbtron text-center">
+    <div class="jumbtron text-center">
         <h1>Local Store App</h1>
         <h3>You have logged in from {{pack.thisStore.Address.City}}</h3>
         <h5>Order creation with time and cost estimation, tracking num and QR code. Order track. Package received update</h5>
 
         <br>
 
-        <div class="col-md-8">
+        <div class="row">
 
-            <div class="list-group pre-scrollable">
-                <button type="button" class="list-group-item list-group-item-action" ng-repeat="p in pack.packages"
-                        ng-click="pack.selectPackage(p)"
-                        ng-class="{active: pack.isSelected(p)}">
-                    <span>{{p.Tracking_Number}}</span>
-                </button>
+            <div class="col-md-4">
+                <h3>Create Delivery</h3>
+                <hr>
+                <form name="packageForm">
+
+                    <div class="form-group row">
+                        <label class="col-form-label" for="delivAdd" >Delivery To:</label>
+                        <select id="delivAdd" class="form-control" ng-model="pack.packageToSave.Delivery_Address" required>
+                            <option ng-repeat="city in pack.localStores | filter: '!' + pack.thisStore.Address.City"
+                                    value="{{city.Address.City}}">
+                                {{city.Address.City}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label" for="exp" >Express:</label>
+                        <input id="exp" type="checkbox" class="form-control" ng-model="pack.packageToSave.Express" required>
+                    </div>
+
+
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn bg-primary" style="color: white" ng-click="pack.calcPackageDetails()">Save</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-click="pack.cancelEdit()">Cancel</a>
+                    </div>
+
+                </form>
+
+                <br>
+
+                <div class="alert alert-success" ng-if="pack.successMsg">{{pack.successMsg}}</div>
+                <div class="alert alert-danger" ng-if="pack.errorMsg">{{pack.errorMsg}}</div>
             </div>
 
-            <ul class="list-group" ng-show="pack.selectedpackage">
-                <li class="list-group-item" ng-repeat="loc in pack.selectedpackage.Hubs_Passed">
-                    {{loc.Date}}:
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="h in loc.Hub">
-                            {{h.Address.City}}
-                        </li>
-                    </ul>
-                </li>
-            </ul>
 
-            <img id="qrImage" class="img-thumbnail" src="{{pack.selectedpackage.Qr_code}}" alt="Smiley face" ng-if="pack.selectedpackage.Qr_code">
-        </div>
+            <div class="col-md-8">
+                <h3>Delivery Details</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Package List</h5>
+                        <hr>
+                        <div class="list-group pre-scrollable">
+                            <button type="button" class="list-group-item list-group-item-action" ng-repeat="p in pack.packages"
+                                    ng-click="pack.selectPackage(p)"
+                                    ng-class="{active: pack.isSelected(p)}">
+                                <span>{{p.Tracking_Number}}</span>
+                            </button>
+                        </div>
+                    </div>
 
+                    <div class="col-md-8">
+                        <h5>Hubs Passed</h5>
+                        <hr>
 
-        <div class="col-md-4">
+                        <table class="table table-bordered" ng-show="pack.selectedpackage && pack.selectedpackage.Hubs_Passed.length > 0">
+                            <thead>
+                            <tr>
+                                <th>Date Scanned</th>
+                                <th>Transit Hub</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="loc in pack.selectedpackage.Hubs_Passed">
+                                <td>{{loc.Date}}</td>
+                                <td>{{loc.Hub.Address.City}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-            <form name="packageForm">
-
-                <div class="form-group">
-                    <label for="delivAdd" >Delivery To:</label>
-                    <select id="delivAdd" class="form-control" ng-model="pack.packageToSave.Delivery_Address" required>
-                        <option ng-repeat="city in pack.localStores | filter: '!' + pack.thisStore.Address.City"
-                                value="{{city.Address.City}}">
-                            {{city.Address.City}}
-                        </option>
-                    </select>
+                        <img id="qrImage" class="img-thumbnail" src="{{pack.selectedpackage.Qr_code}}" alt="Smiley face" ng-if="pack.selectedpackage.Qr_code">
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="exp" >Express:</label>
-                    <input id="exp" type="checkbox" class="form-control" ng-model="pack.packageToSave.Express" required>
-                </div>
+            </div>
 
 
-                <div class="btn-group btn-group-justified">
-                    <a href="#" class="btn bg-primary" style="color: white" ng-click="pack.calcPackageDetails()">Save</a>
-                    <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-click="pack.cancelEdit()">Cancel</a>
-                </div>
 
-            </form>
-
-            <br>
-
-            <div class="alert alert-success" ng-if="pack.successMsg">{{pack.successMsg}}</div>
-            <div class="alert alert-danger" ng-if="pack.errorMsg">{{pack.errorMsg}}</div>
 
         </div>
-
-
 
     </div>
 </div>

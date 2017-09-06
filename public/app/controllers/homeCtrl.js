@@ -198,6 +198,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                                 scaledSize: { width: 36, height: 36 }
                             }
                         };
+                        console.log(marker);
 
                         vm.map.markers.push(marker);
                     }

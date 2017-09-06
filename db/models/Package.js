@@ -32,7 +32,7 @@ let PackageSchema = Schema({
     Hubs_Passed :  [
         {
             Date: {type: Date},
-            Hub: [{type: Schema.ObjectId, ref: 'TransitHub'}]
+            Hub: {type: Schema.ObjectId, ref: 'TransitHub'}
         }],
 
 
