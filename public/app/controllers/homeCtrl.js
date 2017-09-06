@@ -71,114 +71,125 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
 
 
         };
-        let createPolylines = function () {
-            vm.map.polylines = [
-                {
-                    id: 1,
-                    path: [
-                        {
-                          latitude: 40.8562833,
-                          longitude:  25.8642735
-                        },{
-                          latitude: 35.3397899,
-                          longitude:  25.1477693
-                        },{
-                          latitude: 37.0421268,
-                          longitude:  22.1205741
-                        },{
-                          latitude: 38.2252024,
-                          longitude:  21.739027
-                        },{
-                          latitude: 39.6818260,
-                          longitude:  20.8630371
-                        },{
-                          latitude: 40.6723026,
-                          longitude:  22.9397766
-                        },{
-                          latitude: 40.8562833,
-                          longitude:  25.8642735
-                        },{
-                          latitude: 37.983810,
-                          longitude: 23.727539
-                        },{
-                          latitude: 40.6723026,
-                          longitude:  22.9397766
-                        },{
-                          latitude: 39.6439608,
-                          longitude:  22.4102031
-                        },{
-                          latitude: 40.6723026,
-                          longitude: 22.9397766
-                        }],
-                    stroke: {
-                        color: '#6060FB',
-                        weight: 3
-                    }},
-                {
+
+
+        vm.viewNetwork = function () {
+            let createPolylines = function () {
+                vm.map.polylines = [
+                    {
+                        id: 1,
+                        path: [
+                            {
+                                latitude: 40.8562833,
+                                longitude:  25.8642735
+                            },{
+                                latitude: 35.3397899,
+                                longitude:  25.1477693
+                            },{
+                                latitude: 37.0421268,
+                                longitude:  22.1205741
+                            },{
+                                latitude: 38.2252024,
+                                longitude:  21.739027
+                            },{
+                                latitude: 39.6818260,
+                                longitude:  20.8630371
+                            },{
+                                latitude: 40.6723026,
+                                longitude:  22.9397766
+                            },{
+                                latitude: 40.8562833,
+                                longitude:  25.8642735
+                            },{
+                                latitude: 37.983810,
+                                longitude: 23.727539
+                            },{
+                                latitude: 40.6723026,
+                                longitude:  22.9397766
+                            },{
+                                latitude: 39.6439608,
+                                longitude:  22.4102031
+                            },{
+                                latitude: 40.6723026,
+                                longitude: 22.9397766
+                            }],
+                        stroke: {
+                            color: '#6060FB',
+                            weight: 3
+                        }},
+                    {
                         id: 2,
                         path: [
-                        {
-                            latitude: 39.6439608,
-                            longitude: 22.4102031
-                        },{
-                            latitude: 37.983810,
-                            longitude: 23.727539
-                        },{
-                            latitude: 38.2252024,
-                            longitude: 21.739027
-                        }],
+                            {
+                                latitude: 39.6439608,
+                                longitude: 22.4102031
+                            },{
+                                latitude: 37.983810,
+                                longitude: 23.727539
+                            },{
+                                latitude: 38.2252024,
+                                longitude: 21.739027
+                            }],
                         stroke: {
-                        color: '#6060FB',
-                        weight: 3
+                            color: '#6060FB',
+                            weight: 3
                         }
-                },
-                {
-                    id: 3,
-                    path: [
-                        {
-                            latitude: 37.983810,
-                            longitude: 23.727539
-                        },{
-                            latitude: 37.0421268,
-                            longitude: 22.1205741
-                        }],
-                    stroke: {
-                        color: '#6060FB',
-                        weight: 3
-                    }
-                },
-                {
-                    id: 4,
-                    path: [
-                        {
-                            latitude: 37.983810,
-                            longitude: 23.727539
-                        },{
-                            latitude: 35.3397899,
-                            longitude: 25.1477693
-                        }],
-                    stroke: {
-                        color: '#6060FB',
-                        weight: 3
-                    }
-                },
-                {
-                    id: 5,
-                    path: [
-                        {
-                            latitude: 37.983810,
-                            longitude: 23.727539
-                        },{
-                            latitude: 39.1001524,
-                            longitude: 26.5513702
-                        }],
-                    stroke: {
-                        color: '#6060FB',
-                        weight: 3
-                    }
-                },
-            ];
+                    },
+                    {
+                        id: 3,
+                        path: [
+                            {
+                                latitude: 37.983810,
+                                longitude: 23.727539
+                            },{
+                                latitude: 37.0421268,
+                                longitude: 22.1205741
+                            }],
+                        stroke: {
+                            color: '#6060FB',
+                            weight: 3
+                        }
+                    },
+                    {
+                        id: 4,
+                        path: [
+                            {
+                                latitude: 37.983810,
+                                longitude: 23.727539
+                            },{
+                                latitude: 35.3397899,
+                                longitude: 25.1477693
+                            }],
+                        stroke: {
+                            color: '#6060FB',
+                            weight: 3
+                        }
+                    },
+                    {
+                        id: 5,
+                        path: [
+                            {
+                                latitude: 37.983810,
+                                longitude: 23.727539
+                            },{
+                                latitude: 39.1001524,
+                                longitude: 26.5513702
+                            }],
+                        stroke: {
+                            color: '#6060FB',
+                            weight: 3
+                        }
+                    },
+                ];
 
+            };  // TODO: Hardcode alert
+            createPolylines();
+            vm.networkVisible = true;
+        };
+
+        vm.hideNetwork = function () {
+            vm.map.polylines = [];
+            vm.networkVisible = false;
         };
 
 
@@ -245,5 +256,4 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
 
 
         loadMarkers();
-        createPolylines();
     });

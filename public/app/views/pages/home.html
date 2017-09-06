@@ -97,6 +97,19 @@
 
                 </ui-gmap-google-map>
             </div>
+
+            <div ng-if="!home.networkVisible" class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                <div class="btn-group" role="group">
+                    <button class="btn bg-secondary" ng-click="home.viewNetwork()">View full network</button>
+                </div>
+            </div>
+            <div ng-if="home.networkVisible" class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                <div class="btn-group" role="group">
+                    <button class="btn bg-secondary" ng-click="home.hideNetwork()">Hide network</button>
+                </div>
+            </div>
+
+
         </div>
 
     </div>
