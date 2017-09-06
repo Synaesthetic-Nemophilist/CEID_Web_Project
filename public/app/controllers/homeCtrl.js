@@ -193,13 +193,38 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         };
 
 
+        // Show list, package and package path in map
         vm.submitTn = function(tn){
             Package.getByTn(tn)
                 .then(function(response) {
-                    console.log(response);
 
                     vm.searchedPackage = response.data;
 
+                    let path = JSON.stringify({cities: vm.searchedPackage.Full_Path});
+                    LocalStore.getPathCoords(path)
+                        .then(function (res) {
+                            vm.searchedPackage.pathCoords = res.data;
+
+                            // Create polyline path from returned coords
+                            vm.hideNetwork();
+                            vm.map.polylines = [
+                                {
+                                    id: vm.searchedPackage.Tracking_Number,
+                                    path: vm.searchedPackage.pathCoords,
+                                    stroke: {
+                                        color: '#6060FB',
+                                        weight: 3
+                                    },
+                                    geodesic: true
+                                }
+                            ];
+
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+
+                    // Create the package marker
                     let packageMarker = {
                         id: response.data._id,
                         longitude: response.data.Current_Location.Longitude,
@@ -209,7 +234,6 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                             scaledSize: { width: 36, height: 36 }
                         }
                     };
-
                     vm.map.markers.push(packageMarker);
                 })
                 .catch(function (err) {

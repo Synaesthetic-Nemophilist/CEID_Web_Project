@@ -47,6 +47,7 @@ module.exports = function (router) {
         });
     });
 
+    // Return closest city based on user's post code
     router.get('/localstore/pcode/:pcode', function (req, res) {
         let userCode = req.params.pcode;
 
@@ -87,6 +88,35 @@ module.exports = function (router) {
         });
     });
 
+
+    // Return coords of path of cities (for polyline creating on homepage map)
+    router.post('/network/path', function (req, res) {
+        let path = req.body.cities;
+        let cnt = 0;
+        let coords = [];
+        path.forEach(function (city) {
+
+            let query = Lstore.findOne({'Address.City': city}).select('Location');
+            query.exec(function (err, data) {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                } else {
+                    cnt++;
+                    coords.push({
+                        latitude: data.Location.Latitude,
+                        longitude: data.Location.Longitude
+                    });
+                    if(cnt === path.length) {
+                        res.json(coords);
+                    }
+                }
+            });
+
+        });
+
+
+    });
 
     // Provides method for saving new local stores in the db
     router.post('/localstore', function(req, res){

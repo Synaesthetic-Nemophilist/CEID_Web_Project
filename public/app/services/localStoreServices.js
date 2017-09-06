@@ -3,6 +3,10 @@ angular.module('localStoreServices', [])
     .factory('LocalStore', function ($http) {
         let localStoreFactory = {};
 
+        localStoreFactory.getPathCoords = (fullPath) => {
+            return $http.post('/api/network/path', fullPath);
+        };
+
         localStoreFactory.getAll = () => {
             return $http.get('/api/localstore');
         };
