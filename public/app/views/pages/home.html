@@ -22,65 +22,127 @@
 </nav>
 
 <div class="container jumbotron text-center">
-        <h1>Customer Update</h1>
-        <h3>Google API, package tracking, store search and info goes here!!!</h3>
-
-        <br>
-        <div  id="map_canvas">
-            <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom">
-
-                <ui-gmap-window show="home.map.window.show"
-                                coords="home.map.window.model"
-                                options="home.map.window.options"
-                                closeClick="home.map.window.closeClick()">
-                    <div>
-                        <b>City:</b> {{home.map.window.model.name}}
-                        <br><b>Address: </b>{{home.map.window.model.street}}
-                        {{home.map.window.model.number}}
-                    </div>
-                </ui-gmap-window>
-
-                <ui-gmap-markers models="home.map.markers"
-                                 coords="'self'"
-                                 events="home.map.markersEvents"
-                                 icon="'icon'"
-                                 options="home.map.marker.options">
-                </ui-gmap-markers>
-
-                <ui-gmap-polyline ng-repeat="p in home.map.polylines" path="p.path" stroke="p.stroke" visible='p.visible'
-                                  geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'></ui-gmap-polyline>
 
 
-            </ui-gmap-google-map>
-        </div>
-    <br><br><br>
+    <div class="row">
 
+        <div class="col-md-6">
+            <h1><strong>Find Package</strong></h1>
+            <hr>
+            <form id="TnForm">
 
-        <form align="left" id="TnForm">
-            Tracking number:<br>
-            <input ng-model="home.tnumber" type="text" name="Tracking_number" value="" maxlength= "17" minlength= "17" size="20">
-            <br><br>
-            <button  ng-click="home.submit_click(home.tnumber)">Submit</button>
-            <div class="alert alert-danger" ng-if="home.errorMsg">{{home.tnumber}} not found.</div>
+                <div class="form-group">
+                    <label for="tNumber">Tracking Number:</label>
+                    <input id="tNumber" class="form-control" placeholder="e.g. AL1504703541316IO" ng-model="home.tnumber" required>
+                </div>
 
-        </form>
-    <br><br>
-        <form align="left" id="LsForm">
-            Local Store near me<br>
+                <button class="btn bg-success" ng-click="home.submitTn(home.tnumber)">Submit</button>
+                <br>
+                <div class="alert alert-danger" ng-if="home.errorMsgTn">{{home.tnumber}} is not a valid Tracking Number.</div>
 
-            Post Code:<input ng-model="home.pcode" name="Post_code">
-            <br><br>
-            <button  ng-click="home.submit_pcode(home.pcode)">Submit</button>
+            </form>
 
-            <div class="alert alert-danger" ng-if="home.errorMsg">{{home.pcode}} not found.</div>
-            <br><br><br>
-            City Name:<input ng-model="home.cityname" name="City_name">
-            <br><br>
-            <button  ng-click="home.submit_cityname(home.cityname)">Submit</button>
             <br>
-            <div class="alert alert-danger" ng-if="home.errorMsg">{{home.cityname}} not found.</div>
 
-        </form>
+            <div ng-if="home.searchedPackage && home.searchedPackage.Hubs_Passed.length > 0">
+                <h5>Hubs Passed</h5>
+                <hr>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date Scanned</th>
+                            <th>Transit Hub</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="loc in home.searchedPackage.Hubs_Passed">
+                            <td>{{loc.Date}}</td>
+                            <td>{{loc.Hub.Address.City}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="col-md-6">
+            <div  id="map_canvas">
+                <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom">
+
+                    <ui-gmap-window show="home.map.window.show"
+                                    coords="home.map.window.model"
+                                    options="home.map.window.options"
+                                    closeClick="home.map.window.closeClick()">
+                        <div>
+                            <b>City:</b> {{home.map.window.model.name}}
+                            <br><b>Address: </b>{{home.map.window.model.street}}
+                            {{home.map.window.model.number}}
+                        </div>
+                    </ui-gmap-window>
+
+                    <ui-gmap-markers models="home.map.markers"
+                                     coords="'self'"
+                                     events="home.map.markersEvents"
+                                     icon="'icon'"
+                                     options="home.map.marker.options">
+                    </ui-gmap-markers>
+
+                    <ui-gmap-polyline ng-repeat="p in home.map.polylines" path="p.path" stroke="p.stroke" visible='p.visible'
+                                      geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'></ui-gmap-polyline>
+
+
+                </ui-gmap-google-map>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3><strong>Find Local Store</strong></h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Closest to you</h5>
+                    <hr>
+                    <form id="pCodeForm">
+                        <div class="form-group">
+                            <label for="pCode">Your Post Code:</label>
+                            <input id="pCode" class="form-control" placeholder="e.g. 26222" ng-model="home.pcode">
+                        </div>
+
+                        <button class="btn bg-default" ng-click="home.submit_pcode(home.pcode)">Submit</button>
+                        <br>
+                        <div class="alert alert-danger" ng-if="home.errorMsgCode">{{home.pcode}} not found.</div>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Via city</h5>
+                    <hr>
+                    <form id="cityForm">
+                        <div class="form-group">
+                            <label for="cityIn" >City:</label>
+                            <select id="cityIn" class="form-control" ng-model="home.cityId" required>
+                                <option ng-repeat="city in home.localStores" value="{{city._id}}">{{city.Address.City}}</option>
+                            </select>
+                        </div>
+
+                        <button class="btn bg-default" ng-click="home.submit_cityname(home.cityId)">Submit</button>
+                        <br>
+                        <div class="alert alert-danger" ng-if="home.errorMsgCity">{{home.cityname}} not found.</div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 </div><!-- /.container -->

@@ -8,11 +8,13 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         });
     })
 
-    .controller('homeCtrl', function (LocalStore, uiGmapGoogleMapApi, Package) {
+    .controller('homeCtrl', function (LocalStore, uiGmapGoogleMapApi, Package, $timeout) {
 
         //for making ctrl vars public to scope
         let vm = this;
-        vm.errorMsg = false;
+        vm.errorMsgTn = false;
+        vm.errorMsgCode = false;
+        vm.errorMsgCity = false;
 
         vm.map = {
 
@@ -43,8 +45,8 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         let loadMarkers = function (){
             LocalStore.getAll()
                 .then(function(response) {
-                    let stores = response.data;
-                    stores.forEach(function(store) {
+                    vm.localStores = response.data;
+                    vm.localStores.forEach(function(store) {
                         createMarker(store);
                     });
                 })
@@ -180,32 +182,32 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         };
 
 
-        vm.submit_click = function(tn){
+        vm.submitTn = function(tn){
             Package.getByTn(tn)
                 .then(function(response) {
                     console.log(response);
-                    if (response.data === null){
-                        vm.errorMsg = true;
-                        vm.tnumber = '';
-                    }
-                    else{
-                        let marker = {
-                            id: response.data._id,
-                            longitude: response.data.Current_Location.Longitude,
-                            latitude: response.data.Current_Location.Latitude,
-                            icon: {
-                                url: 'assets/pgk.png',
-                                scaledSize: { width: 36, height: 36 }
-                            }
-                        };
-                        console.log(marker);
 
-                        vm.map.markers.push(marker);
-                    }
+                    vm.searchedPackage = response.data;
+
+                    let packageMarker = {
+                        id: response.data._id,
+                        longitude: response.data.Current_Location.Longitude,
+                        latitude: response.data.Current_Location.Latitude,
+                        icon: {
+                            url: 'assets/pgk.png',
+                            scaledSize: { width: 36, height: 36 }
+                        }
+                    };
+
+                    vm.map.markers.push(packageMarker);
                 })
-                    .catch(function (err) {
-                        console.log(err);
-                    });
+                .catch(function (err) {
+                    console.log(err);
+                    vm.errorMsgTn = true;
+                    $timeout(function () {
+                        vm.errorMsgTn = false;
+                    }, 5000);
+                });
         };
 
 
@@ -214,18 +216,32 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                 .then(function(response) {
                     console.log(response);
 
-                    if (response.data === null){
-                        vm.errorMsg = true;
-                        vm.tnumber = '';
-                    }
-                    else{
-                    }
+                    // TODO: Do cool stuff with data --> Show coords on map, animate marker something like that...
+
                 })
                 .catch(function (err) {
                     console.log(err);
+                    vm.errorMsgCode = true;
+                    $timeout(function () {
+                        vm.errorMsgCode = false;
+                    }, 5000);
                  });
         };
 
+        vm.submit_cityname = function (cityId) {
+            LocalStore.getById(cityId)
+                .then(function (res) {
+                    console.log(res.data);
+                    // TODO: Do cool stuff with data --> Show coords on map, animate marker something like that...
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    vm.errorMsgCity = true;
+                    $timeout(function () {
+                        vm.errorMsgCity = false;
+                    }, 5000);
+                });
+        };
 
 
         loadMarkers();
