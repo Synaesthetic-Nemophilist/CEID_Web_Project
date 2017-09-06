@@ -12,6 +12,7 @@
     <div class="page-header jumbtron text-center">
         <h1>Transit Hub Mobile App</h1>
         <h5>QR code scan and update package location in system</h5>
+        <h3>You have logged in from {{qr.thisHub.Address.City}}</h3>
 
         <button ng-if="!qr.cameraRequested" class="btn btn-primary btn-lg btn-block" ng-click="qr.start()">Activate scanner</button>
         <button ng-if="qr.cameraRequested" class="btn btn-danger btn-lg btn-block" ng-click="qr.stop()">Stop scanner</button>
@@ -24,6 +25,8 @@
         <p ng-show="qr.url">QR code detected!</p>
         <p><b>{{ qr.url }}</b></p>
 
+        <div class="alert alert-success" ng-if="qr.successMsg">{{qr.successMsg}}</div>
+        <div class="alert alert-danger" ng-if="qr.errorMsg">{{qr.errorMsg}}</div>
 
     </div>
 </div>

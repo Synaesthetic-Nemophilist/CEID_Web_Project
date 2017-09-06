@@ -11,6 +11,10 @@ angular.module('transitHubServices', [])
             return $http.get('/api/transithub');
         };
 
+        transitHubFactory.getById = (id) => {
+            return $http.get('/api/transithub/' + id);
+        };
+
         transitHubFactory.create = (thData) => {
             return $http.post('/api/transithub', thData)
         };

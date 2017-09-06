@@ -144,6 +144,18 @@ module.exports = function (router) {
         });
     });
 
+    // Fetch transit hub by id
+    router.get('/transithub/:id', function (req, res) {
+        let query = Thub.findById(req.params.id).populate('Local_Store_Id');
+        query.exec(function(err, thub){
+            if(err) {
+                res.send(err);
+            } else {
+                res.json(thub);
+            }
+        });
+    });
+
     // Provides method for saving new transit hubs in the db
     router.post('/transithub', function(req, res){
 
@@ -302,6 +314,19 @@ module.exports = function (router) {
                 res.json({success: false, message: err.errmsg});
             } else {
                 res.json({success: true, message: 'Package saved to DB'});
+            }
+        });
+    });
+
+    router.put('/package/:id', function(req, res){
+        let pack = new Package(req.body);
+        let query = {_id:req.params.id};
+
+        Package.findOneAndUpdate(query, pack, {upsert:true}, function(err, doc){
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(doc);
             }
         });
     });
