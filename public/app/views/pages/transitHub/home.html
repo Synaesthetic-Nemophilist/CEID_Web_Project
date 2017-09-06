@@ -13,14 +13,16 @@
         <h1>Transit Hub Mobile App</h1>
         <h5>QR code scan and update package location in system</h5>
 
-        <button class="btn btn-primary btn-lg btn-block" ng-click="qr.start()">Activate scanner</button>
+        <button ng-if="!qr.cameraRequested" class="btn btn-primary btn-lg btn-block" ng-click="qr.start()">Activate scanner</button>
+        <button ng-if="qr.cameraRequested" class="btn btn-danger btn-lg btn-block" ng-click="qr.stop()">Stop scanner</button>
+
         <p ng-hide="qr.cameraRequested && !qr.cameraIsOn">Your browser should ask for permission to use the camera.</p>
         <div>
-            <bc-qr-reader active="qr.cameraRequested" on-result="qr.processURLfromQR" on-error="onError" camera-status="cameraIsOn" width="200px" height="200px"></bc-qr-reader>
+            <bc-qr-reader ng-if="qr.cameraRequested" active="qr.cameraRequested" on-result="qr.processURLfromQR" on-error="onError" camera-status="qr.cameraIsOn" width="200px" height="200px"></bc-qr-reader>
         </div>
 
         <p ng-show="qr.url">QR code detected!</p>
-        <p><b>{{ url }}</b></p>
+        <p><b>{{ qr.url }}</b></p>
 
 
     </div>
