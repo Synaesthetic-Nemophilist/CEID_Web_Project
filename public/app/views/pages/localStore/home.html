@@ -12,7 +12,6 @@
     <div class="jumbtron text-center">
         <h1>Local Store App</h1>
         <h3>You have logged in from {{pack.thisStore.Address.City}}</h3>
-        <h5>Order creation with time and cost estimation, tracking num and QR code. Order track. Package received update</h5>
 
         <br>
 
@@ -68,14 +67,15 @@
                             </button>
                         </div>
                         <br>
-                        <p><span class="fa fa-thumbs-up"></span> : Ready for pickup</p>
+                        <p>(<span class="fa fa-thumbs-up"></span> : Ready for pickup)</p>
+                        <button class="btn btn-success" ng-if="pack.selectedpackage.Ready_For_Pickup" ng-click="pack.deletePackage(pack.selectedpackage)">Package Delivered</button>
                     </div>
 
                     <div class="col-md-8">
                         <h5>Hubs Passed</h5>
                         <hr>
 
-                        <table class="table table-bordered" ng-show="pack.selectedpackage && pack.selectedpackage.Hubs_Passed.length > 0">
+                        <table class="table table-bordered table-striped" ng-show="pack.selectedpackage && pack.selectedpackage.Hubs_Passed.length > 0">
                             <thead>
                             <tr>
                                 <th>Date Scanned</th>

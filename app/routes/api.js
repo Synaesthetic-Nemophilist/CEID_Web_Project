@@ -305,9 +305,9 @@ module.exports = function (router) {
 
     router.delete('/transitHubEmp/:id', function (req, res){
 
-        Themp.findByIdAndRemove(req.params.id, function (err,offer){
+        Themp.findByIdAndRemove(req.params.id, function (err){
             if (err) return res.send(500, { error: err });
-            return res.send("succesfully deleted");
+            return res.send("Succesfully deleted");
         });
 
     });
@@ -359,6 +359,17 @@ module.exports = function (router) {
                 res.json(doc);
             }
         });
+    });
+
+    router.delete('/package/:id', function (req, res){
+        Package.findByIdAndRemove(req.params.id, function (err,pack){
+            if (err) {
+                res.send(err);
+            } else {
+                res.json({success: true, message: 'Package deleted from DB'});
+            }
+        });
+
     });
 
     router.get('/package/:tn', function (req, res) {

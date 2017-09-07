@@ -25,8 +25,7 @@
 
 
     <div class="row">
-
-        <div class="col-md-6">
+        <div class="col-md-12">
             <h1><strong>Find Package</strong></h1>
             <hr>
             <form id="TnForm">
@@ -37,42 +36,21 @@
                 </div>
 
                 <button class="btn bg-success" ng-click="home.submitTn(home.tnumber)">Submit</button>
-                <br>
-                <div class="alert alert-danger" ng-if="home.errorMsgTn">{{home.tnumber}} is not a valid Tracking Number.</div>
+
+
 
             </form>
 
             <br>
+            <div class="alert alert-danger" ng-if="home.errorMsgTn">{{home.tnumber}} is not a valid Tracking Number.</div>
             <div ng-if="home.searchedPackage.Ready_For_Pickup" class="alert alert-success">
                 Package {{home.searchedPackage.Tracking_Number}} is ready for pickup!
             </div>
             <br>
-
-            <div ng-if="home.searchedPackage && home.searchedPackage.Hubs_Passed.length > 0">
-                <h5>Hubs Passed</h5>
-                <hr>
-
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Date Scanned</th>
-                            <th>Transit Hub</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="loc in home.searchedPackage.Hubs_Passed">
-                            <td>{{loc.Date}}</td>
-                            <td>{{loc.Hub.Address.City}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-
-
         </div>
+    </div>
 
+    <div class="row">
         <div class="col-md-6">
             <div  id="map_canvas">
                 <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom">
@@ -115,8 +93,30 @@
 
 
         </div>
+        <div class="col-md-6">
+            <div ng-if="home.searchedPackage && home.searchedPackage.Hubs_Passed.length > 0">
+                <h5>Hubs Passed</h5>
+                <hr>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Date Scanned</th>
+                        <th>Transit Hub</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="loc in home.searchedPackage.Hubs_Passed">
+                        <td>{{loc.Date}}</td>
+                        <td>{{loc.Hub.Address.City}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
+
 
     <br>
 

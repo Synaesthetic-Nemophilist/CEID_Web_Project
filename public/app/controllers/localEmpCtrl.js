@@ -48,6 +48,19 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
                 });
         };
 
+        vm.deletePackage = function(packageData) {
+            Package.delete(packageData._id)
+                .then(function (res) {
+
+                    //Reset and re-render list
+                    vm.selectedpackage = undefined;
+                    vm.getAllPackages();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        };
+
 
         // Get all packages from db
         vm.getAllPackages = function () {
