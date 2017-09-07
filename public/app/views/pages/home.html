@@ -43,6 +43,10 @@
             </form>
 
             <br>
+            <div ng-if="home.searchedPackage.Ready_For_Pickup" class="alert alert-success">
+                Package {{home.searchedPackage.Tracking_Number}} is ready for pickup!
+            </div>
+            <br>
 
             <div ng-if="home.searchedPackage && home.searchedPackage.Hubs_Passed.length > 0">
                 <h5>Hubs Passed</h5>
