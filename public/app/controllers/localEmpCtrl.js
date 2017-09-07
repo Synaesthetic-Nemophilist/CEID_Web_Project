@@ -141,6 +141,6 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
                 .catch(function (err) {
                     console.log(err);
                 })
-        }
+        };
 
     });

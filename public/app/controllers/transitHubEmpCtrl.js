@@ -38,7 +38,21 @@ angular.module('transitHubEmpControllers', ['webcam', 'bcQrReader', 'authService
 
                     Package.update(res.data)
                         .then(function (resUpd) {
-                            // TODO: (EXTRA BONUS)send message to local store which will be pending package...
+
+                            // If package has reached final transit hub, notify local store
+                            if(resUpd.data.Current_Location.City === resUpd.data.Delivery_Address) {
+
+                                //Comm.notify('TO_LOCAL_STORE', resUpd.data);
+                                resUpd.data.Ready_For_Pickup = true;
+                                Package.update(resUpd.data)
+                                    .then(function (data) {
+                                        //TODO: maybe some msg on mobile app that package is ready to go to local store
+                                    })
+                                    .catch(function (err) {
+                                        console.log(err);
+                                    });
+                            }
+
                             vm.successMsg = 'Package location updated';
                             $timeout(function () {
                                 vm.successMsg = undefined;

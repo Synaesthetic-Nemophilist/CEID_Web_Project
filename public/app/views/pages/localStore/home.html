@@ -64,9 +64,11 @@
                             <button type="button" class="list-group-item list-group-item-action" ng-repeat="p in pack.packages"
                                     ng-click="pack.selectPackage(p)"
                                     ng-class="{active: pack.isSelected(p)}">
-                                <span>{{p.Tracking_Number}}</span>
+                                <span>{{p.Tracking_Number}} <span ng-show="p.Ready_For_Pickup" class="fa fa-thumbs-up"></span></span>
                             </button>
                         </div>
+                        <br>
+                        <p><span class="fa fa-thumbs-up"></span> : Ready for pickup</p>
                     </div>
 
                     <div class="col-md-8">
