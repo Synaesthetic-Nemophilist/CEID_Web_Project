@@ -20,7 +20,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
 
             center: {
                 latitude:  38.223970,
-                longitude: 23.645657
+                longitude: 29.645657
             },
             zoom: 6,
             markers: [],
@@ -286,6 +286,14 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                 });
         };
 
+
+        vm.getClass = function () {
+            if(vm.searchedPackage && vm.searchedPackage.Hubs_Passed.length > 0) {
+                return "col-md-6";
+            } else {
+                return "col-md-12";
+            }
+        };
 
         loadMarkers();
     });
