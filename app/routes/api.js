@@ -94,8 +94,8 @@ module.exports = function (router) {
         let path = req.body.cities;
         let cnt = 0;
         let coords = [];
-        path.forEach(function (city) {
 
+        function asyncCoordsFetch(city, cb) {
             let query = Lstore.findOne({'Address.City': city}).select('Location');
             query.exec(function (err, data) {
                 if (err) {
@@ -107,14 +107,19 @@ module.exports = function (router) {
                         latitude: data.Location.Latitude,
                         longitude: data.Location.Longitude
                     });
-                    if(cnt === path.length) {
-                        res.json(coords);
-                    }
+                    cb();
                 }
             });
+        }
 
-        });
+        // for each city in package path, get coords and store in array to return to front-end
+        let requests = path.reduce((promiseChain, item) => {
+            return promiseChain.then(() => new Promise((resolve) => {
+                asyncCoordsFetch(item, resolve);
+            }));
+        }, Promise.resolve());
 
+        requests.then(() => res.json(coords));
 
     });
 

@@ -205,6 +205,8 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                         .then(function (res) {
                             vm.searchedPackage.pathCoords = res.data;
 
+                            console.log(res.data);
+
                             // Create polyline path from returned coords
                             vm.hideNetwork();
                             vm.map.polylines = [
@@ -251,7 +253,6 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
             LocalStore.getByPcode(pcode)
                 .then(function(response) {
 
-                    // TODO: Do cool stuff with response.data --> animate marker something like that...
                     vm.map.window.model = {
                         id: response.data._id,
                         longitude: response.data.Location.Longitude,
