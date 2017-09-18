@@ -275,6 +275,16 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
             LocalStore.getById(cityId)
                 .then(function (res) {
                     console.log(res.data);
+                    vm.map.window.model = {
+                        id: res.data._id,
+                        longitude: res.data.Location.Longitude,
+                        latitude: res.data.Location.Latitude,
+                        name: res.data.Address.City,
+                        street: res.data.Address.Street,
+                        number: res.data.Address.Number,
+                    };
+                    vm.map.window.show = true;
+
                     // TODO: Do cool stuff with response.data --> Show coords on map, animate marker something like that...
                 })
                 .catch(function (err) {
