@@ -20,7 +20,7 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
 
             center: {
                 latitude:  38.223970,
-                longitude: 29.645657
+                longitude: 23.645657
             },
             zoom: 6,
             markers: [],

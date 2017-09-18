@@ -51,7 +51,7 @@
     </div>
 
     <div class="row">
-        <div ng-class="home.getClass()">
+        <div class="col-md-6">
             <div  id="map_canvas">
                 <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom">
 
@@ -111,6 +111,15 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="col-md-6" ng-if="!home.searchedPackage">
+            <h5>Welcome to the Customer Update Page</h5>
+            <hr>
+
+            <p>Please enter the tracking number of your package in the above field to get provided
+            with information about the current state of your package.</p>
+
         </div>
 
     </div>
