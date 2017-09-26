@@ -3,19 +3,19 @@
 
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Κεντρική Σελίδα Ενημέρωσης <span class="sr-only">(current)</span></a>
         </li>
     </ul>
 
     <div class="dropdown show">
         <a class="btn btn-success dropdown-toggle dropdown-toggle-split" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-            Login
+            Σύνδεση
         </a>
 
         <div class="dropdown-menu" style="right: 0; left: auto;">
-            <a class="dropdown-item" href="/login" ng-click="main.asAnAdmin()">As Admin</a>
-            <a class="dropdown-item" href="/login" ng-click="main.asAnEmpLs()">As Local Store Employee</a>
-            <a class="dropdown-item" href="/login" ng-click="main.asAnAEmpTh()">As Transit Hub Employee</a>
+            <a class="dropdown-item" href="/login" ng-click="main.asAnAdmin()">Ως διαχειρηστής</a>
+            <a class="dropdown-item" href="/login" ng-click="main.asAnEmpLs()">Ως υπάλληλος τοπικού καταστήματος</a>
+            <a class="dropdown-item" href="/login" ng-click="main.asAnAEmpTh()">Ως υπάλληλος διαμετακομιστικού κέντρου</a>
         </div>
     </div>
 
@@ -26,25 +26,27 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1><strong>Find Package</strong></h1>
+            <h1><strong>Εύρεση Πακέτου</strong></h1>
             <hr>
             <form id="TnForm">
 
                 <div class="form-group">
-                    <label for="tNumber">Tracking Number:</label>
+                    <label for="tNumber">Αριθμός Εντοπισμού:</label>
                     <input id="tNumber" class="form-control" placeholder="e.g. AL1504703541316IO" ng-model="home.tnumber" required>
                 </div>
 
-                <button class="btn bg-success" ng-click="home.submitTn(home.tnumber)">Submit</button>
+                <button class="btn bg-success" ng-click="home.submitTn(home.tnumber)">Υποβολή</button>
 
 
 
             </form>
 
             <br>
-            <div class="alert alert-danger" ng-if="home.errorMsgTn">{{home.tnumber}} is not a valid Tracking Number.</div>
+            <div class="alert alert-danger" ng-if="home.errorMsgTn && home.tnumber !== undefined">
+                Ο {{home.tnumber}} δεν είναι έγκυρος αριθμός εντοπισμού.
+            </div>
             <div ng-if="home.searchedPackage.Ready_For_Pickup" class="alert alert-success">
-                Package {{home.searchedPackage.Tracking_Number}} is ready for pickup!
+                Το πακέτο {{home.searchedPackage.Tracking_Number}} είναι έτοιμο για παραλαβή!
             </div>
             <br>
         </div>
@@ -60,8 +62,8 @@
                                     options="home.map.window.options"
                                     closeClick="home.map.window.closeClick()">
                         <div>
-                            <b>City:</b> {{home.map.window.model.name}}
-                            <br><b>Address: </b>{{home.map.window.model.street}}
+                            <b>Πόλη:</b> {{home.map.window.model.name}}
+                            <br><b>Διεύθυνση: </b>{{home.map.window.model.street}}
                             {{home.map.window.model.number}}
                         </div>
                     </ui-gmap-window>
@@ -82,26 +84,26 @@
 
             <div ng-if="!home.networkVisible" class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
                 <div class="btn-group" role="group">
-                    <button class="btn bg-secondary" ng-click="home.viewNetwork()">View full network</button>
+                    <button class="btn bg-secondary" ng-click="home.viewNetwork()">Προβολή ολόκληρου του δικτύου</button>
                 </div>
             </div>
             <div ng-if="home.networkVisible" class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
                 <div class="btn-group" role="group">
-                    <button class="btn bg-secondary" ng-click="home.hideNetwork()">Hide network</button>
+                    <button class="btn bg-secondary" ng-click="home.hideNetwork()">Απόκρυψη δικτύου</button>
                 </div>
             </div>
 
 
         </div>
         <div class="col-md-6" ng-if="home.searchedPackage && home.searchedPackage.Hubs_Passed.length > 0">
-            <h5>Hubs Passed</h5>
+            <h5>Το πακέτο έχει περάσει απο:</h5>
             <hr>
 
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Date Scanned</th>
-                    <th>Transit Hub</th>
+                    <th>Ημερομηνία σκαναρίσματος</th>
+                    <th>Διαμετακομιστικό Κέντρο</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -114,15 +116,16 @@
         </div>
 
         <div class="col-md-6" ng-if="!home.searchedPackage">
-            <h5>Welcome to the Customer Update Page</h5>
+            <h5>Καλως ήρθατε στην κεντρική σελίδα ενημέρωσης</h5>
             <hr>
 
-            <p>Please enter the tracking number of your package in the above field to get provided
-                with information about the current state of your package.</p>
-            <p>If you are searching for one of our stores near you, you can provide us with your zip
-            code below, and the result will be printed on the map.
-            Alternatively, you can select one of the cities from the drop-down below to get information
-            on our local stores.</p>
+            <p>Παρακαλώ εισάγετε τον αριθμό εντοπισμού του πακέτου στο πεδίο επάνω για να μάθετε περισσότερες
+                πληροφορίες για την τρέχουσα κατάστασή του.</p>
+            <p>Αν ψάχνετε κάποιο απο τα καταστήματα μας, μπορείτε να εισάγετε τον ταχυδρομικό σας κώδικα
+                στο παρακάτω πεδίο, και θα εμφανιστεί στον χάρτη η θέση του καταστήματος που είναι πιο κοντά σε
+                εσάς.<br>
+                Εναλλακτικά, μπορείτε να πληκτρολογήσετε στο αντίστοιχο πεδίο το όνομα μιας πόλης και το σύστημα θα
+                σας ενημερώσει με τεχνολογία auto-complete.</p>
 
         </div>
 
@@ -134,39 +137,44 @@
     <div class="row">
 
         <div class="col-md-12">
-            <h3><strong>Find Local Store</strong></h3>
+            <h3><strong>Εύρεση τοπικού καταστήματος</strong></h3>
             <hr>
             <div class="row">
                 <div class="col-md-6">
-                    <h5>Closest to you</h5>
+                    <h5>Πλησιέστερο σε εσάς</h5>
                     <hr>
                     <form id="pCodeForm">
                         <div class="form-group">
-                            <label for="pCode">Your Post Code:</label>
-                            <input id="pCode" class="form-control" placeholder="e.g. 26222" ng-model="home.pcode">
+                            <label for="pCode">Εισάγετε τον ΤΚ σας:</label>
+                            <input id="pCode" class="form-control" placeholder="π.χ. 26222" ng-model="home.pcode">
                         </div>
 
-                        <button class="btn bg-default" ng-click="home.submit_pcode(home.pcode)">Submit</button>
+                        <button class="btn bg-default" ng-click="home.submit_pcode(home.pcode)">Υποβολή</button>
                         <br>
-                        <div class="alert alert-danger" ng-if="home.errorMsgCode">{{home.pcode}} not found.</div>
+                        <div class="alert alert-danger" ng-if="home.errorMsgCode">Ο ΤΚ {{home.pcode}} δεν βρέθηκε.</div>
                     </form>
                 </div>
 
                 <div class="col-md-6">
-                    <h5>Via city</h5>
+                    <h5>Με βάση όνομα πόλης</h5>
                     <hr>
-                    <form id="cityForm">
+
+                    <form>
                         <div class="form-group">
-                            <label for="cityIn" >City:</label>
-                            <select id="cityIn" class="form-control" ng-model="home.cityId" required>
-                                <option ng-repeat="city in home.localStores" value="{{city._id}}">{{city.Address.City}}</option>
-                            </select>
+                            <label for="cityIn">Εισάγετε το όνομα μιας πόλης:</label>
+                            <input id="cityIn" class="form-control" ng-model="cityInput" />
                         </div>
 
-                        <button class="btn bg-default" ng-click="home.submit_cityname(home.cityId)">Submit</button>
-                        <br>
-                        <div class="alert alert-danger" ng-if="home.errorMsgCity">{{home.cityname}} not found.</div>
+
+                        <div ng-show="home.storeList.length > 0">
+                            <p ng-if="home.storeList.length === 1">Έχουμε κατάστημα στην πόλη:</p>
+                            <p ng-if="home.storeList.length > 1">Έχουμε καταστήματα στις πόλεις:</p>
+                            <ul ng-repeat="store in home.storeList">
+                                <li>{{ store.Address.City }}</li>
+                            </ul>
+                        </div>
                     </form>
+
                 </div>
 
             </div>

@@ -32,4 +32,26 @@ angular.module('localStoreServices', [])
         };
 
         return localStoreFactory;
+    })
+
+
+    .factory('SearchNCache', function ($http, $cacheFactory) {
+        let searchCacheFactory = {};
+
+        searchCacheFactory.getCity = (payload, successCallback) => {
+            let key = 'search_' + payload.q;  //create key for checking cache
+
+            // if city name not stored in cache, then do the API call
+            if($cacheFactory.get(key) === undefined || $cacheFactory.get(key) === ''){
+                $http.get('/api/localstore/search/' + payload.q)
+                    .then(function(data){
+                        $cacheFactory(key).put('result', data.data);
+                        successCallback(data.data);
+                    });
+            }else{
+                successCallback($cacheFactory.get(key).get('result'));
+            }
+        };
+
+        return searchCacheFactory;
     });

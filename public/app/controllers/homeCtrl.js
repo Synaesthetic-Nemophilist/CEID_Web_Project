@@ -8,13 +8,14 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
         });
     })
 
-    .controller('homeCtrl', function (LocalStore, uiGmapGoogleMapApi, Package, $timeout) {
+    .controller('homeCtrl', function (LocalStore, SearchNCache, uiGmapGoogleMapApi, Package, $timeout, $scope) {
 
         //for making ctrl vars public to scope
         let vm = this;
         vm.errorMsgTn = false;
         vm.errorMsgCode = false;
         vm.errorMsgCity = false;
+        vm.storeList = [];
 
         vm.map = {
 
@@ -272,30 +273,17 @@ angular.module('homeControllers', ['uiGmapgoogle-maps','localStoreServices','pac
                  });
         };
 
-        vm.submit_cityname = function (cityId) {
-            LocalStore.getById(cityId)
-                .then(function (res) {
-                    console.log(res.data);
-                    vm.map.window.model = {
-                        id: res.data._id,
-                        longitude: res.data.Location.Longitude,
-                        latitude: res.data.Location.Latitude,
-                        name: res.data.Address.City,
-                        street: res.data.Address.Street,
-                        number: res.data.Address.Number,
-                    };
-                    vm.map.window.show = true;
+        $scope.$watch('cityInput', function(val) {
+            let payload = { 'q': val};
 
-                    // TODO: Do cool stuff with response.data --> Show coords on map, animate marker something like that...
-                })
-                .catch(function (err) {
-                    console.log(err);
-                    vm.errorMsgCity = true;
-                    $timeout(function () {
-                        vm.errorMsgCity = false;
-                    }, 5000);
+            if(val !== '' && val !== undefined) {
+                SearchNCache.getCity(payload, function (data) {
+                    vm.storeList = data;
                 });
-        };
+            } else {
+                vm.storeList = [];
+            }
+        });
 
 
         vm.getClass = function () {

@@ -88,6 +88,22 @@ module.exports = function (router) {
         });
     });
 
+    // Return list of city names searched in autocomplete input on homepage
+    router.get('/localstore/search/:city', function (req, res) {
+        let cityInput = req.params.city;
+        let regexp = new RegExp("^"+ cityInput);  // use regular expressions to match prefix
+
+        let query = Lstore.find({ 'Address.City': regexp }).select('Address.City');
+        query.exec(function (err, data) {
+            if(err){
+                console.log(err);
+                res.send(err);
+            } else {
+                res.json(data);
+            }
+        })
+    });
+
 
     // Return coords of path of cities (for polyline creating on homepage map)
     router.post('/network/path', function (req, res) {
