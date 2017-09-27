@@ -2,27 +2,26 @@
     <a class="navbar-brand" href="#">LOGO</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="#">Welcome {{main.username}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Καλώς ήρθατε {{main.username}} <span class="sr-only">(current)</span></a>
         </li>
     </ul>
-    <a class="btn btn-success" href="#" ng-click="main.logout()">Logout</a>
+    <a class="btn btn-success" href="#" ng-click="main.logout()">Αποσύνδεση</a>
 </nav>
 
 <div class="container">
     <div class="page-header jumbtron text-center">
-        <h1>Transit Hub Mobile App</h1>
-        <h5>QR code scan and update package location in system</h5>
-        <h3>You have logged in from {{qr.thisHub.Address.City}}</h3>
+        <h1>Κινητή Εφαρμογή Διαμετακομιστικού Κέντρου</h1>
+        <h3>Έχετε συνδεθεί απο {{qr.thisHub.Address.City}}</h3>
 
-        <button ng-if="!qr.cameraRequested" class="btn btn-primary btn-lg btn-block" ng-click="qr.start()">Activate scanner</button>
-        <button ng-if="qr.cameraRequested" class="btn btn-danger btn-lg btn-block" ng-click="qr.stop()">Stop scanner</button>
+        <button ng-if="!qr.cameraRequested" class="btn btn-primary btn-lg btn-block" ng-click="qr.start()">Ενεργοποίηση QR Scanner</button>
+        <button ng-if="qr.cameraRequested" class="btn btn-danger btn-lg btn-block" ng-click="qr.stop()">Απεμεργοποίηση QR Scanner</button>
 
-        <p ng-hide="qr.cameraRequested && !qr.cameraIsOn">Your browser should ask for permission to use the camera.</p>
+        <p ng-hide="qr.cameraRequested && !qr.cameraIsOn">Δώστε άδεια στον φυλλομετρητή σας για πρόσβαση στην κάμερα.</p>
         <div>
             <bc-qr-reader ng-if="qr.cameraRequested" active="qr.cameraRequested" on-result="qr.processURLfromQR" on-error="onError" camera-status="qr.cameraIsOn" width="200px" height="200px"></bc-qr-reader>
         </div>
 
-        <p ng-show="qr.url">QR code detected!</p>
+        <p ng-show="qr.url">Εντοπίστηκε QR κώδικας!</p>
         <p><b>{{ qr.url }}</b></p>
 
         <div class="alert alert-success" ng-if="qr.successMsg">{{qr.successMsg}}</div>
