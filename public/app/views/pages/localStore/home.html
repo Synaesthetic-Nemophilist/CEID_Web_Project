@@ -2,28 +2,28 @@
     <a class="navbar-brand" href="#">LOGO</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="#">Welcome {{main.username}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Καλώς ήρθατε {{main.username}} <span class="sr-only">(current)</span></a>
         </li>
     </ul>
-    <a class="btn btn-success" href="#" ng-click="main.logout()">Logout</a>
+    <a class="btn btn-success" href="#" ng-click="main.logout()">Αποσύνδεση</a>
 </nav>
 
 <div class="container">
     <div class="jumbtron text-center">
-        <h1>Local Store App</h1>
-        <h3>You have logged in from {{pack.thisStore.Address.City}}</h3>
+        <h1>Εφαρμογή Τοπικού Καταστήματος</h1>
+        <h3>Έχετε συνδεθεί απο {{pack.thisStore.Address.City}}</h3>
 
         <br>
 
         <div class="row">
 
             <div class="col-md-4">
-                <h3>Create Delivery</h3>
+                <h3>Δημιουργία Παραγγελίας</h3>
                 <hr>
                 <form name="packageForm">
 
                     <div class="form-group row">
-                        <label class="col-form-label" for="delivAdd" >Delivery To:</label>
+                        <label class="col-form-label" for="delivAdd" >Αποστολή πρός:</label>
                         <select id="delivAdd" class="form-control" ng-model="pack.packageToSave.Delivery_Address" required>
                             <option ng-repeat="city in pack.localStores | filter: '!' + pack.thisStore.Address.City"
                                     value="{{city.Address.City}}">
@@ -39,8 +39,8 @@
 
 
                     <div class="btn-group btn-group-justified">
-                        <a href="#" class="btn bg-primary" style="color: white" ng-click="pack.calcPackageDetails()">Save</a>
-                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-click="pack.cancelEdit()">Cancel</a>
+                        <a href="#" class="btn bg-primary" style="color: white" ng-click="pack.calcPackageDetails()">Αποθήκευση</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-click="pack.cancelEdit()">Ακύρωση</a>
                     </div>
 
                 </form>
@@ -53,11 +53,11 @@
 
 
             <div class="col-md-8">
-                <h3>Delivery Details</h3>
+                <h3>Πληροφορίες Παραγγελιών</h3>
                 <hr>
                 <div class="row">
                     <div class="col-md-4">
-                        <h5>Package List</h5>
+                        <h5>Λίστα Δεμάτων</h5>
                         <hr>
                         <div class="list-group pre-scrollable">
                             <button type="button" class="list-group-item list-group-item-action" ng-repeat="p in pack.packages"
@@ -67,19 +67,19 @@
                             </button>
                         </div>
                         <br>
-                        <p>(<span class="fa fa-thumbs-up"></span> : Ready for pickup)</p>
-                        <button class="btn btn-success" ng-if="pack.selectedpackage.Ready_For_Pickup" ng-click="pack.deletePackage(pack.selectedpackage)">Package Delivered</button>
+                        <p>(<span class="fa fa-thumbs-up"></span> : Έτοιμο για παραλαβή)</p>
+                        <button class="btn btn-success" ng-if="pack.selectedpackage.Ready_For_Pickup" ng-click="pack.deletePackage(pack.selectedpackage)">Δέμα παρελήφθη</button>
                     </div>
 
                     <div class="col-md-8">
-                        <h5>Hubs Passed</h5>
+                        <h5>Έχει περάσει απο:</h5>
                         <hr>
 
                         <table class="table table-bordered table-striped" ng-show="pack.selectedpackage && pack.selectedpackage.Hubs_Passed.length > 0">
                             <thead>
                             <tr>
-                                <th>Date Scanned</th>
-                                <th>Transit Hub</th>
+                                <th>Ημερομηνία σκαναρίσματος</th>
+                                <th>Διαμετακομιστικό κέντρο</th>
                             </tr>
                             </thead>
                             <tbody>
