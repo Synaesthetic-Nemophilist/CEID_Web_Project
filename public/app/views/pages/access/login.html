@@ -1,17 +1,12 @@
 <div class="container">
 
     <form class="form-signin" ng-submit="main.doLogin(loginData)">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input id="inputUsername" class="form-control" placeholder="Username" required autofocus ng-model="main.loginData.username">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="main.loginData.password">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block">Sign in</button>
+        <h3 class="form-signin-heading">Παρακαλώ συνδεθείτε</h3>
+        <label for="inputUsername" class="sr-only">Όνομα χρήστη</label>
+        <input id="inputUsername" class="form-control" placeholder="Όνομα χρήστη" required autofocus ng-model="main.loginData.username">
+        <label for="inputPassword" class="sr-only">Κωδικός πρόσβασης</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Κωδικός πρόσβασης" required ng-model="main.loginData.password">
+        <button class="btn btn-lg btn-primary btn-block">Είσοδος</button>
 
         <br>
 
@@ -19,7 +14,7 @@
         <div>
             <div class="jumbotron text-center" ng-show="main.loading">
                 <span class="fa fa-repeat spinner"></span>
-                <p>Loading...</p>
+                <p>Φόρτωση...</p>
             </div>
 
             <br>

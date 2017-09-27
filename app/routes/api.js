@@ -589,7 +589,7 @@ module.exports = function (router) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
                         let token = jwt.sign({username: admin.username, is: admin.is}, secret);  //create jwt for session
-                        res.json({success: true, message: 'User authenticated!', token: token});
+                        res.json({success: true, message: 'Η πιστοποίηση ολοκληρώθηκε με επιτυχία!', token: token});
                     }
                 }
             });
@@ -609,7 +609,7 @@ module.exports = function (router) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
                         let token = jwt.sign({username: lsemp.username, is: lsemp.is, storeId: lsemp.local_store_id}, secret);  //create jwt for session
-                        res.json({success: true, message: 'User authenticated!', token: token});
+                        res.json({success: true, message: 'Η πιστοποίηση ολοκληρώθηκε με επιτυχία!', token: token});
                     }
                 }
             });
@@ -629,7 +629,7 @@ module.exports = function (router) {
                         res.json({success: false, message: 'Could not authenticate password'});
                     } else {
                         let token = jwt.sign({username: themp.username, is: themp.is, hubId: themp.transit_hub_id}, secret);  //create jwt for session
-                        res.json({success: true, message: 'User authenticated!', token: token});
+                        res.json({success: true, message: 'Η πιστοποίηση ολοκληρώθηκε με επιτυχία!', token: token});
                     }
                 }
             });

@@ -30,7 +30,7 @@ angular.module('mainController', ['authServices'])
                 .then(function (data) {
                     if(data.data.success) {
                         vm.loading = false;  // remove spinner
-                        vm.successMsg = data.data.message + '...Redirecting';  // show success msg
+                        vm.successMsg = data.data.message + '...Γίνεται ανακατεύθυνση';  // show success msg
 
                         $timeout(function () {
                             vm.loginData = {};  // clear form data

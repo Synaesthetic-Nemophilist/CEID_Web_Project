@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-4">
         <div>
-            <h3>Local Stores</h3>
+            <h3>Τοπικά Καταστήματα</h3>
             <hr>
             <div class="list-group pre-scrollable">
                 <button type="button" class="list-group-item list-group-item-action" ng-repeat="ls in crudLs.localStores"
@@ -21,7 +21,7 @@
 
     <div class="col-md-8">
         <div>
-            <h3>Local Store Details</h3>
+            <h3>Πληροφορίες Τοπικών Καταστημάτων</h3>
             <hr>
             <div class="col-md-6">
                 <div class="alert alert-success" ng-if="crudLs.successMsg">{{crudLs.successMsg}}</div>
@@ -30,31 +30,31 @@
                 <table class="table table-striped table-bordered" ng-show="!crudLs.editMode">
                     <tbody>
                     <tr>
-                        <th>City:</th>
+                        <th>Πόλη:</th>
                         <td>{{crudLs.selectedLocalStore.Address.City}}</td>
                     </tr>
                     <tr>
-                        <th>Street:</th>
+                        <th>Οδός:</th>
                         <td>{{crudLs.selectedLocalStore.Address.Street}}</td>
                     </tr>
                     <tr>
-                        <th>Number:</th>
+                        <th>Αριθμός:</th>
                         <td>{{crudLs.selectedLocalStore.Address.Number}}</td>
                     </tr>
                     <tr>
-                        <th>Post Code:</th>
+                        <th>Ταχυδρομικός κώδικας:</th>
                         <td>{{crudLs.selectedLocalStore.Address.Post_code}}</td>
                     </tr>
                     <tr>
-                        <th>Longitude:</th>
+                        <th>Γεωγραφικό μήκος:</th>
                         <td>{{crudLs.selectedLocalStore.Location.Longitude}}</td>
                     </tr>
                     <tr>
-                        <th>Latitude:</th>
+                        <th>Γεωγραφικό πλάτος:</th>
                         <td>{{crudLs.selectedLocalStore.Location.Latitude}}</td>
                     </tr>
                     <tr>
-                        <th>Phone Number:</th>
+                        <th>Τηλέφωνο:</th>
                         <td>{{crudLs.selectedLocalStore.phone_number}}</td>
                     </tr>
                     </tbody>
@@ -62,50 +62,50 @@
 
                 <form name="lsform">
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="city" >City:</label>
+                        <label for="city" >Πόλη:</label>
                         <input id="city" class="form-control" ng-model="crudLs.selectedLocalStore.Address.City" required>
                     </div>
 
 
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="street" >Street:</label>
+                        <label for="street" >Οδός:</label>
                         <input id="street" class="form-control" ng-model="crudLs.selectedLocalStore.Address.Street" required>
                     </div>
 
 
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="number" >Number:</label>
+                        <label for="number" >Αριθμός:</label>
                         <input id="number" class="form-control" ng-model="crudLs.selectedLocalStore.Address.Number" required>
                     </div>
 
 
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="postCode" >Post Code:</label>
+                        <label for="postCode" >Ταχυδρομικός κώδικας:</label>
                         <input id="postCode" class="form-control" ng-model="crudLs.selectedLocalStore.Address.Post_code" required>
                     </div>
 
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="longit" >Longitude:</label>
+                        <label for="longit" >Γεωγραφικό μήκος:</label>
                         <input id="longit" class="form-control" ng-model="crudLs.selectedLocalStore.Location.Longitude" required>
                     </div>
 
 
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="latit" >Latitude:</label>
+                        <label for="latit" >Γεωγραφικό πλάτος:</label>
                         <input id="latit" class="form-control" ng-model="crudLs.selectedLocalStore.Location.Latitude" required>
                     </div>
 
                     <div ng-show="crudLs.editMode" class="form-group">
-                        <label for="phone" >Phone Number:</label>
+                        <label for="phone" >Τηλέφωνο:</label>
                         <input id="phone" class="form-control" ng-model="crudLs.selectedLocalStore.phone_number" required>
                     </div>
 
 
                     <div class="btn-group btn-group-justified">
-                        <a href="#" class="btn bg-primary" style="color: white" ng-if="!crudLs.editMode" ng-class="{disabled: crudLs.disabledDel()}" ng-click="crudLs.toggleEditMode()">Edit</a>
-                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudLs.editMode"  ng-class="{disabled: !crudLs.allfieldsOk(lsform)}" ng-click="crudLs.saveLocalStore()">Save</a>
-                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudLs.editMode" ng-class="{disabled: crudLs.disabledDel()}" ng-click="crudLs.delLocalStore()">Delete</a>
-                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="crudLs.editMode"  ng-click="crudLs.cancelEdit()">Cancel</a>
+                        <a href="#" class="btn bg-primary" style="color: white" ng-if="!crudLs.editMode" ng-class="{disabled: crudLs.disabledDel()}" ng-click="crudLs.toggleEditMode()">Επεξεργασία</a>
+                        <a href="#" class="btn bg-primary" style="color: white" ng-if="crudLs.editMode"  ng-class="{disabled: !crudLs.allfieldsOk(lsform)}" ng-click="crudLs.saveLocalStore()">Αποθήκευση</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="!crudLs.editMode" ng-class="{disabled: crudLs.disabledDel()}" ng-click="crudLs.delLocalStore()">Διαγραφή</a>
+                        <a href="#" class="btn bg-danger" style="background-color: crimson; color: white" ng-if="crudLs.editMode"  ng-click="crudLs.cancelEdit()">Ακύρωση</a>
 
                     </div>
 

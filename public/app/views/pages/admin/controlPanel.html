@@ -2,29 +2,28 @@
     <a class="navbar-brand" href="#">LOGO</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="#">Welcome {{main.username}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Καλώς ήρθατε {{main.username}} <span class="sr-only">(current)</span></a>
         </li>
     </ul>
-    <a class="btn btn-success" href="#" ng-click="main.logout()">Logout</a>
+    <a class="btn btn-success" href="#" ng-click="main.logout()">Αποσύνδεση</a>
 </nav>
 
 <div class="container">
     <div class="page-header jumbtron text-center">
-        <h1>Admin Control Panel</h1>
-        <h5>Local Store CRUD, Local Employee CRUD, Transit Hub Employee CRUD go here...</h5>
+        <h1>Πίνακας Ελέγχου Διαχειρηστή</h1>
     </div>
 
     <br>
 
     <ul class="nav nav-tabs nav-justified">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" data-target="#lsTab">Local Stores</a>
+            <a class="nav-link active" data-toggle="tab" data-target="#lsTab">Τοπικά Καταστήματα</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" data-target="#lsEmpTab">Local Store Employees</a>
+            <a class="nav-link" data-toggle="tab" data-target="#lsEmpTab">Υπάλληλοι Τοπικών Καταστημάτων</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" data-target="#thEmpTab">Transit Hub Employees</a>
+            <a class="nav-link" data-toggle="tab" data-target="#thEmpTab">Υπάλληλοι Διαμετακομιστικών Κέντρων</a>
         </li>
     </ul>
 
