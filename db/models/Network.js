@@ -4,132 +4,132 @@ let Schema = mongoose.Schema;
 
 
 let NetworkSchema = Schema({
-    Alexandroupoli: {
-        Thessaloniki: {
+    Αλεξανδρούπολη: {
+        Θεσσαλλονίκη: {
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         },
-        Athina: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 10},
             time: {type: Number, default: 1}
         },
-        Irakleio: {
+        Ηράκλειο: {
             cost: {type: Number, default: 15},
             time: {type: Number, default: 1}
         },
     },
-    Thessaloniki: {
-        Alexandroupoli: {
+    Θεσσαλλονίκη: {
+        Αλεξανδρούπολη: {
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         },
-        Athina: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 5},
             time: {type: Number, default: 1}
         },
-        Larisa: {
+        Λάρισα: {
             cost: {type: Number, default: 1},
             time: {type: Number, default: 1}
         },
-        Ioannina: {
+        Ιωάννινα: {
             cost: {type: Number, default: 1},
             time: {type: Number, default: 1}
         }
     },
-    Ioannina: {
-        Thessaloniki: {
+    Ιωάννινα: {
+        Θεσσαλλονίκη: {
             cost: {type: Number, default: 1},
             time: {type: Number, default: 1}
         },
-        Patra: {
+        Πάτρα: {
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         }
     },
-    Larisa: {
-        Thessaloniki: {
+    Λάρισα: {
+        Θεσσαλλονίκη: {
             cost: {type: Number, default: 1},
             time: {type: Number, default: 1}
         },
-        Athina: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 2},
             time: {type: Number, default: 1}
         },
     },
-    Patra: {
-        Ioannina: {
+    Πάτρα: {
+        Ιωάννινα: {
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         },
-        Athina: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 2},
             time: {type: Number, default: 1}
         },
-        Kalamata: {
+        Καλαμάτα: {
             cost: {type: Number, default: 2},
             time: {type: Number, default: 1}
         },
     },
-    Kalamata: {
-        Patra:  {
+    Καλαμάτα: {
+        Πάτρα:  {
             cost: {type: Number, default: 2},
             time: {type: Number, default: 1}
         },
-        Athina: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         },
-        Irakleio: {
+        Ηράκλειο: {
             cost: {type: Number, default: 4},
             time: {type: Number, default: 2}
         },
     },
-    Athina: {
-        Patra: {
+    Ασπρόπυργος: {
+        Πάτρα: {
             cost: {type: Number, default: 2},
             time: {type: Number, default: 1}
         },
-        Kalamata: {
+        Καλαμάτα: {
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         },
-        Larisa: {
+        Λάρισα: {
             cost: {type: Number, default: 2},
             time: {type: Number, default: 1}
         },
-        Irakleio: {
+        Ηράκλειο: {
             cost: {type: Number, default: 10},
             time: {type: Number, default: 1}
         },
-        Mitilini: {
+        Μυτιλήνη: {
             cost: {type: Number, default: 8},
             time: {type: Number, default: 1}
         },
-        Thessaloniki: {
+        Θεσσαλλονίκη: {
             cost: {type: Number, default: 5},
             time: {type: Number, default: 1}
         },
-        Alexandroupoli: {
+        Αλεξανδρούπολη: {
             cost: {type: Number, default: 10},
             time: {type: Number, default: 1}
         },
     },
-    Mitilini: {
-        Athina: {
+    Μυτιλήνη: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 8},
             time: {type: Number, default: 1}
         },
     },
-    Irakleio: {
-        Athina: {
+    Ηράκλειο: {
+        Ασπρόπυργος: {
             cost: {type: Number, default: 10},
             time: {type: Number, default: 1}
         },
-        Kalamata: {
+        Καλαμάτα: {
             cost: {type: Number, default: 4},
             time: {type: Number, default: 2}
         },
-        Alexandroupoli: {
+        Αλεξανδρούπολη: {
             cost: {type: Number, default: 15},
             time: {type: Number, default: 1}
         },

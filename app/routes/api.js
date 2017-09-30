@@ -570,7 +570,7 @@ module.exports = function (router) {
 
     //-----------AUTHENTICATION-----------
 
-    //Authenticate TODO: This function should be generalized for admins, localEmps and transitHubEmps!!!
+    //Authenticate
     // http://localhost:port/api/authenticate
     router.post('/authenticate', function (req, res) {
         if(req.body.is === "admin") {

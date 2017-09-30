@@ -16,7 +16,9 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
 
             // Calculate unique tracking number
             let initial1 = vm.thisStore.Address.City.substr(0, 2).toUpperCase();
+            initial1 = string_to_url(initial1);
             let initial2 = vm.packageToSave.Delivery_Address.substr(0, 2).toUpperCase();
+            initial2 = string_to_url(initial2);
             vm.packageToSave.Date_Sent = Date.now();
             vm.packageToSave.Tracking_Number = initial1 + vm.packageToSave.Date_Sent + initial2;
 
@@ -39,11 +41,12 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
             Package.create(packageData)
                 .then(function () {
                     vm.successMsg = 'Package successfully stored.';
-
+                    console.log(packageData);
                     // Render updated list
                     vm.getAllPackages();
                 })
                 .catch(function (err) {
+                    console.log(err);
                     vm.errorMsg = 'There was an error. Please try again.'
                 });
         };
@@ -155,5 +158,16 @@ angular.module('localEmpControllers', ['localEmpServices', 'packageServices', 'l
                     console.log(err);
                 })
         };
+
+        function string_to_url(string) {
+            let replace = ['\u0391', '\u039B', '\u039C', '\u03A5', '\u0386', '\u03A1', '\u0397', '\u03A3', '\u039A', '\u03A0', '\u0398', '\u0395', '\u0399', '\u03A9' ];
+            let replace_n = ['A', 'L', 'M', 'Y', 'A', 'R', 'H', 'S', 'K', 'P', 'ΤΗ', '', 'I', 'O' ];
+
+            for (let i = 0; i < replace.length; i++) {
+                string = string.replace(replace[i], replace_n[i]);
+            }
+
+            return string;
+        }
 
     });
