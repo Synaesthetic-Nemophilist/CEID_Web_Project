@@ -38,8 +38,6 @@ angular.module('transitHubEmpControllers', ['webcam', 'bcQrReader', 'authService
 
                     Package.update(res.data)
                         .then(function (resUpd) {
-                            console.log(resUpd.data.Current_Location.City);
-                            console.log(resUpd.data.Delivery_Address);
                             // If package has reached final transit hub, notify local store
                             if(resUpd.data.Current_Location.City === resUpd.data.Delivery_Address) {
 
@@ -86,6 +84,7 @@ angular.module('transitHubEmpControllers', ['webcam', 'bcQrReader', 'authService
                 TransitHub.getById(data.data.hubId)
                     .then(function (res) {
                         vm.thisHub = res.data;
+                        console.log(vm.thisHub);
                     })
                     .catch(function(err) {
                         console.log(err);

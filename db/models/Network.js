@@ -9,14 +9,10 @@ let NetworkSchema = Schema({
             cost: {type: Number, default: 3},
             time: {type: Number, default: 1}
         },
-        Ασπρόπυργος: {
-            cost: {type: Number, default: 10},
-            time: {type: Number, default: 1}
-        },
         Ηράκλειο: {
             cost: {type: Number, default: 15},
             time: {type: Number, default: 1}
-        },
+        }
     },
     Θεσσαλλονίκη: {
         Αλεξανδρούπολη: {
@@ -107,10 +103,6 @@ let NetworkSchema = Schema({
         },
         Θεσσαλλονίκη: {
             cost: {type: Number, default: 5},
-            time: {type: Number, default: 1}
-        },
-        Αλεξανδρούπολη: {
-            cost: {type: Number, default: 10},
             time: {type: Number, default: 1}
         },
     },
